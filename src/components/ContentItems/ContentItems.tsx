@@ -3,10 +3,9 @@ import * as React from 'react';
 
 import { ExternalDocumentation } from '../ExternalDocumentation/ExternalDocumentation';
 import { AdvancedMarkdown } from '../Markdown/AdvancedMarkdown';
-
 import { H1, H2, MiddlePanel, Row, Section, ShareLink } from '../../common-elements';
-import { ContentItemModel } from '../../services/MenuBuilder';
-import { GroupModel, OperationModel } from '../../services/models';
+import type { ContentItemModel } from '../../services';
+import type { GroupModel, OperationModel } from '../../services/models';
 import { Operation } from '../Operation/Operation';
 
 @observer
@@ -18,7 +17,9 @@ export class ContentItems extends React.Component<{
     if (items.length === 0) {
       return null;
     }
-    return items.map(item => <ContentItem item={item} key={item.id} />);
+    return items.map(item => {
+      return <ContentItem key={item.id} item={item} />;
+    });
   }
 }
 
@@ -60,7 +61,7 @@ export class ContentItem extends React.Component<ContentItemProps> {
   }
 }
 
-const middlePanelWrap = component => <MiddlePanel>{component}</MiddlePanel>;
+const middlePanelWrap = component => <MiddlePanel compact={true}>{component}</MiddlePanel>;
 
 @observer
 export class SectionItem extends React.Component<ContentItemProps> {
@@ -71,14 +72,18 @@ export class SectionItem extends React.Component<ContentItemProps> {
     return (
       <>
         <Row>
-          <MiddlePanel>
+          <MiddlePanel compact={false}>
             <Header>
               <ShareLink to={this.props.item.id} />
               {name}
             </Header>
           </MiddlePanel>
         </Row>
-        <AdvancedMarkdown source={description || ''} htmlWrap={middlePanelWrap} />
+        <AdvancedMarkdown
+          parentId={this.props.item.id}
+          source={description || ''}
+          htmlWrap={middlePanelWrap}
+        />
         {externalDocs && (
           <Row>
             <MiddlePanel>

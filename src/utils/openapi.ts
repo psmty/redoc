@@ -1,19 +1,22 @@
 import { dirname } from 'path';
-import { URI } from 'uri-template-lite';
+import * as URLtemplate from 'url-template';
 
+import { ExtendedOpenAPIOperation } from '../services';
+import { FieldModel } from '../services/models';
 import { OpenAPIParser } from '../services/OpenAPIParser';
 import {
   OpenAPIEncoding,
   OpenAPIMediaType,
-  OpenAPIOperation,
   OpenAPIParameter,
   OpenAPIParameterStyle,
+  OpenAPIRequestBody,
+  OpenAPIResponse,
   OpenAPISchema,
   OpenAPIServer,
   Referenced,
 } from '../types';
 import { IS_BROWSER } from './dom';
-import { isNumeric, removeQueryString, resolveUrl, stripTrailingSlash } from './helpers';
+import { isNumeric, removeQueryStringAndHash, resolveUrl, isArray, isBoolean } from './helpers';
 
 function isWildcardStatusCode(statusCode: string | number): statusCode is string {
   return typeof statusCode === 'string' && /\dxx/i.test(statusCode);
@@ -55,17 +58,19 @@ const operationNames = {
   patch: true,
   delete: true,
   options: true,
+  $ref: true,
 };
 
 export function isOperationName(key: string): boolean {
   return key in operationNames;
 }
 
-export function getOperationSummary(operation: OpenAPIOperation): string {
+export function getOperationSummary(operation: ExtendedOpenAPIOperation): string {
   return (
     operation.summary ||
     operation.operationId ||
     (operation.description && operation.description.substring(0, 50)) ||
+    operation.pathName ||
     '<no summary>'
   );
 }
@@ -80,6 +85,8 @@ const schemaKeywordTypes = {
   maxLength: 'string',
   minLength: 'string',
   pattern: 'string',
+  contentEncoding: 'string',
+  contentMediaType: 'string',
 
   items: 'array',
   maxItems: 'array',
@@ -90,11 +97,13 @@ const schemaKeywordTypes = {
   minProperties: 'object',
   required: 'object',
   additionalProperties: 'object',
+  unevaluatedProperties: 'object',
   properties: 'object',
+  patternProperties: 'object',
 };
 
 export function detectType(schema: OpenAPISchema): string {
-  if (schema.type !== undefined) {
+  if (schema.type !== undefined && !isArray(schema.type)) {
     return schema.type;
   }
   const keywords = Object.keys(schemaKeywordTypes);
@@ -108,25 +117,47 @@ export function detectType(schema: OpenAPISchema): string {
   return 'any';
 }
 
-export function isPrimitiveType(schema: OpenAPISchema, type: string | undefined = schema.type) {
+export function isPrimitiveType(
+  schema: OpenAPISchema,
+  type: string | string[] | undefined = schema.type,
+) {
+  if (schema['x-circular-ref']) {
+    return true;
+  }
+
   if (schema.oneOf !== undefined || schema.anyOf !== undefined) {
     return false;
   }
 
-  if (type === 'object') {
-    return schema.properties !== undefined
-      ? Object.keys(schema.properties).length === 0
-      : schema.additionalProperties === undefined;
-  }
-
-  if (type === 'array') {
-    if (schema.items === undefined) {
-      return true;
-    }
+  if ((schema.if && schema.then) || (schema.if && schema.else)) {
     return false;
   }
 
-  return true;
+  let isPrimitive = true;
+  const isArrayType = isArray(type);
+
+  if (type === 'object' || (isArrayType && type?.includes('object'))) {
+    isPrimitive =
+      schema.properties !== undefined
+        ? Object.keys(schema.properties).length === 0
+        : schema.additionalProperties === undefined &&
+          schema.unevaluatedProperties === undefined &&
+          schema.patternProperties === undefined;
+  }
+
+  if (isArray(schema.items) || isArray(schema.prefixItems)) {
+    return false;
+  }
+
+  if (
+    schema.items !== undefined &&
+    !isBoolean(schema.items) &&
+    (type === 'array' || (isArrayType && type?.includes('array')))
+  ) {
+    isPrimitive = isPrimitiveType(schema.items, schema.items.type);
+  }
+
+  return isPrimitive;
 }
 
 export function isJsonLike(contentType: string): boolean {
@@ -137,20 +168,20 @@ export function isFormUrlEncoded(contentType: string): boolean {
   return contentType === 'application/x-www-form-urlencoded';
 }
 
-function delimitedEncodeField(fieldVal: any, fieldName: string, delimeter: string): string {
-  if (Array.isArray(fieldVal)) {
-    return fieldVal.map(v => v.toString()).join(delimeter);
+function delimitedEncodeField(fieldVal: any, fieldName: string, delimiter: string): string {
+  if (isArray(fieldVal)) {
+    return fieldVal.map(v => v.toString()).join(delimiter);
   } else if (typeof fieldVal === 'object') {
     return Object.keys(fieldVal)
-      .map(k => `${k}${delimeter}${fieldVal[k]}`)
-      .join(delimeter);
+      .map(k => `${k}${delimiter}${fieldVal[k]}`)
+      .join(delimiter);
   } else {
     return fieldName + '=' + fieldVal.toString();
   }
 }
 
 function deepObjectEncodeField(fieldVal: any, fieldName: string): string {
-  if (Array.isArray(fieldVal)) {
+  if (isArray(fieldVal)) {
     console.warn('deepObject style cannot be used with array value:' + fieldVal.toString());
     return '';
   } else if (typeof fieldVal === 'object') {
@@ -165,10 +196,10 @@ function deepObjectEncodeField(fieldVal: any, fieldName: string): string {
 
 function serializeFormValue(name: string, explode: boolean, value: any) {
   // Use RFC6570 safe name ([a-zA-Z0-9_]) and replace with our name later
-  // e.g. URI.template doesn't parse names with hypen (-) which are valid query param names
+  // e.g. URI.template doesn't parse names with hyphen (-) which are valid query param names
   const safeName = '__redoc_param_name__';
   const suffix = explode ? '*' : '';
-  const template = new URI.Template(`{?${safeName}${suffix}}`);
+  const template = URLtemplate.parse(`{?${safeName}${suffix}}`);
   return template
     .expand({ [safeName]: value })
     .substring(1)
@@ -177,13 +208,13 @@ function serializeFormValue(name: string, explode: boolean, value: any) {
 
 /*
  * Should be used only for url-form-encoded body payloads
- * To be used for parmaters should be extended with other style values
+ * To be used for parameters should be extended with other style values
  */
 export function urlFormEncodePayload(
   payload: object,
   encoding: { [field: string]: OpenAPIEncoding } = {},
 ) {
-  if (Array.isArray(payload)) {
+  if (isArray(payload)) {
     throw new Error('Payload must have fields: ' + payload.toString());
   } else {
     return Object.keys(payload)
@@ -225,9 +256,9 @@ function serializePathParameter(
   }
 
   // Use RFC6570 safe name ([a-zA-Z0-9_]) and replace with our name later
-  // e.g. URI.template doesn't parse names with hypen (-) which are valid query param names
+  // e.g. URI.template doesn't parse names with hyphen (-) which are valid query param names
   const safeName = '__redoc_param_name__';
-  const template = new URI.Template(`{${prefix}${safeName}${suffix}}`);
+  const template = URLtemplate.parse(`{${prefix}${safeName}${suffix}}`);
 
   return template.expand({ [safeName]: value }).replace(/__redoc_param_name__/g, name);
 }
@@ -242,7 +273,7 @@ function serializeQueryParameter(
     case 'form':
       return serializeFormValue(name, explode, value);
     case 'spaceDelimited':
-      if (!Array.isArray(value)) {
+      if (!isArray(value)) {
         console.warn('The style spaceDelimited is only applicable to arrays');
         return '';
       }
@@ -252,7 +283,7 @@ function serializeQueryParameter(
 
       return `${name}=${value.join('%20')}`;
     case 'pipeDelimited':
-      if (!Array.isArray(value)) {
+      if (!isArray(value)) {
         console.warn('The style pipeDelimited is only applicable to arrays');
         return '';
       }
@@ -262,8 +293,8 @@ function serializeQueryParameter(
 
       return `${name}=${value.join('|')}`;
     case 'deepObject':
-      if (!explode || Array.isArray(value) || typeof value !== 'object') {
-        console.warn('The style deepObject is only applicable for objects with expolde=true');
+      if (!explode || isArray(value) || typeof value !== 'object') {
+        console.warn('The style deepObject is only applicable for objects with explode=true');
         return '';
       }
 
@@ -285,7 +316,7 @@ function serializeHeaderParameter(
 
       // name is not important here, so use RFC6570 safe name ([a-zA-Z0-9_])
       const name = '__redoc_param_name__';
-      const template = new URI.Template(`{${name}${suffix}}`);
+      const template = URLtemplate.parse(`{${name}${suffix}}`);
       return decodeURIComponent(template.expand({ [name]: value }));
     default:
       console.warn('Unexpected style for header: ' + style);
@@ -318,7 +349,7 @@ export function serializeParameterValueWithMime(value: any, mime: string): strin
 }
 
 export function serializeParameterValue(
-  parameter: OpenAPIParameter & { serializationMime?: string },
+  parameter: (OpenAPIParameter & { serializationMime?: string }) | FieldModel,
   value: any,
 ): string {
   const { name, style, explode = false, serializationMime } = parameter;
@@ -357,15 +388,51 @@ export function serializeParameterValue(
   }
 }
 
+export function getSerializedValue(field: FieldModel, example: any) {
+  if (field.in) {
+    // decode for better readability in examples: see https://github.com/Redocly/redoc/issues/1138
+    return decodeURIComponent(serializeParameterValue(field, example));
+  } else {
+    return example;
+  }
+}
+
 export function langFromMime(contentType: string): string {
   if (contentType.search(/xml/i) !== -1) {
     return 'xml';
   }
+
+  if (contentType.search(/csv/i) !== -1) {
+    return 'csv';
+  }
+
+  if (contentType.search(/plain/i) !== -1) {
+    return 'tex';
+  }
+
   return 'clike';
 }
 
+const DEFINITION_NAME_REGEX = /^#\/components\/(schemas|pathItems)\/([^/]+)$/;
+
 export function isNamedDefinition(pointer?: string): boolean {
-  return /^#\/components\/schemas\/[^\/]+$/.test(pointer || '');
+  return DEFINITION_NAME_REGEX.test(pointer || '');
+}
+
+export function getDefinitionName(pointer?: string): string | undefined {
+  const [name] = pointer?.match(DEFINITION_NAME_REGEX)?.reverse() || [];
+  return name;
+}
+
+function humanizeMultipleOfConstraint(multipleOf: number | undefined): string | undefined {
+  if (multipleOf === undefined) {
+    return;
+  }
+  const strigifiedMultipleOf = multipleOf.toString(10);
+  if (!/^0\.0*1$/.test(strigifiedMultipleOf)) {
+    return `multiple of ${strigifiedMultipleOf}`;
+  }
+  return `decimal places <= ${strigifiedMultipleOf.split('.')[1].length}`;
 }
 
 function humanizeRangeConstraint(
@@ -376,7 +443,7 @@ function humanizeRangeConstraint(
   let stringRange;
   if (min !== undefined && max !== undefined) {
     if (min === max) {
-      stringRange = `${min} ${description}`;
+      stringRange = `= ${min} ${description}`;
     } else {
       stringRange = `[ ${min} .. ${max} ] ${description}`;
     }
@@ -393,6 +460,29 @@ function humanizeRangeConstraint(
   return stringRange;
 }
 
+export function humanizeNumberRange(schema: OpenAPISchema): string | undefined {
+  const minimum =
+    typeof schema.exclusiveMinimum === 'number'
+      ? Math.min(schema.exclusiveMinimum, schema.minimum ?? Infinity)
+      : schema.minimum;
+  const maximum =
+    typeof schema.exclusiveMaximum === 'number'
+      ? Math.max(schema.exclusiveMaximum, schema.maximum ?? -Infinity)
+      : schema.maximum;
+  const exclusiveMinimum = typeof schema.exclusiveMinimum === 'number' || schema.exclusiveMinimum;
+  const exclusiveMaximum = typeof schema.exclusiveMaximum === 'number' || schema.exclusiveMaximum;
+
+  if (minimum !== undefined && maximum !== undefined) {
+    return `${exclusiveMinimum ? '( ' : '[ '}${minimum} .. ${maximum}${
+      exclusiveMaximum ? ' )' : ' ]'
+    }`;
+  } else if (maximum !== undefined) {
+    return `${exclusiveMaximum ? '< ' : '<= '}${maximum}`;
+  } else if (minimum !== undefined) {
+    return `${exclusiveMinimum ? '> ' : '>= '}${minimum}`;
+  }
+}
+
 export function humanizeConstraints(schema: OpenAPISchema): string[] {
   const res: string[] = [];
 
@@ -406,47 +496,55 @@ export function humanizeConstraints(schema: OpenAPISchema): string[] {
     res.push(arrayRange);
   }
 
-  let numberRange;
-  if (schema.minimum !== undefined && schema.maximum !== undefined) {
-    numberRange = schema.exclusiveMinimum ? '( ' : '[ ';
-    numberRange += schema.minimum;
-    numberRange += ' .. ';
-    numberRange += schema.maximum;
-    numberRange += schema.exclusiveMaximum ? ' )' : ' ]';
-  } else if (schema.maximum !== undefined) {
-    numberRange = schema.exclusiveMaximum ? '< ' : '<= ';
-    numberRange += schema.maximum;
-  } else if (schema.minimum !== undefined) {
-    numberRange = schema.exclusiveMinimum ? '> ' : '>= ';
-    numberRange += schema.minimum;
+  const propertiesRange = humanizeRangeConstraint(
+    'properties',
+    schema.minProperties,
+    schema.maxProperties,
+  );
+  if (propertiesRange !== undefined) {
+    res.push(propertiesRange);
   }
 
+  const multipleOfConstraint = humanizeMultipleOfConstraint(schema.multipleOf);
+  if (multipleOfConstraint !== undefined) {
+    res.push(multipleOfConstraint);
+  }
+
+  const numberRange = humanizeNumberRange(schema);
   if (numberRange !== undefined) {
     res.push(numberRange);
+  }
+
+  if (schema.uniqueItems) {
+    res.push('unique');
   }
 
   return res;
 }
 
-export function sortByRequired(
-  fields: Array<{ required: boolean; name: string }>,
-  order: string[] = [],
-) {
-  fields.sort((a, b) => {
-    if (!a.required && b.required) {
-      return 1;
-    } else if (a.required && !b.required) {
-      return -1;
-    } else if (a.required && b.required) {
-      return order.indexOf(a.name) - order.indexOf(b.name);
+export function sortByRequired(fields: FieldModel[], order: string[] = []) {
+  const unrequiredFields: FieldModel[] = [];
+  const orderedFields: FieldModel[] = [];
+  const unorderedFields: FieldModel[] = [];
+
+  fields.forEach(field => {
+    if (field.required) {
+      order.includes(field.name) ? orderedFields.push(field) : unorderedFields.push(field);
     } else {
-      return 0;
+      unrequiredFields.push(field);
     }
   });
+
+  orderedFields.sort((a, b) => order.indexOf(a.name) - order.indexOf(b.name));
+
+  return [...orderedFields, ...unorderedFields, ...unrequiredFields];
 }
 
-export function sortByField<T extends string>(fields: Array<{ [P in T]: string }>, param: T) {
-  fields.sort((a, b) => {
+export function sortByField(
+  fields: FieldModel[],
+  param: keyof Pick<FieldModel, 'name' | 'description' | 'kind'>,
+) {
+  return [...fields].sort((a, b) => {
     return a[param].localeCompare(b[param]);
   });
 }
@@ -458,20 +556,22 @@ export function mergeParams(
 ): Array<Referenced<OpenAPIParameter>> {
   const operationParamNames = {};
   operationParams.forEach(param => {
-    param = parser.shalowDeref(param);
+    ({ resolved: param } = parser.deref(param));
     operationParamNames[param.name + '_' + param.in] = true;
   });
 
-  // filter out path params overriden by operation ones with the same name
+  // filter out path params overridden by operation ones with the same name
   pathParams = pathParams.filter(param => {
-    param = parser.shalowDeref(param);
+    ({ resolved: param } = parser.deref(param));
     return !operationParamNames[param.name + '_' + param.in];
   });
 
   return pathParams.concat(operationParams);
 }
 
-export function mergeSimilarMediaTypes(types: Dict<OpenAPIMediaType>): Dict<OpenAPIMediaType> {
+export function mergeSimilarMediaTypes(
+  types: Record<string, OpenAPIMediaType>,
+): Record<string, OpenAPIMediaType> {
   const mergedTypes = {};
   Object.keys(types).forEach(name => {
     const mime = types[name];
@@ -487,6 +587,13 @@ export function mergeSimilarMediaTypes(types: Dict<OpenAPIMediaType>): Dict<Open
   return mergedTypes;
 }
 
+export function expandDefaultServerVariables(url: string, variables: object = {}) {
+  return url.replace(
+    /(?:{)([\w-.]+)(?:})/g,
+    (match, name) => (variables[name] && variables[name].default) || match,
+  );
+}
+
 export function normalizeServers(
   specUrl: string | undefined,
   servers: OpenAPIServer[],
@@ -499,12 +606,13 @@ export function normalizeServers(
     return href.endsWith('.html') ? dirname(href) : href;
   };
 
-  const baseUrl = specUrl === undefined ? removeQueryString(getHref()) : dirname(specUrl);
+  const baseUrl = specUrl === undefined ? removeQueryStringAndHash(getHref()) : dirname(specUrl);
 
   if (servers.length === 0) {
-    return [
+    // Behaviour defined in OpenAPI spec: https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#openapi-object
+    servers = [
       {
-        url: stripTrailingSlash(baseUrl),
+        url: '/',
       },
     ];
   }
@@ -522,8 +630,8 @@ export function normalizeServers(
   });
 }
 
-export const SECURITY_DEFINITIONS_COMPONENT_NAME = 'security-definitions';
 export const SECURITY_DEFINITIONS_JSX_NAME = 'SecurityDefinitions';
+export const OLD_SECURITY_DEFINITIONS_JSX_NAME = 'security-definitions';
 export const SCHEMA_DEFINITION_JSX_NAME = 'SchemaDefinition';
 
 export let SECURITY_SCHEMES_SECTION_PREFIX = 'section/Authentication/';
@@ -540,7 +648,10 @@ export const shortenHTTPVerb = verb =>
 export function isRedocExtension(key: string): boolean {
   const redocExtensions = {
     'x-circular-ref': true,
-    'x-code-samples': true,
+    'x-parentRefs': true,
+    'x-refsStack': true,
+    'x-code-samples': true, // deprecated
+    'x-codeSamples': true,
     'x-displayName': true,
     'x-examples': true,
     'x-ignoredHeaderParameters': true,
@@ -550,12 +661,16 @@ export function isRedocExtension(key: string): boolean {
     'x-tagGroups': true,
     'x-traitTag': true,
     'x-additionalPropertiesName': true,
+    'x-explicitMappingOnly': true,
   };
 
   return key in redocExtensions;
 }
 
-export function extractExtensions(obj: object, showExtensions: string[] | true): Dict<any> {
+export function extractExtensions(
+  obj: object,
+  showExtensions: string[] | true,
+): Record<string, any> {
   return Object.keys(obj)
     .filter(key => {
       if (showExtensions === true) {
@@ -572,6 +687,36 @@ export function extractExtensions(obj: object, showExtensions: string[] | true):
 export function pluralizeType(displayType: string): string {
   return displayType
     .split(' or ')
-    .map(type => type.replace(/^(string|object|number|integer|array|boolean)( ?.*)/, '$1s$2'))
+    .map(type => type.replace(/^(string|object|number|integer|array|boolean)s?( ?.*)/, '$1s$2'))
     .join(' or ');
+}
+
+export function getContentWithLegacyExamples(
+  info: OpenAPIRequestBody | OpenAPIResponse,
+): { [mime: string]: OpenAPIMediaType } | undefined {
+  let mediaContent = info.content;
+  const xExamples = info['x-examples']; // converted from OAS2 body param
+  const xExample = info['x-example']; // converted from OAS2 body param
+
+  if (xExamples) {
+    mediaContent = { ...mediaContent };
+    for (const mime of Object.keys(xExamples)) {
+      const examples = xExamples[mime];
+      mediaContent[mime] = {
+        ...mediaContent[mime],
+        examples,
+      };
+    }
+  } else if (xExample) {
+    mediaContent = { ...mediaContent };
+    for (const mime of Object.keys(xExample)) {
+      const example = xExample[mime];
+      mediaContent[mime] = {
+        ...mediaContent[mime],
+        example,
+      };
+    }
+  }
+
+  return mediaContent;
 }

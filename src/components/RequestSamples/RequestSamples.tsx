@@ -1,11 +1,18 @@
 import { observer } from 'mobx-react';
 import * as React from 'react';
-import { OperationModel, RedocNormalizedOptions } from '../../services';
+import { isPayloadSample, OperationModel, RedocNormalizedOptions } from '../../services';
 import { PayloadSamples } from '../PayloadSamples/PayloadSamples';
 import { SourceCodeWithCopy } from '../SourceCode/SourceCode';
 
-import { RequestSamplesTabs, RightPanelHeader, Tab, TabList, TabPanel } from '../../common-elements';
+import {
+  RequestSamplesTabs,
+  RightPanelHeader,
+  Tab,
+  TabList,
+  TabPanel,
+} from '../../common-elements';
 import { OptionsContext } from '../OptionsProvider';
+import { l } from '../../services/Labels';
 
 export interface RequestSamplesProps {
   operation: OperationModel;
@@ -19,39 +26,32 @@ export class RequestSamples extends React.Component<RequestSamplesProps> {
 
   render() {
     const { operation } = this.props;
-    const requestBodyContent = operation.requestBody && operation.requestBody.content;
-    const hasBodySample = requestBodyContent && requestBodyContent.hasSample;
     const samples = operation.codeSamples;
 
-    const hasSamples = hasBodySample || samples.length > 0;
-    const hideTabList =
-      samples.length + (hasBodySample ? 1 : 0) === 1
-        ? this.context.hideSingleRequestSampleTab
-        : false;
+    const hasSamples = samples.length > 0;
+    const hideTabList = samples.length === 1 ? this.context.hideSingleRequestSampleTab : false;
     return (
       (hasSamples && (
         <div>
-          <RightPanelHeader> Request samples </RightPanelHeader>
+          <RightPanelHeader> {l('requestSamples')} </RightPanelHeader>
 
           <RequestSamplesTabs defaultIndex={0}>
             <TabList hidden={hideTabList}>
-              {hasBodySample && <Tab key="payload"> Payload </Tab>}
               {samples.map(sample => (
                 <Tab key={sample.lang + '_' + (sample.label || '')}>
                   {sample.label !== undefined ? sample.label : sample.lang}
                 </Tab>
               ))}
             </TabList>
-            {hasBodySample && (
-              <TabPanel key="payload">
-                <div>
-                  <PayloadSamples content={requestBodyContent!} />
-                </div>
-              </TabPanel>
-            )}
             {samples.map(sample => (
-              <TabPanel key={sample.lang}>
-                <SourceCodeWithCopy lang={sample.lang} source={sample.source} />
+              <TabPanel key={sample.lang + '_' + (sample.label || '')}>
+                {isPayloadSample(sample) ? (
+                  <div>
+                    <PayloadSamples content={sample.requestBodyContent} />
+                  </div>
+                ) : (
+                  <SourceCodeWithCopy lang={sample.lang} source={sample.source} />
+                )}
               </TabPanel>
             ))}
           </RequestSamplesTabs>

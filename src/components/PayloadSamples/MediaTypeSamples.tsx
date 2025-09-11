@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import styled from '../../styled-components';
 
-import { DropdownProps } from '../../common-elements';
+import { DropdownOption, DropdownProps } from '../../common-elements';
 import { MediaTypeModel } from '../../services/models';
 import { Markdown } from '../Markdown/Markdown';
 import { Example } from './Example';
@@ -21,10 +21,12 @@ export class MediaTypeSamples extends React.Component<PayloadSamplesProps, Media
   state = {
     activeIdx: 0,
   };
-  switchMedia = ({ value }) => {
-    this.setState({
-      activeIdx: parseInt(value, 10),
-    });
+  switchMedia = ({ idx }: DropdownOption) => {
+    if (idx !== undefined) {
+      this.setState({
+        activeIdx: idx,
+      });
+    }
   };
   render() {
     const { activeIdx } = this.state;
@@ -41,8 +43,8 @@ export class MediaTypeSamples extends React.Component<PayloadSamplesProps, Media
     if (examplesNames.length > 1) {
       const options = examplesNames.map((name, idx) => {
         return {
-          label: examples[name].summary || name,
-          value: idx.toString(),
+          value: examples[name].summary || name,
+          idx,
         };
       });
 
@@ -54,9 +56,10 @@ export class MediaTypeSamples extends React.Component<PayloadSamplesProps, Media
           <DropdownWrapper>
             <DropdownLabel>Example</DropdownLabel>
             {this.props.renderDropdown({
-              value: options[activeIdx],
+              value: options[activeIdx].value,
               options,
               onChange: this.switchMedia,
+              ariaLabel: 'Example',
             })}
           </DropdownWrapper>
           <div>
@@ -77,5 +80,4 @@ export class MediaTypeSamples extends React.Component<PayloadSamplesProps, Media
   }
 }
 
-const SamplesWrapper = styled.div`
-`;
+const SamplesWrapper = styled.div``;

@@ -19,74 +19,97 @@ const JsonViewerWrap = styled.div`
   }
 `;
 
-class Json extends React.PureComponent<JsonProps> {
-  node: HTMLDivElement;
+const Json = (props: JsonProps) => {
+  const [node, setNode] = React.useState<HTMLDivElement>();
 
-  render() {
-    return <CopyButtonWrapper data={this.props.data}>{this.renderInner}</CopyButtonWrapper>;
-  }
+  const renderInner = ({ renderCopyButton }) => {
+    const showFoldingButtons =
+      props.data &&
+      Object.values(props.data).some(value => typeof value === 'object' && value !== null);
 
-  renderInner = ({ renderCopyButton }) => (
-    <JsonViewerWrap>
-      <SampleControls>
-        {renderCopyButton()}
-        <span onClick={this.expandAll}> Expand all </span>
-        <span onClick={this.collapseAll}> Collapse all </span>
-      </SampleControls>
-      <OptionsContext.Consumer>
-        {options => (
-          <PrismDiv
-            className={this.props.className}
-            // tslint:disable-next-line
-            ref={node => (this.node = node!)}
-            dangerouslySetInnerHTML={{
-              __html: jsonToHTML(this.props.data, options.jsonSampleExpandLevel),
-            }}
-          />
-        )}
-      </OptionsContext.Consumer>
-    </JsonViewerWrap>
-  );
+    return (
+      <JsonViewerWrap>
+        <SampleControls>
+          {renderCopyButton()}
+          {showFoldingButtons && (
+            <>
+              <button onClick={expandAll}> Expand all </button>
+              <button onClick={collapseAll}> Collapse all </button>
+            </>
+          )}
+        </SampleControls>
+        <OptionsContext.Consumer>
+          {options => (
+            <PrismDiv
+              className={props.className}
+              // tslint:disable-next-line
+              ref={node => setNode(node!)}
+              dangerouslySetInnerHTML={{
+                __html: jsonToHTML(props.data, options.jsonSampleExpandLevel),
+              }}
+            />
+          )}
+        </OptionsContext.Consumer>
+      </JsonViewerWrap>
+    );
+  };
 
-  expandAll = () => {
-    const elements = this.node.getElementsByClassName('collapsible');
+  const expandAll = () => {
+    const elements = node?.getElementsByClassName('collapsible');
     for (const collapsed of Array.prototype.slice.call(elements)) {
-      (collapsed.parentNode as Element)!.classList.remove('collapsed');
+      const parentNode = collapsed.parentNode as Element;
+      parentNode.classList.remove('collapsed');
+      parentNode.querySelector('.collapser')!.setAttribute('aria-label', 'collapse');
     }
   };
 
-  collapseAll = () => {
-    const elements = this.node.getElementsByClassName('collapsible');
-    for (const expanded of Array.prototype.slice.call(elements)) {
-      // const collapsed = elements[i];
-      if ((expanded.parentNode as Element)!.classList.contains('redoc-json')) {
-        continue;
-      }
-      (expanded.parentNode as Element)!.classList.add('collapsed');
+  const collapseAll = () => {
+    const elements = node?.getElementsByClassName('collapsible');
+    // skip first item to avoid collapsing whole object/array
+    const elementsArr = Array.prototype.slice.call(elements, 1);
+
+    for (const expanded of elementsArr) {
+      const parentNode = expanded.parentNode as Element;
+      parentNode.classList.add('collapsed');
+      parentNode.querySelector('.collapser')!.setAttribute('aria-label', 'expand');
     }
   };
 
-  clickListener = (event: MouseEvent) => {
+  const collapseElement = (target: HTMLElement) => {
     let collapsed;
-    const target = event.target as HTMLElement;
     if (target.className === 'collapser') {
       collapsed = target.parentElement!.getElementsByClassName('collapsible')[0];
       if (collapsed.parentElement.classList.contains('collapsed')) {
         collapsed.parentElement.classList.remove('collapsed');
+        target.setAttribute('aria-label', 'collapse');
       } else {
         collapsed.parentElement.classList.add('collapsed');
+        target.setAttribute('aria-label', 'expand');
       }
     }
   };
 
-  componentDidMount() {
-    this.node!.addEventListener('click', this.clickListener);
-  }
+  const clickListener = React.useCallback((event: MouseEvent) => {
+    collapseElement(event.target as HTMLElement);
+  }, []);
 
-  componentWillUnmount() {
-    this.node!.removeEventListener('click', this.clickListener);
-  }
-}
+  const focusListener = React.useCallback((event: KeyboardEvent) => {
+    if (event.key === 'Enter') {
+      collapseElement(event.target as HTMLElement);
+    }
+  }, []);
+
+  React.useEffect(() => {
+    node?.addEventListener('click', clickListener);
+    node?.addEventListener('focus', focusListener);
+    return () => {
+      node?.removeEventListener('click', clickListener);
+      node?.removeEventListener('focus', focusListener);
+    };
+  }, [clickListener, focusListener, node]);
+
+  return <CopyButtonWrapper data={props.data}>{renderInner}</CopyButtonWrapper>;
+};
 
 export const JsonViewer = styled(Json)`
   ${jsonStyles};

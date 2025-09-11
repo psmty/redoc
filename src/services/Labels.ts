@@ -1,16 +1,4 @@
-export interface LabelsConfig {
-  enum: string;
-  enumSingleValue: string;
-  enumArray: string;
-  default: string;
-  deprecated: string;
-  example: string;
-  nullable: string;
-  recursive: string;
-  arrayOf: string;
-}
-
-export type LabelsConfigRaw = Partial<LabelsConfig>;
+import type { LabelsConfig, LabelsConfigRaw } from './types';
 
 const labels: LabelsConfig = {
   enum: 'Enum',
@@ -19,9 +7,18 @@ const labels: LabelsConfig = {
   default: 'Default',
   deprecated: 'Deprecated',
   example: 'Example',
-  nullable: 'Nullable',
+  examples: 'Examples',
   recursive: 'Recursive',
   arrayOf: 'Array of ',
+  webhook: 'Event',
+  const: 'Value',
+  noResultsFound: 'No results found',
+  download: 'Download',
+  downloadSpecification: 'Download OpenAPI specification',
+  responses: 'Responses',
+  callbackResponses: 'Callback responses',
+  requestSamples: 'Request samples',
+  responseSamples: 'Response samples',
 };
 
 export function setRedocLabels(_labels?: LabelsConfigRaw) {

@@ -1,7 +1,7 @@
 import { observer } from 'mobx-react';
 import * as React from 'react';
 
-import { DropdownProps } from '../../common-elements/dropdown';
+import { DropdownOption, DropdownProps } from '../../common-elements/Dropdown';
 import { MediaContentModel, MediaTypeModel, SchemaModel } from '../../services/models';
 import { DropdownLabel, DropdownWrapper } from '../PayloadSamples/styled.elements';
 
@@ -20,9 +20,9 @@ export interface MediaTypesSwitchProps {
 
 @observer
 export class MediaTypesSwitch extends React.Component<MediaTypesSwitchProps> {
-  switchMedia = ({ value }) => {
-    if (this.props.content) {
-      this.props.content.activate(parseInt(value, 10));
+  switchMedia = ({ idx }: DropdownOption) => {
+    if (this.props.content && idx !== undefined) {
+      this.props.content.activate(idx);
     }
   };
 
@@ -35,8 +35,8 @@ export class MediaTypesSwitch extends React.Component<MediaTypesSwitchProps> {
 
     const options = content.mediaTypes.map((mime, idx) => {
       return {
-        label: mime.name,
-        value: idx.toString(),
+        value: mime.name,
+        idx,
       };
     });
 
@@ -54,9 +54,10 @@ export class MediaTypesSwitch extends React.Component<MediaTypesSwitchProps> {
       <>
         <Wrapper>
           {this.props.renderDropdown({
-            value: options[activeMimeIdx],
+            value: options[activeMimeIdx].value,
             options,
             onChange: this.switchMedia,
+            ariaLabel: 'Content type',
           })}
         </Wrapper>
         {this.props.children(content.active)}

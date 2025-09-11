@@ -1,12 +1,13 @@
 #!/usr/bin/env node
 /* tslint:disable:no-implicit-dependencies */
 import * as React from 'react';
+import * as updateNotifier from 'update-notifier';
 import { renderToString } from 'react-dom/server';
 import { ServerStyleSheet } from 'styled-components';
 
 import { compile } from 'handlebars';
 import { createServer, IncomingMessage, ServerResponse } from 'http';
-import { dirname, join, resolve } from 'path';
+import { dirname, join, resolve, extname as getExtName } from 'path';
 
 import * as zlib from 'zlib';
 
@@ -14,10 +15,23 @@ import * as zlib from 'zlib';
 import { createStore, loadAndBundleSpec, Redoc } from 'redoc';
 
 import { watch } from 'chokidar';
-import { createReadStream, existsSync, readFileSync, ReadStream, writeFileSync } from 'fs';
+import {
+  createReadStream,
+  existsSync,
+  lstatSync,
+  readFileSync,
+  ReadStream,
+  writeFileSync,
+} from 'fs';
 import * as mkdirp from 'mkdirp';
 
 import * as YargsParser from 'yargs';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { findConfig } from '@redocly/openapi-core';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { parseYaml } from '@redocly/openapi-core';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { Config } from '@redocly/openapi-core';
 
 interface Options {
   ssr?: boolean;
@@ -25,15 +39,86 @@ interface Options {
   cdn?: boolean;
   output?: string;
   title?: string;
+  disableGoogleFont?: boolean;
   port?: number;
   templateFileName?: string;
   templateOptions?: any;
   redocOptions?: any;
 }
 
+export const mimeTypes = {
+  '.html': 'text/html',
+  '.js': 'text/javascript',
+  '.css': 'text/css',
+  '.json': 'application/json',
+  '.png': 'image/png',
+  '.jpg': 'image/jpg',
+  '.gif': 'image/gif',
+  '.svg': 'image/svg+xml',
+  '.wav': 'audio/wav',
+  '.mp4': 'video/mp4',
+  '.woff': 'application/font-woff',
+  '.ttf': 'application/font-ttf',
+  '.eot': 'application/vnd.ms-fontobject',
+  '.otf': 'application/font-otf',
+  '.wasm': 'application/wasm',
+};
+
 const BUNDLES_DIR = dirname(require.resolve('redoc'));
 
-/* tslint:disable-next-line */
+const builderForBuildCommand = yargs => {
+  yargs.positional('spec', {
+    describe: 'path or URL to your spec',
+  });
+
+  yargs.option('o', {
+    describe: 'Output file',
+    alias: 'output',
+    type: 'string',
+    default: 'redoc-static.html',
+  });
+
+  yargs.options('title', {
+    describe: 'Page Title',
+    type: 'string',
+  });
+
+  yargs.options('disableGoogleFont', {
+    describe: 'Disable Google Font',
+    type: 'boolean',
+    default: false,
+  });
+
+  yargs.option('cdn', {
+    describe: 'Do not include ReDoc source code into html page, use link to CDN instead',
+    type: 'boolean',
+    default: false,
+  });
+
+  yargs.demandOption('spec');
+  return yargs;
+};
+
+const handlerForBuildCommand = async (argv: any) => {
+  const config = {
+    ssr: true,
+    output: argv.o as string,
+    cdn: argv.cdn as boolean,
+    title: argv.title as string,
+    disableGoogleFont: argv.disableGoogleFont as boolean,
+    templateFileName: argv.template as string,
+    templateOptions: argv.templateOptions || {},
+    redocOptions: getObjectOrJSON(argv.options),
+  };
+
+  try {
+    notifyUpdateCliVersion();
+    await bundle(argv.spec, config);
+  } catch (e) {
+    handleError(e);
+  }
+};
+
 YargsParser.command(
   'serve <spec>',
   'start the server',
@@ -42,10 +127,21 @@ YargsParser.command(
       describe: 'path or URL to your spec',
     });
 
+    yargs.options('title', {
+      describe: 'Page Title',
+      type: 'string',
+    });
+
     yargs.option('s', {
       alias: 'ssr',
       describe: 'Enable server-side rendering',
       type: 'boolean',
+    });
+
+    yargs.option('h', {
+      alias: 'host',
+      type: 'string',
+      default: '127.0.0.1',
     });
 
     yargs.option('p', {
@@ -59,72 +155,59 @@ YargsParser.command(
       type: 'boolean',
     });
 
+    yargs.options('disable-google-font', {
+      describe: 'Disable Google Font',
+      type: 'boolean',
+      default: false,
+    });
+
     yargs.demandOption('spec');
     return yargs;
   },
   async argv => {
     const config: Options = {
       ssr: argv.ssr as boolean,
+      title: argv.title as string,
       watch: argv.watch as boolean,
+      disableGoogleFont: argv.disableGoogleFont as boolean,
       templateFileName: argv.template as string,
       templateOptions: argv.templateOptions || {},
-      redocOptions: argv.options || {},
+      redocOptions: getObjectOrJSON(argv.options),
     };
 
     try {
-      await serve(argv.port as number, argv.spec as string, config);
+      notifyUpdateCliVersion();
+      await serve(argv.host as string, argv.port as number, argv.spec as string, config);
     } catch (e) {
       handleError(e);
     }
   },
+  [
+    res => {
+      console.log(
+        `\n⚠️ This command is deprecated. Use "npx @redocly/cli preview-docs petstore.yaml"\n`,
+      );
+      return res;
+    },
+  ],
 )
   .command(
+    'build <spec>',
+    'build definition into zero-dependency HTML-file',
+    builderForBuildCommand,
+    handlerForBuildCommand,
+  )
+  .command(
     'bundle <spec>',
-    'bundle spec into zero-dependency HTML-file',
-    yargs => {
-      yargs.positional('spec', {
-        describe: 'path or URL to your spec',
-      });
-
-      yargs.option('o', {
-        describe: 'Output file',
-        alias: 'output',
-        type: 'string',
-        default: 'redoc-static.html',
-      });
-
-      yargs.options('title', {
-        describe: 'Page Title',
-        type: 'string',
-        default: 'ReDoc documentation',
-      });
-
-      yargs.option('cdn', {
-        describe: 'Do not include ReDoc source code into html page, use link to CDN instead',
-        type: 'boolean',
-        default: false,
-      });
-
-      yargs.demandOption('spec');
-      return yargs;
-    },
-    async argv => {
-      const config: Options = {
-        ssr: true,
-        output: argv.o as string,
-        cdn: argv.cdn as boolean,
-        title: argv.title as string,
-        templateFileName: argv.template as string,
-        templateOptions: argv.templateOptions || {},
-        redocOptions: argv.options || {},
-      };
-
-      try {
-        await bundle(argv.spec, config);
-      } catch (e) {
-        handleError(e);
-      }
-    },
+    'bundle spec into zero-dependency HTML-file [deprecated]',
+    builderForBuildCommand,
+    handlerForBuildCommand,
+    [
+      res => {
+        console.log(`\n⚠️ This command is deprecated. Use "build" command instead.\n`);
+        return res;
+      },
+    ],
   )
   .demandCommand()
   .options('t', {
@@ -140,10 +223,9 @@ YargsParser.command(
     describe: 'ReDoc options, use dot notation, e.g. options.nativeScrollbars',
   }).argv;
 
-async function serve(port: number, pathToSpec: string, options: Options = {}) {
-  let spec = await loadAndBundleSpec(pathToSpec);
+async function serve(host: string, port: number, pathToSpec: string, options: Options = {}) {
+  let spec = await loadAndBundleSpec(isURL(pathToSpec) ? pathToSpec : resolve(pathToSpec));
   let pageHTML = await getPageHTML(spec, pathToSpec, options);
-
   const server = createServer((request, response) => {
     console.time('GET ' + request.url);
     if (request.url === '/redoc.standalone.js') {
@@ -165,9 +247,19 @@ async function serve(port: number, pathToSpec: string, options: Options = {}) {
         'Content-Type': 'application/json',
       });
     } else {
-      response.writeHead(404);
-      response.write('Not found');
-      response.end();
+      try {
+        const filePath = join(dirname(pathToSpec), request.url || '');
+        const extname = String(getExtName(filePath)).toLowerCase() as keyof typeof mimeTypes;
+
+        const contentType = mimeTypes[extname] || 'application/octet-stream';
+        respondWithGzip(createReadStream(filePath), request, response, {
+          'Content-Type': contentType,
+        });
+      } catch (e) {
+        response.writeHead(404);
+        response.write('Not found');
+        response.end();
+      }
     }
 
     console.timeEnd('GET ' + request.url);
@@ -175,26 +267,39 @@ async function serve(port: number, pathToSpec: string, options: Options = {}) {
 
   console.log();
 
-  server.listen(port, () => console.log(`Server started: http://127.0.0.1:${port}`));
+  server.listen(port, host, () => console.log(`Server started: http://${host}:${port}`));
 
   if (options.watch && existsSync(pathToSpec)) {
     const pathToSpecDirectory = resolve(dirname(pathToSpec));
     const watchOptions = {
-      ignored: /(^|[\/\\])\../,
+      ignored: [/(^|[\/\\])\../, /___jb_[a-z]+___$/],
+      ignoreInitial: true,
     };
 
     const watcher = watch(pathToSpecDirectory, watchOptions);
     const log = console.log.bind(console);
+
+    const handlePath = async _path => {
+      try {
+        spec = await loadAndBundleSpec(resolve(pathToSpec));
+        pageHTML = await getPageHTML(spec, pathToSpec, options);
+        log('Updated successfully');
+      } catch (e) {
+        console.error('Error while updating: ', e.message);
+      }
+    };
+
     watcher
       .on('change', async path => {
         log(`${path} changed, updating docs`);
-        try {
-          spec = await loadAndBundleSpec(pathToSpec);
-          pageHTML = await getPageHTML(spec, pathToSpec, options);
-          log('Updated successfully');
-        } catch (e) {
-          console.error('Error while updating: ', e.message);
-        }
+        handlePath(path);
+      })
+      .on('add', async path => {
+        log(`File ${path} added, updating docs`);
+        handlePath(path);
+      })
+      .on('addDir', path => {
+        log(`↗  Directory ${path} added. Files in here will trigger reload.`);
       })
       .on('error', error => console.error(`Watcher error: ${error}`))
       .on('ready', () => log(`👀  Watching ${pathToSpecDirectory} for changes...`));
@@ -203,7 +308,7 @@ async function serve(port: number, pathToSpec: string, options: Options = {}) {
 
 async function bundle(pathToSpec, options: Options = {}) {
   const start = Date.now();
-  const spec = await loadAndBundleSpec(pathToSpec);
+  const spec = await loadAndBundleSpec(isURL(pathToSpec) ? pathToSpec : resolve(pathToSpec));
   const pageHTML = await getPageHTML(spec, pathToSpec, { ...options, ssr: true });
 
   mkdirp.sync(dirname(options.output!));
@@ -218,7 +323,15 @@ async function bundle(pathToSpec, options: Options = {}) {
 async function getPageHTML(
   spec: any,
   pathToSpec: string,
-  { ssr, cdn, title, templateFileName, templateOptions, redocOptions = {} }: Options,
+  {
+    ssr,
+    cdn,
+    title,
+    disableGoogleFont,
+    templateFileName,
+    templateOptions,
+    redocOptions = {},
+  }: Options,
 ) {
   let html;
   let css;
@@ -230,6 +343,7 @@ async function getPageHTML(
     const specUrl = redocOptions.specUrl || (isURL(pathToSpec) ? pathToSpec : undefined);
     const store = await createStore(spec, specUrl, redocOptions);
     const sheet = new ServerStyleSheet();
+    // @ts-ignore
     html = renderToString(sheet.collectStyles(React.createElement(Redoc, { store })));
     css = sheet.getStyleTags();
     state = await store.toJS();
@@ -250,17 +364,18 @@ async function getPageHTML(
     var container = document.getElementById('redoc');
     Redoc.${
       ssr
-        ? 'hydrate(__redoc_state, container);'
+        ? 'hydrate(__redoc_state, container)'
         : `init("spec.json", ${JSON.stringify(redocOptions)}, container)`
     };
 
     </script>`,
     redocHead: ssr
       ? (cdn
-          ? '<script src="https://unpkg.com/redoc@next/bundles/redoc.standalone.js"></script>'
+          ? '<script src="https://unpkg.com/redoc@latest/bundles/redoc.standalone.js"></script>'
           : `<script>${redocStandaloneSrc}</script>`) + css
       : '<script src="redoc.standalone.js"></script>',
-    title,
+    title: title || spec.info.title || 'ReDoc documentation',
+    disableGoogleFont,
     templateOptions,
   });
 }
@@ -322,4 +437,50 @@ function escapeUnicode(str) {
 function handleError(error: Error) {
   console.error(error.stack);
   process.exit(1);
+}
+
+function getObjectOrJSON(options) {
+  switch (typeof options) {
+    case 'object':
+      return options;
+    case 'string':
+      try {
+        if (existsSync(options) && lstatSync(options).isFile()) {
+          return JSON.parse(readFileSync(options, 'utf-8'));
+        } else {
+          return JSON.parse(options);
+        }
+      } catch (e) {
+        console.log(
+          `Encountered error:\n\n${options}\n\nis neither a file with a valid JSON object neither a stringified JSON object.`,
+        );
+        handleError(e);
+      }
+    default:
+      const configFile = findConfig();
+      if (configFile) {
+        console.log(`Found ${configFile} and using features.openapi options`);
+        try {
+          const config = parseYaml(readFileSync(configFile, 'utf-8')) as Config;
+
+          return config['features.openapi'];
+        } catch (e) {
+          console.warn(`Found ${configFile} but failed to parse: ${e.message}`);
+        }
+      }
+      return {};
+  }
+}
+
+function notifyUpdateCliVersion() {
+  const pkg = require('./package.json');
+  const notifier = updateNotifier({
+    pkg,
+    updateCheckInterval: 0,
+    shouldNotifyInNpmScript: true,
+  });
+  notifier.notify({
+    message:
+      'Run `{updateCommand}` to update.\nChangelog: https://github.com/Redocly/redoc/releases/tag/{latestVersion}',
+  });
 }

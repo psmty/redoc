@@ -6,7 +6,7 @@ import { StyledComponent } from 'styled-components';
 
 export const linksCss = css`
   a {
-    text-decoration: none;
+    text-decoration: ${props => props.theme.typography.links.textDecoration};
     color: ${props => props.theme.typography.links.color};
 
     &:visited {
@@ -15,16 +15,18 @@ export const linksCss = css`
 
     &:hover {
       color: ${props => props.theme.typography.links.hover};
+      text-decoration: ${props => props.theme.typography.links.hoverTextDecoration};
     }
   }
 `;
 
-export const StyledMarkdownBlock = styled(PrismDiv as StyledComponent<
-  'div',
-  ResolvedThemeInterface,
-  { compact?: boolean; inline?: boolean }
->)`
-
+export const StyledMarkdownBlock = styled(
+  PrismDiv as StyledComponent<
+    'div',
+    ResolvedThemeInterface,
+    { compact?: boolean; inline?: boolean }
+  >,
+)`
   font-family: ${props => props.theme.typography.fontFamily};
   font-weight: ${props => props.theme.typography.fontWeightRegular};
   line-height: ${props => props.theme.typography.lineHeight};
@@ -79,13 +81,13 @@ export const StyledMarkdownBlock = styled(PrismDiv as StyledComponent<
 
   pre {
     font-family: ${props => props.theme.typography.code.fontFamily};
-    white-space:${({ theme }) => (theme.typography.code.wrap ? 'pre-wrap' : 'pre')};
-    background-color: #263238;
+    white-space: ${({ theme }) => (theme.typography.code.wrap ? 'pre-wrap' : 'pre')};
+    background-color: ${({ theme }) => theme.codeBlock.backgroundColor};
     color: white;
     padding: ${props => props.theme.spacing.unit * 4}px;
     overflow-x: auto;
     line-height: normal;
-    border-radius: 0px
+    border-radius: 0px;
     border: 1px solid rgba(38, 50, 56, 0.1);
 
     code {
@@ -119,7 +121,8 @@ export const StyledMarkdownBlock = styled(PrismDiv as StyledComponent<
     margin: 0;
     margin-bottom: 1em;
 
-    ul, ol {
+    ul,
+    ol {
       margin-bottom: 0;
       margin-top: 0;
     }

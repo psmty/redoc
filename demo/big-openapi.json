@@ -53,7 +53,7 @@
     },
     {
       "name": "Contacts",
-      "description": "Contacts are Customer's address book.\nAll contact information used in Invoices, Subscriptions, Transacions, etc is enlisted here. Hovewer, changing a Contact won't change corresponding contact information in related resources\n"
+      "description": "Contacts are Customer's address book.\nAll contact information used in Invoices, Subscriptions, Transacions, etc is enlisted here. However, changing a Contact won't change corresponding contact information in related resources\n"
     },
     {
       "name": "Coupons",
@@ -93,7 +93,7 @@
     },
     {
       "name": "Files",
-      "description": "A File is an entity that can store a phyiscal file and some metadata. It also provides an easy access to\nits size, mime-type, user-defined tags and description thus allowing easy sorting and searching among stored\nfiles.\nThere are several methods of file uploading available: multipart/form-data encoded form, RAW POST (by sending\nfile contents as POST body), fetching from URL (by providing the file URL via 'url' param)\nAttachment is an entity that is used to link a File to one or multiple objects like Customer, Dispute, Payment,\nTransaction, Subscription, Plan, Product, Invoice, Note. That allows to quickly find and use files related to\nthose specific entities.\n"
+      "description": "A File is an entity that can store a physical file and some metadata. It also provides an easy access to\nits size, mime-type, user-defined tags and description thus allowing easy sorting and searching among stored\nfiles.\nThere are several methods of file uploading available: multipart/form-data encoded form, RAW POST (by sending\nfile contents as POST body), fetching from URL (by providing the file URL via 'url' param)\nAttachment is an entity that is used to link a File to one or multiple objects like Customer, Dispute, Payment,\nTransaction, Subscription, Plan, Product, Invoice, Note. That allows to quickly find and use files related to\nthose specific entities.\n"
     },
     {
       "name": "Gateway Accounts",
@@ -200,9 +200,7 @@
   "paths": {
     "/3dsecure": {
       "get": {
-        "tags": [
-          "3D Secure"
-        ],
+        "tags": ["3D Secure"],
         "summary": "Retrieve a list of ThreeDSecure entries",
         "parameters": [
           {
@@ -270,9 +268,7 @@
         }
       },
       "post": {
-        "tags": [
-          "3D Secure"
-        ],
+        "tags": ["3D Secure"],
         "summary": "Create a ThreeDSecure entry",
         "description": "Create a ThreeDSecure entry\n",
         "responses": {
@@ -333,9 +329,7 @@
         }
       ],
       "get": {
-        "tags": [
-          "3D Secure"
-        ],
+        "tags": ["3D Secure"],
         "summary": "Retrieve a ThreeDSecure entry",
         "description": "Retrieve a ThreeDSecure entry with specified identifier string\n",
         "responses": {
@@ -391,9 +385,7 @@
         }
       ],
       "post": {
-        "tags": [
-          "Users"
-        ],
+        "tags": ["Users"],
         "summary": "Sends a token to activate user account",
         "description": "Sends a token to activate user account\n",
         "security": [
@@ -446,9 +438,7 @@
     },
     "/api-keys": {
       "get": {
-        "tags": [
-          "API Keys"
-        ],
+        "tags": ["API Keys"],
         "summary": "Retrieve a list of api keys",
         "description": "Retrieve a list of api keys\n",
         "parameters": [
@@ -523,9 +513,7 @@
         ]
       },
       "post": {
-        "tags": [
-          "API Keys"
-        ],
+        "tags": ["API Keys"],
         "summary": "Create an api key",
         "description": "Create an api key\n",
         "responses": {
@@ -591,9 +579,7 @@
         }
       ],
       "get": {
-        "tags": [
-          "API Keys"
-        ],
+        "tags": ["API Keys"],
         "summary": "Retrieve api key",
         "description": "Retrieve api key with specified identifier string\n",
         "responses": {
@@ -642,9 +628,7 @@
         ]
       },
       "put": {
-        "tags": [
-          "API Keys"
-        ],
+        "tags": ["API Keys"],
         "summary": "Create or update api key with predefined ID",
         "description": "Create or update api key with predefined identifier string\n",
         "responses": {
@@ -729,9 +713,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "API Keys"
-        ],
+        "tags": ["API Keys"],
         "summary": "Delete api key",
         "description": "Delete api key with predefined identifier string\n",
         "responses": {
@@ -778,9 +760,7 @@
     },
     "/attachments": {
       "get": {
-        "tags": [
-          "Files"
-        ],
+        "tags": ["Files"],
         "summary": "Retrieve a list of Attachments",
         "description": "Retrieve a list of Attachments\n",
         "parameters": [
@@ -895,9 +875,7 @@
         ]
       },
       "post": {
-        "tags": [
-          "Files"
-        ],
+        "tags": ["Files"],
         "summary": "Create an Attachment",
         "description": "Create an Attachment\n",
         "responses": {
@@ -956,9 +934,7 @@
         }
       ],
       "get": {
-        "tags": [
-          "Files"
-        ],
+        "tags": ["Files"],
         "summary": "Retrieve an Attachment",
         "description": "Retrieve a Attachment with specified identifier string\n",
         "responses": {
@@ -1007,9 +983,7 @@
         ]
       },
       "put": {
-        "tags": [
-          "Files"
-        ],
+        "tags": ["Files"],
         "summary": "Update the Attachment with predefined ID",
         "description": "Update the Attachment with predefined ID\n",
         "responses": {
@@ -1101,9 +1075,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "Files"
-        ],
+        "tags": ["Files"],
         "summary": "Delete an Attachment",
         "description": "Delete the Attachment with predefined identifier string\n",
         "responses": {
@@ -1147,9 +1119,7 @@
     },
     "/authentication-options": {
       "get": {
-        "tags": [
-          "Customer Authentication"
-        ],
+        "tags": ["Customer Authentication"],
         "summary": "Read current authentication options",
         "description": "Read current authentication options\n",
         "responses": {
@@ -1198,9 +1168,7 @@
         ]
       },
       "put": {
-        "tags": [
-          "Customer Authentication"
-        ],
+        "tags": ["Customer Authentication"],
         "summary": "Change authentication options",
         "description": "Change options\n",
         "responses": {
@@ -1269,9 +1237,7 @@
     },
     "/authentication-tokens": {
       "get": {
-        "tags": [
-          "Customer Authentication"
-        ],
+        "tags": ["Customer Authentication"],
         "summary": "Retrieve a list of auth tokens",
         "description": "Retrieve a list of auth tokens\n",
         "parameters": [
@@ -1346,9 +1312,7 @@
         ]
       },
       "post": {
-        "tags": [
-          "Customer Authentication"
-        ],
+        "tags": ["Customer Authentication"],
         "summary": "Login",
         "description": "Login a user (customer)\n",
         "responses": {
@@ -1428,9 +1392,7 @@
         }
       ],
       "get": {
-        "tags": [
-          "Customer Authentication"
-        ],
+        "tags": ["Customer Authentication"],
         "summary": "Verify",
         "description": "Verify an authentication token\n",
         "responses": {
@@ -1479,9 +1441,7 @@
         ]
       },
       "delete": {
-        "tags": [
-          "Customer Authentication"
-        ],
+        "tags": ["Customer Authentication"],
         "summary": "Logout a user",
         "description": "Logout a user\n",
         "responses": {
@@ -1525,9 +1485,7 @@
     },
     "/bank-accounts": {
       "get": {
-        "tags": [
-          "Bank Accounts"
-        ],
+        "tags": ["Bank Accounts"],
         "summary": "Retrieve a list of bank accounts",
         "description": "Retrieve a list of Bank Accounts\n",
         "parameters": [
@@ -1602,9 +1560,7 @@
         ]
       },
       "post": {
-        "tags": [
-          "Bank Accounts"
-        ],
+        "tags": ["Bank Accounts"],
         "summary": "Create a Bank Account",
         "description": "Create a Bank Account\n",
         "responses": {
@@ -1670,9 +1626,7 @@
         }
       ],
       "get": {
-        "tags": [
-          "Bank Accounts"
-        ],
+        "tags": ["Bank Accounts"],
         "summary": "Retrieve a Bank Account",
         "description": "Retrieve a Bank Account with specified identifier string\n",
         "responses": {
@@ -1721,9 +1675,7 @@
         ]
       },
       "put": {
-        "tags": [
-          "Bank Accounts"
-        ],
+        "tags": ["Bank Accounts"],
         "summary": "Create a BankAccount with predefined ID",
         "description": "Create or update a BankAccount with predefined identifier string\n",
         "responses": {
@@ -1822,9 +1774,7 @@
         }
       ],
       "post": {
-        "tags": [
-          "Bank Accounts"
-        ],
+        "tags": ["Bank Accounts"],
         "summary": "Deactivate a Bank Account",
         "description": "Deactivate a Bank Account\n",
         "responses": {
@@ -1882,9 +1832,7 @@
     },
     "/blacklists": {
       "get": {
-        "tags": [
-          "Blacklists"
-        ],
+        "tags": ["Blacklists"],
         "summary": "Retrieve a list of blacklists",
         "description": "Retrieve a list of blacklists\n",
         "parameters": [
@@ -1959,9 +1907,7 @@
         ]
       },
       "post": {
-        "tags": [
-          "Blacklists"
-        ],
+        "tags": ["Blacklists"],
         "summary": "Create a blacklist",
         "description": "Create a blacklist\n",
         "responses": {
@@ -2020,9 +1966,7 @@
         }
       ],
       "get": {
-        "tags": [
-          "Blacklists"
-        ],
+        "tags": ["Blacklists"],
         "summary": "Retrieve a blacklist",
         "description": "Retrieve a blacklist with specified identifier string\n",
         "responses": {
@@ -2071,9 +2015,7 @@
         ]
       },
       "put": {
-        "tags": [
-          "Blacklists"
-        ],
+        "tags": ["Blacklists"],
         "summary": "Create a blacklist with predefined ID",
         "description": "Create a blacklist with predefined identifier string\n",
         "responses": {
@@ -2135,9 +2077,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "Blacklists"
-        ],
+        "tags": ["Blacklists"],
         "summary": "Delete a blacklist",
         "description": "Delete a blacklist with predefined identifier string\n",
         "responses": {
@@ -2181,9 +2121,7 @@
     },
     "/checkout-pages": {
       "get": {
-        "tags": [
-          "Checkout Pages"
-        ],
+        "tags": ["Checkout Pages"],
         "summary": "Retrieve a list of checkout pages",
         "description": "Retrieve a list of checkout pages\n",
         "parameters": [
@@ -2258,9 +2196,7 @@
         ]
       },
       "post": {
-        "tags": [
-          "Checkout Pages"
-        ],
+        "tags": ["Checkout Pages"],
         "summary": "Create a Checkout Page",
         "description": "Create a Checkout Page\n",
         "responses": {
@@ -2326,9 +2262,7 @@
         }
       ],
       "get": {
-        "tags": [
-          "Checkout Pages"
-        ],
+        "tags": ["Checkout Pages"],
         "summary": "Retrieve a Checkout Page",
         "description": "Retrieve a Checkout Page with specified identifier string\n",
         "responses": {
@@ -2357,9 +2291,7 @@
         ]
       },
       "put": {
-        "tags": [
-          "Checkout Pages"
-        ],
+        "tags": ["Checkout Pages"],
         "summary": "Create or update a Checkout Page with predefined ID",
         "description": "Create or update a Checkout Page with predefined identifier string\n",
         "responses": {
@@ -2451,9 +2383,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "Checkout Pages"
-        ],
+        "tags": ["Checkout Pages"],
         "summary": "Delete a Checkout Page",
         "description": "Delete a Checkout Page with predefined identifier string\n",
         "responses": {
@@ -2500,9 +2430,7 @@
     },
     "/contacts": {
       "get": {
-        "tags": [
-          "Contacts"
-        ],
+        "tags": ["Contacts"],
         "summary": "Retrieve a list of contacts",
         "description": "Retrieve a list of contacts\n",
         "parameters": [
@@ -2577,9 +2505,7 @@
         ]
       },
       "post": {
-        "tags": [
-          "Contacts"
-        ],
+        "tags": ["Contacts"],
         "summary": "Create a contact",
         "description": "Create a contact\n",
         "responses": {
@@ -2638,9 +2564,7 @@
         }
       ],
       "get": {
-        "tags": [
-          "Contacts"
-        ],
+        "tags": ["Contacts"],
         "summary": "Retrieve a contact",
         "description": "Retrieve a contact with specified identifier string\n",
         "responses": {
@@ -2689,9 +2613,7 @@
         ]
       },
       "put": {
-        "tags": [
-          "Contacts"
-        ],
+        "tags": ["Contacts"],
         "summary": "Create or update a contact with predefined ID",
         "description": "Create or update a contact with predefined identifier string\n",
         "responses": {
@@ -2749,9 +2671,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "Contacts"
-        ],
+        "tags": ["Contacts"],
         "summary": "Delete a contact",
         "description": "Delete a contact with predefined identifier string\n",
         "responses": {
@@ -2792,9 +2712,7 @@
     },
     "/coupons-redemptions": {
       "get": {
-        "tags": [
-          "Coupons"
-        ],
+        "tags": ["Coupons"],
         "summary": "Retrieve a list of coupon redemptions",
         "parameters": [
           {
@@ -2880,9 +2798,7 @@
         ]
       },
       "post": {
-        "tags": [
-          "Coupons"
-        ],
+        "tags": ["Coupons"],
         "summary": "Redeem a coupon",
         "description": "Redeem a coupon\n",
         "responses": {
@@ -2956,9 +2872,7 @@
         }
       ],
       "get": {
-        "tags": [
-          "Coupons"
-        ],
+        "tags": ["Coupons"],
         "summary": "Retrieve a coupon redemption with specified identifier string",
         "responses": {
           "200": {
@@ -2993,9 +2907,7 @@
         }
       ],
       "post": {
-        "tags": [
-          "Coupons"
-        ],
+        "tags": ["Coupons"],
         "summary": "Cancel a coupon redemption",
         "responses": {
           "201": {
@@ -3018,9 +2930,7 @@
     },
     "/coupons": {
       "get": {
-        "tags": [
-          "Coupons"
-        ],
+        "tags": ["Coupons"],
         "summary": "Retrieve a list of coupons",
         "description": "Retrieve a list of coupons\n",
         "parameters": [
@@ -3107,9 +3017,7 @@
         ]
       },
       "post": {
-        "tags": [
-          "Coupons"
-        ],
+        "tags": ["Coupons"],
         "summary": "Create a coupon",
         "description": "Create a coupon\n",
         "responses": {
@@ -3181,9 +3089,7 @@
         }
       ],
       "get": {
-        "tags": [
-          "Coupons"
-        ],
+        "tags": ["Coupons"],
         "summary": "Retrieve a coupon",
         "description": "Retrieve a coupon with specified redemption code string\n",
         "responses": {
@@ -3232,9 +3138,7 @@
         ]
       },
       "put": {
-        "tags": [
-          "Coupons"
-        ],
+        "tags": ["Coupons"],
         "summary": "Create or update a coupon with predefined redemption code",
         "description": "Create or update a coupon with predefined redemption code\n",
         "responses": {
@@ -3342,9 +3246,7 @@
         }
       ],
       "post": {
-        "tags": [
-          "Coupons"
-        ],
+        "tags": ["Coupons"],
         "summary": "Set a coupon's expiration time.",
         "description": "Set a coupon's expiry time with the specified redemption code.\nThe expiredTime of a coupon must be greater than its issuedTime.\nThis cannot be performed on expired coupons.\n",
         "responses": {
@@ -3412,9 +3314,7 @@
     },
     "/credential-hashes/emails": {
       "post": {
-        "tags": [
-          "Credential Hashes"
-        ],
+        "tags": ["Credential Hashes"],
         "summary": "Create an email credential",
         "description": "Create an email credential\n",
         "responses": {
@@ -3482,9 +3382,7 @@
         }
       ],
       "get": {
-        "tags": [
-          "Credential Hashes"
-        ],
+        "tags": ["Credential Hashes"],
         "summary": "Retrieve an email credential",
         "description": "Retrieve an email credential with specified token identifier string\n",
         "responses": {
@@ -3529,9 +3427,7 @@
     },
     "/credential-hashes/webhooks": {
       "post": {
-        "tags": [
-          "Credential Hashes"
-        ],
+        "tags": ["Credential Hashes"],
         "summary": "Create a webhook credential",
         "description": "Create a webhook credential\n",
         "responses": {
@@ -3599,9 +3495,7 @@
         }
       ],
       "get": {
-        "tags": [
-          "Credential Hashes"
-        ],
+        "tags": ["Credential Hashes"],
         "summary": "Retrieve a webhook credential",
         "description": "Retrieve a webhook credential with specified token identifier string\n",
         "responses": {
@@ -3646,9 +3540,7 @@
     },
     "/credentials": {
       "get": {
-        "tags": [
-          "Customer Authentication"
-        ],
+        "tags": ["Customer Authentication"],
         "summary": "Retrieve a list of credentials",
         "description": "Retrieve a list of credentials\n",
         "parameters": [
@@ -3723,9 +3615,7 @@
         ]
       },
       "post": {
-        "tags": [
-          "Customer Authentication"
-        ],
+        "tags": ["Customer Authentication"],
         "summary": "Create a credential",
         "description": "Create a credential\n",
         "responses": {
@@ -3791,9 +3681,7 @@
         }
       ],
       "get": {
-        "tags": [
-          "Customer Authentication"
-        ],
+        "tags": ["Customer Authentication"],
         "summary": "Retrieve a credential",
         "description": "Retrieve a credential with specified identifier string\n",
         "responses": {
@@ -3842,9 +3730,7 @@
         ]
       },
       "put": {
-        "tags": [
-          "Customer Authentication"
-        ],
+        "tags": ["Customer Authentication"],
         "summary": "Create or update a credential with predefined ID",
         "description": "Create or update a credential with predefined identifier string\n",
         "responses": {
@@ -3936,9 +3822,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "Customer Authentication"
-        ],
+        "tags": ["Customer Authentication"],
         "summary": "Delete a credential",
         "description": "Delete a credential with predefined identifier string\n",
         "responses": {
@@ -3982,9 +3866,7 @@
     },
     "/custom-events": {
       "get": {
-        "tags": [
-          "Custom Events"
-        ],
+        "tags": ["Custom Events"],
         "summary": "Retrieve a list of custom events",
         "description": "Retrieve a list of custom events\n",
         "parameters": [
@@ -4073,9 +3955,7 @@
         }
       },
       "post": {
-        "tags": [
-          "Custom Events"
-        ],
+        "tags": ["Custom Events"],
         "summary": "Create a custom event",
         "description": "Create a custom event\n",
         "responses": {
@@ -4128,9 +4008,7 @@
         }
       ],
       "get": {
-        "tags": [
-          "Custom Events"
-        ],
+        "tags": ["Custom Events"],
         "summary": "Retrieve a custom event",
         "description": "Retrieve a custom event with predefined identifier string\n",
         "responses": {
@@ -4173,9 +4051,7 @@
         }
       },
       "put": {
-        "tags": [
-          "Custom Events"
-        ],
+        "tags": ["Custom Events"],
         "summary": "Create a custom event with predefined ID",
         "description": "Create a custom event with predefined identifier string\n",
         "responses": {
@@ -4224,9 +4100,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "Custom Events"
-        ],
+        "tags": ["Custom Events"],
         "summary": "Delete a custom event",
         "description": "Delete a custom event with predefined identifier string\n",
         "responses": {
@@ -4272,10 +4146,7 @@
         }
       ],
       "get": {
-        "tags": [
-          "Custom Events",
-          "Rules"
-        ],
+        "tags": ["Custom Events", "Rules"],
         "summary": "Retrieve a list of rules for custom event",
         "responses": {
           "200": {
@@ -4317,10 +4188,7 @@
         }
       },
       "put": {
-        "tags": [
-          "Custom Events",
-          "Rules"
-        ],
+        "tags": ["Custom Events", "Rules"],
         "summary": "Update the rules for custom event",
         "responses": {
           "200": {
@@ -4382,10 +4250,7 @@
         }
       ],
       "get": {
-        "tags": [
-          "Custom Events",
-          "Rules"
-        ],
+        "tags": ["Custom Events", "Rules"],
         "summary": "Retrieve the change history of the set of rules for a custom event",
         "description": "Retrieve the change history of the set of rules for the selected custom event.\nThe history is updated each time you change the rules.\n",
         "parameters": [
@@ -4482,10 +4347,7 @@
         }
       ],
       "get": {
-        "tags": [
-          "Custom Events",
-          "Rules"
-        ],
+        "tags": ["Custom Events", "Rules"],
         "summary": "Retrieve the record from the change history of the set of rules for a custom event",
         "description": "Retrieve the record from the change history of the set of rules for the selected custom event.\nA history record is created each time you change the rules.\n",
         "parameters": [
@@ -4546,10 +4408,7 @@
         }
       ],
       "get": {
-        "tags": [
-          "Custom Events",
-          "Rules"
-        ],
+        "tags": ["Custom Events", "Rules"],
         "summary": "Retrieve the version of the set of rules for a custom event",
         "description": "Retrieve the version of the selected set of rules for the selected custom event.\nThe versions are created each time you change the rules.\n",
         "parameters": [
@@ -4622,9 +4481,7 @@
         }
       ],
       "get": {
-        "tags": [
-          "Custom Fields"
-        ],
+        "tags": ["Custom Fields"],
         "summary": "Retrieve Custom Fields",
         "description": "Retrieve a schema of Custom Fields for the given resource type\n",
         "responses": {
@@ -4705,9 +4562,7 @@
         }
       ],
       "get": {
-        "tags": [
-          "Custom Fields"
-        ],
+        "tags": ["Custom Fields"],
         "summary": "Retrieve a Custom Field",
         "description": "Retrieve a schema of the given Custom Field for the given resource type\n",
         "responses": {
@@ -4756,9 +4611,7 @@
         ]
       },
       "put": {
-        "tags": [
-          "Custom Fields"
-        ],
+        "tags": ["Custom Fields"],
         "summary": "Create or alter a Custom Field",
         "description": "Create or alter a schema of the given Custom Field for the given resource type.\n",
         "responses": {
@@ -4865,9 +4718,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "Custom Fields"
-        ],
+        "tags": ["Custom Fields"],
         "summary": "Delete a custom field",
         "description": "Delete a custom field by its name\n",
         "responses": {
@@ -4921,9 +4772,7 @@
     },
     "/customers": {
       "get": {
-        "tags": [
-          "Customers"
-        ],
+        "tags": ["Customers"],
         "summary": "Retrieve a list of customers",
         "description": "Retrieve a list of customers\n",
         "parameters": [
@@ -4973,10 +4822,7 @@
             "description": "The response media type",
             "schema": {
               "type": "string",
-              "enum": [
-                "application/json",
-                "text/csv"
-              ],
+              "enum": ["application/json", "text/csv"],
               "default": "application/json"
             }
           }
@@ -5053,9 +4899,7 @@
         ]
       },
       "post": {
-        "tags": [
-          "Customers"
-        ],
+        "tags": ["Customers"],
         "summary": "Create a customer",
         "description": "Create a customer\n",
         "responses": {
@@ -5114,9 +4958,7 @@
         }
       ],
       "get": {
-        "tags": [
-          "Customers"
-        ],
+        "tags": ["Customers"],
         "summary": "Retrieve a customer",
         "description": "Retrieve a customer with specified identifier string\n",
         "responses": {
@@ -5165,9 +5007,7 @@
         ]
       },
       "put": {
-        "tags": [
-          "Customers"
-        ],
+        "tags": ["Customers"],
         "summary": "Create a customer with predefined ID",
         "description": "Create a customer with predefined identifier string\n",
         "responses": {
@@ -5256,9 +5096,7 @@
         }
       ],
       "get": {
-        "tags": [
-          "Customers"
-        ],
+        "tags": ["Customers"],
         "summary": "Retrieve a customer's Lead Source",
         "description": "Retrieve a Lead Source of given customer\n",
         "responses": {
@@ -5307,9 +5145,7 @@
         ]
       },
       "put": {
-        "tags": [
-          "Customers"
-        ],
+        "tags": ["Customers"],
         "summary": "Create a Lead Source for a customer",
         "description": "Create a Lead Source for a customer\n",
         "responses": {
@@ -5398,9 +5234,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "Customers"
-        ],
+        "tags": ["Customers"],
         "summary": "Delete a Lead Source for a customer",
         "description": "Delete a Lead Source that belongs to a certain customer\n",
         "responses": {
@@ -5447,9 +5281,7 @@
     },
     "/disputes": {
       "get": {
-        "tags": [
-          "Disputes"
-        ],
+        "tags": ["Disputes"],
         "summary": "Retrieve a list of disputes",
         "description": "Retrieve a list of disputes\n",
         "parameters": [
@@ -5524,9 +5356,7 @@
         ]
       },
       "post": {
-        "tags": [
-          "Disputes"
-        ],
+        "tags": ["Disputes"],
         "summary": "Create a dispute",
         "description": "Create a dispute\n",
         "responses": {
@@ -5592,9 +5422,7 @@
         }
       ],
       "get": {
-        "tags": [
-          "Disputes"
-        ],
+        "tags": ["Disputes"],
         "summary": "Retrieve a dispute",
         "description": "Retrieve a dispute with specified identifier string\n",
         "responses": {
@@ -5643,9 +5471,7 @@
         ]
       },
       "put": {
-        "tags": [
-          "Disputes"
-        ],
+        "tags": ["Disputes"],
         "summary": "Create or update a Dispute with predefined ID",
         "description": "Create or update a Dispute with predefined identifier string\n",
         "responses": {
@@ -5736,10 +5562,7 @@
     },
     "/events": {
       "get": {
-        "tags": [
-          "Events",
-          "Rules"
-        ],
+        "tags": ["Events", "Rules"],
         "summary": "Retrieve a list of existing events",
         "responses": {
           "200": {
@@ -5806,10 +5629,7 @@
         }
       ],
       "get": {
-        "tags": [
-          "Events",
-          "Rules"
-        ],
+        "tags": ["Events", "Rules"],
         "summary": "Retrieve the event information",
         "responses": {
           "200": {
@@ -5858,10 +5678,7 @@
         }
       ],
       "get": {
-        "tags": [
-          "Events",
-          "Rules"
-        ],
+        "tags": ["Events", "Rules"],
         "summary": "Retrieve a list of rules for event",
         "responses": {
           "200": {
@@ -5903,10 +5720,7 @@
         }
       },
       "put": {
-        "tags": [
-          "Events",
-          "Rules"
-        ],
+        "tags": ["Events", "Rules"],
         "summary": "Update the rules for event",
         "responses": {
           "200": {
@@ -5968,10 +5782,7 @@
         }
       ],
       "get": {
-        "tags": [
-          "Events",
-          "Rules"
-        ],
+        "tags": ["Events", "Rules"],
         "summary": "Retrieve the change history of the set of rules",
         "description": "Retrieve the change history of the selected set of rules.\nThe history is updated each time you change the rules.\n",
         "parameters": [
@@ -6068,10 +5879,7 @@
         }
       ],
       "get": {
-        "tags": [
-          "Events",
-          "Rules"
-        ],
+        "tags": ["Events", "Rules"],
         "summary": "Retrieve the record from the change history of the set of rules",
         "description": "Retrieve the record from the change history of the selected set of rules.\nA history record is created each time you change the rules.\n",
         "parameters": [
@@ -6132,10 +5940,7 @@
         }
       ],
       "get": {
-        "tags": [
-          "Events",
-          "Rules"
-        ],
+        "tags": ["Events", "Rules"],
         "summary": "Retrieve the version of the set of rules",
         "description": "Retrieve the version of the selected set of rules.\nThe versions are created each time you change the rules.\n",
         "parameters": [
@@ -6188,9 +5993,7 @@
     },
     "/files": {
       "get": {
-        "tags": [
-          "Files"
-        ],
+        "tags": ["Files"],
         "summary": "Retrieve a list of files",
         "description": "Retrieve a list of files\n",
         "parameters": [
@@ -6307,9 +6110,7 @@
         ]
       },
       "post": {
-        "tags": [
-          "Files"
-        ],
+        "tags": ["Files"],
         "summary": "Create a file",
         "description": "Create a file\n",
         "responses": {
@@ -6382,9 +6183,7 @@
         }
       ],
       "get": {
-        "tags": [
-          "Files"
-        ],
+        "tags": ["Files"],
         "summary": "Retrieve a File",
         "description": "Retrieve a File with specified identifier string\n",
         "responses": {
@@ -6433,9 +6232,7 @@
         ]
       },
       "put": {
-        "tags": [
-          "Files"
-        ],
+        "tags": ["Files"],
         "summary": "Update the File with predefined ID. Note that file can be uploaded with POST only.",
         "description": "Update the File with predefined ID\n",
         "responses": {
@@ -6505,9 +6302,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "Files"
-        ],
+        "tags": ["Files"],
         "summary": "Delete a File",
         "description": "Delete the File with predefined identifier string\n",
         "responses": {
@@ -6556,9 +6351,7 @@
         }
       ],
       "get": {
-        "tags": [
-          "Files"
-        ],
+        "tags": ["Files"],
         "summary": "Retrieve a file",
         "description": "Retrieve a file\n",
         "responses": {
@@ -6608,17 +6401,12 @@
           "required": true,
           "schema": {
             "type": "string",
-            "enum": [
-              ".png",
-              ".jpg"
-            ]
+            "enum": [".png", ".jpg"]
           }
         }
       ],
       "get": {
-        "tags": [
-          "Files"
-        ],
+        "tags": ["Files"],
         "summary": "Used for converting images server-side",
         "description": "Used for converting images server-side\n",
         "responses": {
@@ -6661,9 +6449,7 @@
     },
     "/forgot-password": {
       "post": {
-        "tags": [
-          "Users"
-        ],
+        "tags": ["Users"],
         "summary": "Sends an email with a link containing a token to reset user password",
         "description": "Sends an email with a link containing a token to reset user password\n",
         "responses": {
@@ -6722,9 +6508,7 @@
     },
     "/gateway-accounts": {
       "get": {
-        "tags": [
-          "Gateway Accounts"
-        ],
+        "tags": ["Gateway Accounts"],
         "summary": "Retrieve a list of gateway accounts",
         "description": "Retrieve a list of gateway accounts\n",
         "parameters": [
@@ -6799,9 +6583,7 @@
         ]
       },
       "post": {
-        "tags": [
-          "Gateway Accounts"
-        ],
+        "tags": ["Gateway Accounts"],
         "summary": "Create a Gateway Account",
         "description": "Create a Gateway Account\n",
         "responses": {
@@ -6867,9 +6649,7 @@
         }
       ],
       "get": {
-        "tags": [
-          "Gateway Accounts"
-        ],
+        "tags": ["Gateway Accounts"],
         "summary": "Retrieve a Gateway Account",
         "description": "Retrieve a Gateway Account with specified identifier string\n",
         "responses": {
@@ -6918,9 +6698,7 @@
         ]
       },
       "put": {
-        "tags": [
-          "Gateway Accounts"
-        ],
+        "tags": ["Gateway Accounts"],
         "summary": "Create or update a Gateway Account with predefined ID",
         "description": "Create or update a GatewayAccount with predefined identifier string\n",
         "responses": {
@@ -7012,9 +6790,7 @@
         }
       },
       "patch": {
-        "tags": [
-          "Gateway Accounts"
-        ],
+        "tags": ["Gateway Accounts"],
         "summary": "Update a Gateway Account with predefined ID",
         "description": "Update a GatewayAccount with predefined identifier string\n",
         "responses": {
@@ -7070,9 +6846,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "Gateway Accounts"
-        ],
+        "tags": ["Gateway Accounts"],
         "summary": "Delete a Gateway Account",
         "description": "Delete a Gateway Account with predefined identifier string\n",
         "responses": {
@@ -7119,9 +6893,7 @@
     },
     "/invoices": {
       "get": {
-        "tags": [
-          "Invoices"
-        ],
+        "tags": ["Invoices"],
         "summary": "Retrieve a list of invoices",
         "description": "Retrieve a list of invoices\n",
         "parameters": [
@@ -7137,10 +6909,7 @@
             "description": "The response media type",
             "schema": {
               "type": "string",
-              "enum": [
-                "application/json",
-                "text/csv"
-              ],
+              "enum": ["application/json", "text/csv"],
               "default": "application/json"
             }
           }
@@ -7217,9 +6986,7 @@
         ]
       },
       "post": {
-        "tags": [
-          "Invoices"
-        ],
+        "tags": ["Invoices"],
         "summary": "Create an invoice",
         "description": "Create an invoice\n",
         "responses": {
@@ -7285,9 +7052,7 @@
         }
       ],
       "get": {
-        "tags": [
-          "Invoices"
-        ],
+        "tags": ["Invoices"],
         "summary": "Retrieve an invoice",
         "description": "Retrieve an invoice with specified identifier string\n",
         "parameters": [
@@ -7297,10 +7062,7 @@
             "description": "The response media type",
             "schema": {
               "type": "string",
-              "enum": [
-                "application/json",
-                "application/pdf"
-              ],
+              "enum": ["application/json", "application/pdf"],
               "default": "application/json"
             }
           }
@@ -7356,9 +7118,7 @@
         ]
       },
       "put": {
-        "tags": [
-          "Invoices"
-        ],
+        "tags": ["Invoices"],
         "summary": "Create or update an invoice with predefined ID",
         "description": "Create or update an invoice with predefined identifier string\n",
         "responses": {
@@ -7457,9 +7217,7 @@
         }
       ],
       "post": {
-        "tags": [
-          "Invoices"
-        ],
+        "tags": ["Invoices"],
         "summary": "Abandon an invoice",
         "description": "Abandon an invoice with specified identifier string\n",
         "responses": {
@@ -7515,9 +7273,7 @@
         }
       ],
       "post": {
-        "tags": [
-          "Invoices"
-        ],
+        "tags": ["Invoices"],
         "summary": "Issue an invoice",
         "description": "Issue an invoice with specified identifier string\n",
         "responses": {
@@ -7584,9 +7340,7 @@
         }
       ],
       "get": {
-        "tags": [
-          "Invoices"
-        ],
+        "tags": ["Invoices"],
         "summary": "Retrieve invoice items",
         "description": "Retrieve an invoice items with specified invoice identifier string\n",
         "parameters": [
@@ -7646,9 +7400,7 @@
         ]
       },
       "post": {
-        "tags": [
-          "Invoices"
-        ],
+        "tags": ["Invoices"],
         "summary": "Create an invoice item",
         "description": "Create an invoice item\n",
         "responses": {
@@ -7722,9 +7474,7 @@
         }
       ],
       "get": {
-        "tags": [
-          "Invoices"
-        ],
+        "tags": ["Invoices"],
         "summary": "Retrieve an invoice's Lead Source",
         "description": "Retrieve a Lead Source of given invoice\n",
         "responses": {
@@ -7773,9 +7523,7 @@
         ]
       },
       "put": {
-        "tags": [
-          "Invoices"
-        ],
+        "tags": ["Invoices"],
         "summary": "Create a Lead Source for an invoice",
         "description": "Create a Lead Source for an invoice\n",
         "responses": {
@@ -7864,9 +7612,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "Invoices"
-        ],
+        "tags": ["Invoices"],
         "summary": "Delete a Lead Source for an invoice",
         "description": "Delete a Lead Source that belongs to a certain invoice\n",
         "responses": {
@@ -7918,9 +7664,7 @@
         }
       ],
       "post": {
-        "tags": [
-          "Invoices"
-        ],
+        "tags": ["Invoices"],
         "summary": "Void an invoice",
         "description": "Void an invoice with specified identifier string\n",
         "responses": {
@@ -7971,9 +7715,7 @@
     },
     "/layouts": {
       "get": {
-        "tags": [
-          "Layouts"
-        ],
+        "tags": ["Layouts"],
         "summary": "Retrieve a layout list",
         "description": "Retrieve a layout list\n",
         "parameters": [
@@ -8048,9 +7790,7 @@
         ]
       },
       "post": {
-        "tags": [
-          "Layouts"
-        ],
+        "tags": ["Layouts"],
         "summary": "Create a layout",
         "description": "Create a layout\n",
         "responses": {
@@ -8109,9 +7849,7 @@
         }
       ],
       "get": {
-        "tags": [
-          "Layouts"
-        ],
+        "tags": ["Layouts"],
         "summary": "Retrieve a layout",
         "description": "Retrieve a layout with specified identifier string\n",
         "responses": {
@@ -8160,9 +7898,7 @@
         ]
       },
       "put": {
-        "tags": [
-          "Layouts"
-        ],
+        "tags": ["Layouts"],
         "summary": "Create or update a layout with predefined ID",
         "description": "Create or update a layout with predefined identifier string\n",
         "responses": {
@@ -8247,9 +7983,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "Layouts"
-        ],
+        "tags": ["Layouts"],
         "summary": "Delete a layout",
         "description": "Delete a layout with predefined identifier string\n",
         "responses": {
@@ -8293,9 +8027,7 @@
     },
     "/lists": {
       "get": {
-        "tags": [
-          "Lists"
-        ],
+        "tags": ["Lists"],
         "summary": "Retrieve a collection of Lists (latest version of each List)",
         "description": "Retrieve a collection of Lists\n",
         "parameters": [
@@ -8373,9 +8105,7 @@
         }
       },
       "post": {
-        "tags": [
-          "Lists"
-        ],
+        "tags": ["Lists"],
         "summary": "Create a List",
         "description": "Create a List\n",
         "responses": {
@@ -8435,9 +8165,7 @@
         }
       ],
       "get": {
-        "tags": [
-          "Lists"
-        ],
+        "tags": ["Lists"],
         "summary": "Retrieve list's latest version",
         "description": "Retrieve latest version of List with specified identifier string\n",
         "responses": {
@@ -8480,9 +8208,7 @@
         }
       },
       "put": {
-        "tags": [
-          "Lists"
-        ],
+        "tags": ["Lists"],
         "summary": "Create or update a list with predefined ID",
         "description": "Create or update a list with predefined identifier string\n",
         "responses": {
@@ -8561,9 +8287,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "Lists"
-        ],
+        "tags": ["Lists"],
         "summary": "Delete a list",
         "description": "Delete a list with predefined identifier string\n",
         "responses": {
@@ -8619,9 +8343,7 @@
         }
       ],
       "get": {
-        "tags": [
-          "Lists"
-        ],
+        "tags": ["Lists"],
         "summary": "Retrieve List's exact version",
         "responses": {
           "200": {
@@ -8645,9 +8367,7 @@
     },
     "/notes": {
       "get": {
-        "tags": [
-          "Notes"
-        ],
+        "tags": ["Notes"],
         "summary": "Retrieve a list of notes",
         "description": "Retrieve a list of notes\n",
         "parameters": [
@@ -8722,9 +8442,7 @@
         ]
       },
       "post": {
-        "tags": [
-          "Notes"
-        ],
+        "tags": ["Notes"],
         "summary": "Create a note",
         "description": "Create a note\n",
         "responses": {
@@ -8790,9 +8508,7 @@
         }
       ],
       "get": {
-        "tags": [
-          "Notes"
-        ],
+        "tags": ["Notes"],
         "summary": "Retrieve a note",
         "description": "Retrieve a note with specified identifier string\n",
         "responses": {
@@ -8841,9 +8557,7 @@
         ]
       },
       "put": {
-        "tags": [
-          "Notes"
-        ],
+        "tags": ["Notes"],
         "summary": "Create or update a note with predefined ID",
         "description": "Create or update a note with predefined identifier string\n",
         "responses": {
@@ -8937,9 +8651,7 @@
     },
     "/organizations": {
       "get": {
-        "tags": [
-          "Organizations"
-        ],
+        "tags": ["Organizations"],
         "summary": "Retrieve a list of organizations",
         "description": "Retrieve a list of organizations\n",
         "parameters": [
@@ -9014,9 +8726,7 @@
         ]
       },
       "post": {
-        "tags": [
-          "Organizations"
-        ],
+        "tags": ["Organizations"],
         "summary": "Create a organization",
         "description": "Create a organization\n",
         "responses": {
@@ -9075,9 +8785,7 @@
         }
       ],
       "get": {
-        "tags": [
-          "Organizations"
-        ],
+        "tags": ["Organizations"],
         "summary": "Retrieve a organization",
         "description": "Retrieve a organization with specified identifier string\n",
         "responses": {
@@ -9126,9 +8834,7 @@
         ]
       },
       "put": {
-        "tags": [
-          "Organizations"
-        ],
+        "tags": ["Organizations"],
         "summary": "Create or update a organization with predefined ID",
         "description": "Create or update a organization with predefined identifier string\n",
         "responses": {
@@ -9210,9 +8916,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "Organizations"
-        ],
+        "tags": ["Organizations"],
         "summary": "Delete a organization",
         "description": "Delete a organization with predefined identifier string\n",
         "responses": {
@@ -9260,9 +8964,7 @@
     },
     "/password-tokens": {
       "get": {
-        "tags": [
-          "Customer Authentication"
-        ],
+        "tags": ["Customer Authentication"],
         "summary": "Retrieve a list of tokens",
         "description": "Retrieve a list of tokens\n",
         "parameters": [
@@ -9337,9 +9039,7 @@
         ]
       },
       "post": {
-        "tags": [
-          "Customer Authentication"
-        ],
+        "tags": ["Customer Authentication"],
         "summary": "Create a Reset Password Token",
         "description": "Create a Reset Password Token\n",
         "responses": {
@@ -9413,9 +9113,7 @@
         }
       ],
       "get": {
-        "tags": [
-          "Customer Authentication"
-        ],
+        "tags": ["Customer Authentication"],
         "summary": "Retrieve a Reset Password Token",
         "description": "Retrieve a Reset Password Token with specified identifier string\n",
         "responses": {
@@ -9464,9 +9162,7 @@
         ]
       },
       "delete": {
-        "tags": [
-          "Customer Authentication"
-        ],
+        "tags": ["Customer Authentication"],
         "summary": "Delete a Reset Password Token",
         "description": "Delete a Reset Password Token with predefined identifier string\n",
         "responses": {
@@ -9513,9 +9209,7 @@
     },
     "/payment-cards-migrations": {
       "get": {
-        "tags": [
-          "Migrate payment cards"
-        ],
+        "tags": ["Migrate payment cards"],
         "summary": "Retrieve a list of payment cards ready for migration",
         "description": "Retrieve a list of payment cards ready for migration\n",
         "parameters": [
@@ -9592,9 +9286,7 @@
     },
     "/payment-cards-migrations/migrate": {
       "post": {
-        "tags": [
-          "Migrate payment cards"
-        ],
+        "tags": ["Migrate payment cards"],
         "summary": "Migrate payment cards to another gateway account",
         "description": "Migrate payment cards to another gateway account\n",
         "responses": {
@@ -9643,9 +9335,7 @@
     },
     "/payment-cards": {
       "get": {
-        "tags": [
-          "Payment Cards"
-        ],
+        "tags": ["Payment Cards"],
         "summary": "Retrieve a list of Payment Cards",
         "description": "Retrieve a list of Payments Cards\n",
         "parameters": [
@@ -9720,9 +9410,7 @@
         ]
       },
       "post": {
-        "tags": [
-          "Payment Cards"
-        ],
+        "tags": ["Payment Cards"],
         "summary": "Create a Payment Card",
         "description": "Create a Payment Card\n",
         "responses": {
@@ -9796,9 +9484,7 @@
         }
       ],
       "get": {
-        "tags": [
-          "Payment Cards"
-        ],
+        "tags": ["Payment Cards"],
         "summary": "Retrieve a Payment Card",
         "description": "Retrieve a Payment Card with specified identifier string\n",
         "responses": {
@@ -9847,9 +9533,7 @@
         ]
       },
       "patch": {
-        "tags": [
-          "Payment Cards"
-        ],
+        "tags": ["Payment Cards"],
         "summary": "Update a payment card's cvv value with predefined ID",
         "description": "Update a payment card's cvv value with predefined identifier string\n",
         "responses": {
@@ -9919,9 +9603,7 @@
         }
       },
       "put": {
-        "tags": [
-          "Payment Cards"
-        ],
+        "tags": ["Payment Cards"],
         "summary": "Create a payment card with predefined ID",
         "responses": {
           "201": {
@@ -9997,9 +9679,7 @@
         }
       ],
       "post": {
-        "tags": [
-          "Payment Cards"
-        ],
+        "tags": ["Payment Cards"],
         "summary": "Authorize a Payment Card",
         "description": "Authorize a Payment Card\n",
         "responses": {
@@ -10058,10 +9738,7 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "required": [
-                  "websiteId",
-                  "currency"
-                ],
+                "required": ["websiteId", "currency"],
                 "properties": {
                   "websiteId": {
                     "description": "The Website ID",
@@ -10096,9 +9773,7 @@
         }
       ],
       "post": {
-        "tags": [
-          "Payment Cards"
-        ],
+        "tags": ["Payment Cards"],
         "summary": "Deactivate a Payment Card",
         "description": "Deactivate a Payment Card\n",
         "responses": {
@@ -10156,9 +9831,7 @@
     },
     "/payments": {
       "get": {
-        "tags": [
-          "Payments"
-        ],
+        "tags": ["Payments"],
         "summary": "Retrieve a payment list",
         "description": "Retrieve a payment list\n",
         "parameters": [
@@ -10174,10 +9847,7 @@
             "description": "The response media type",
             "schema": {
               "type": "string",
-              "enum": [
-                "application/json",
-                "text/csv"
-              ],
+              "enum": ["application/json", "text/csv"],
               "default": "application/json"
             }
           }
@@ -10257,9 +9927,7 @@
         ]
       },
       "post": {
-        "tags": [
-          "Payments"
-        ],
+        "tags": ["Payments"],
         "summary": "Create a payment",
         "description": "Create a payment\n",
         "responses": {
@@ -10321,9 +9989,7 @@
         }
       ],
       "get": {
-        "tags": [
-          "Payments"
-        ],
+        "tags": ["Payments"],
         "summary": "Retrieve a payment",
         "description": "Retrieve a payment with specified identifier string\n",
         "responses": {
@@ -10372,9 +10038,7 @@
         ]
       },
       "put": {
-        "tags": [
-          "Payments"
-        ],
+        "tags": ["Payments"],
         "summary": "Create a payment with predefined ID",
         "description": "Make a payment with predefined identifier string\n",
         "responses": {
@@ -10468,9 +10132,7 @@
     },
     "/paypal-accounts": {
       "get": {
-        "tags": [
-          "PayPal Accounts"
-        ],
+        "tags": ["PayPal Accounts"],
         "summary": "Retrieve a list of PayPal accounts",
         "description": "Retrieve a list of PayPal Accounts\n",
         "parameters": [
@@ -10501,9 +10163,7 @@
         }
       },
       "post": {
-        "tags": [
-          "PayPal Accounts"
-        ],
+        "tags": ["PayPal Accounts"],
         "summary": "Create a PayPal Account",
         "description": "Create a PayPal Account\n",
         "responses": {
@@ -10551,9 +10211,7 @@
         }
       ],
       "get": {
-        "tags": [
-          "PayPal Accounts"
-        ],
+        "tags": ["PayPal Accounts"],
         "summary": "Retrieve a PayPal Account",
         "description": "Retrieve a PayPal Account with specified identifier string\n",
         "responses": {
@@ -10596,9 +10254,7 @@
         }
       },
       "put": {
-        "tags": [
-          "PayPal Accounts"
-        ],
+        "tags": ["PayPal Accounts"],
         "summary": "Create a PayPal account with predefined ID",
         "responses": {
           "201": {
@@ -10668,9 +10324,7 @@
         }
       ],
       "post": {
-        "tags": [
-          "PayPal Accounts"
-        ],
+        "tags": ["PayPal Accounts"],
         "summary": "Activate a PayPal Account",
         "description": "Activate a PayPal Account\n",
         "responses": {
@@ -10723,10 +10377,7 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "required": [
-                  "websiteId",
-                  "currency"
-                ],
+                "required": ["websiteId", "currency"],
                 "properties": {
                   "websiteId": {
                     "description": "The Website ID",
@@ -10766,9 +10417,7 @@
         }
       ],
       "post": {
-        "tags": [
-          "PayPal Accounts"
-        ],
+        "tags": ["PayPal Accounts"],
         "summary": "Deactivate a PayPal Account",
         "description": "Deactivate a PayPal Account\n",
         "responses": {
@@ -10820,9 +10469,7 @@
     },
     "/plans": {
       "get": {
-        "tags": [
-          "Plans"
-        ],
+        "tags": ["Plans"],
         "summary": "Retrieve a list of plans",
         "description": "Retrieve a list of plans\n",
         "parameters": [
@@ -10897,9 +10544,7 @@
         ]
       },
       "post": {
-        "tags": [
-          "Plans"
-        ],
+        "tags": ["Plans"],
         "summary": "Create a plan",
         "description": "Create a plan\n",
         "responses": {
@@ -10945,9 +10590,7 @@
         }
       ],
       "get": {
-        "tags": [
-          "Plans"
-        ],
+        "tags": ["Plans"],
         "summary": "Retrieve a plan",
         "description": "Retrieve a plan with specified identifier string\n",
         "responses": {
@@ -10996,9 +10639,7 @@
         ]
       },
       "put": {
-        "tags": [
-          "Plans"
-        ],
+        "tags": ["Plans"],
         "summary": "Create or update a Plan with predefined ID",
         "description": "Create or update a Plan with predefined identifier string\n",
         "responses": {
@@ -11090,9 +10731,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "Plans"
-        ],
+        "tags": ["Plans"],
         "summary": "Delete a Plan",
         "description": "Delete a Plan with predefined identifier string\n",
         "responses": {
@@ -11136,9 +10775,7 @@
     },
     "/previews/rule-actions/send-email": {
       "post": {
-        "tags": [
-          "Rules"
-        ],
+        "tags": ["Rules"],
         "summary": "Send a test email",
         "description": "Send a test email\n",
         "security": [
@@ -11206,9 +10843,7 @@
     },
     "/previews/rule-actions/trigger-webhook": {
       "post": {
-        "tags": [
-          "Rules"
-        ],
+        "tags": ["Rules"],
         "summary": "Trigger a test webhook",
         "description": "Trigger a test webhook\n",
         "security": [
@@ -11276,9 +10911,7 @@
     },
     "/previews/webhooks": {
       "post": {
-        "tags": [
-          "Webhooks"
-        ],
+        "tags": ["Webhooks"],
         "summary": "Trigger a test webhook",
         "description": "Trigger a test webhook\n",
         "responses": {
@@ -11326,9 +10959,7 @@
     },
     "/products": {
       "get": {
-        "tags": [
-          "Products"
-        ],
+        "tags": ["Products"],
         "summary": "Retrieve a list of products",
         "description": "Retrieve a list of products\n",
         "parameters": [
@@ -11397,9 +11028,7 @@
         }
       },
       "post": {
-        "tags": [
-          "Products"
-        ],
+        "tags": ["Products"],
         "summary": "Create a Product",
         "description": "Create a Product\n",
         "responses": {
@@ -11452,9 +11081,7 @@
         }
       ],
       "get": {
-        "tags": [
-          "Products"
-        ],
+        "tags": ["Products"],
         "summary": "Retrieve a product",
         "description": "Retrieve a product with specified identifier string\n",
         "responses": {
@@ -11497,9 +11124,7 @@
         }
       },
       "put": {
-        "tags": [
-          "Products"
-        ],
+        "tags": ["Products"],
         "summary": "Create a product with predefined ID",
         "description": "Create a product with predefined identifier string\n",
         "responses": {
@@ -11575,9 +11200,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "Products"
-        ],
+        "tags": ["Products"],
         "summary": "Delete a product",
         "description": "Delete a product with predefined identifier string\n",
         "responses": {
@@ -11615,9 +11238,7 @@
     },
     "/profile": {
       "get": {
-        "tags": [
-          "Profile"
-        ],
+        "tags": ["Profile"],
         "summary": "Retrieve user's profile",
         "description": "Retrieve user's profile\n",
         "responses": {
@@ -11660,9 +11281,7 @@
         }
       },
       "put": {
-        "tags": [
-          "Profile"
-        ],
+        "tags": ["Profile"],
         "summary": "Update user's profile",
         "description": "Update user's profile\n",
         "responses": {
@@ -11721,9 +11340,7 @@
     },
     "/profile/password": {
       "post": {
-        "tags": [
-          "Profile"
-        ],
+        "tags": ["Profile"],
         "summary": "Updates user's password with the specified newPassword",
         "description": "Updates user's password with the specified newPassword. And checks if currentPassword matches the actual one.\n",
         "responses": {
@@ -11774,9 +11391,7 @@
     },
     "/profile/totp-reset": {
       "post": {
-        "tags": [
-          "Profile"
-        ],
+        "tags": ["Profile"],
         "summary": "Reset (renew) totpSecret",
         "description": "Reset (renew) totpSecret\n",
         "responses": {
@@ -11818,9 +11433,7 @@
     },
     "/queue/custom-events": {
       "get": {
-        "tags": [
-          "Custom Events"
-        ],
+        "tags": ["Custom Events"],
         "summary": "Retrieve a list of scheduled custom events",
         "description": "Retrieve a list of scheduled custom events\n",
         "parameters": [
@@ -11896,9 +11509,7 @@
         }
       ],
       "get": {
-        "tags": [
-          "Custom Events"
-        ],
+        "tags": ["Custom Events"],
         "summary": "Retrieve a scheduled custom event",
         "description": "Retrieve a scheduled custom event with predefined identifier string\n",
         "responses": {
@@ -11971,9 +11582,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "Custom Events"
-        ],
+        "tags": ["Custom Events"],
         "summary": "Delete a scheduled custom event",
         "description": "Delete a scheduled custom event with predefined identifier string\n",
         "responses": {
@@ -12011,9 +11620,7 @@
     },
     "/queue/payments": {
       "get": {
-        "tags": [
-          "Payments"
-        ],
+        "tags": ["Payments"],
         "parameters": [
           {
             "$ref": "#/components/parameters/collectionLimit"
@@ -12095,9 +11702,7 @@
         }
       ],
       "get": {
-        "tags": [
-          "Payments"
-        ],
+        "tags": ["Payments"],
         "summary": "Retrieve a scheduled payment",
         "description": "Retrieve a payment with specified identifier string\n",
         "responses": {
@@ -12176,9 +11781,7 @@
         ]
       },
       "put": {
-        "tags": [
-          "Payments"
-        ],
+        "tags": ["Payments"],
         "summary": "Update pending payment",
         "responses": {
           "200": {
@@ -12231,9 +11834,7 @@
     },
     "/sessions": {
       "get": {
-        "tags": [
-          "Sessions"
-        ],
+        "tags": ["Sessions"],
         "summary": "Retrieve a list of sessions",
         "description": "Retrieve a list of sessions\n",
         "parameters": [
@@ -12308,9 +11909,7 @@
         ]
       },
       "post": {
-        "tags": [
-          "Sessions"
-        ],
+        "tags": ["Sessions"],
         "summary": "Create a session",
         "description": "Create a session\n",
         "responses": {
@@ -12384,9 +11983,7 @@
         }
       ],
       "get": {
-        "tags": [
-          "Sessions"
-        ],
+        "tags": ["Sessions"],
         "summary": "Retrieve a Session",
         "description": "Retrieve a Session with specified identifier string\n",
         "responses": {
@@ -12435,9 +12032,7 @@
         ]
       },
       "put": {
-        "tags": [
-          "Sessions"
-        ],
+        "tags": ["Sessions"],
         "summary": "Create or update a Session with predefined ID",
         "description": "Create or update a Session with predefined identifier string\n",
         "responses": {
@@ -12537,9 +12132,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "Sessions"
-        ],
+        "tags": ["Sessions"],
         "summary": "Delete a Session",
         "description": "Delete a Session with predefined identifier string\n",
         "responses": {
@@ -12586,9 +12179,7 @@
     },
     "/shipping-zones": {
       "get": {
-        "tags": [
-          "Shipping Zones"
-        ],
+        "tags": ["Shipping Zones"],
         "summary": "Retrieve a list of shipping zones",
         "description": "Retrieve a list of shipping zones\n",
         "parameters": [
@@ -12657,9 +12248,7 @@
         }
       },
       "post": {
-        "tags": [
-          "Shipping Zones"
-        ],
+        "tags": ["Shipping Zones"],
         "summary": "Create a Shipping Zone",
         "description": "Create a Shipping Zone\n",
         "responses": {
@@ -12720,9 +12309,7 @@
         }
       ],
       "get": {
-        "tags": [
-          "Shipping Zones"
-        ],
+        "tags": ["Shipping Zones"],
         "summary": "Retrieve a shipping zone",
         "description": "Retrieve a shipping zone with specified identifier string\n",
         "responses": {
@@ -12765,9 +12352,7 @@
         }
       },
       "put": {
-        "tags": [
-          "Shipping Zones"
-        ],
+        "tags": ["Shipping Zones"],
         "summary": "Create a shipping zone with predefined ID",
         "description": "Create a shipping zone with predefined identifier string\n",
         "responses": {
@@ -12851,9 +12436,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "Shipping Zones"
-        ],
+        "tags": ["Shipping Zones"],
         "summary": "Delete a shipping zone",
         "description": "Delete a shipping zone with predefined identifier string\n",
         "responses": {
@@ -12891,10 +12474,7 @@
     },
     "/signin": {
       "post": {
-        "tags": [
-          "Users",
-          "Sessions"
-        ],
+        "tags": ["Users", "Sessions"],
         "summary": "Create a session with email and password",
         "description": "Create a session with email and password\n",
         "security": [],
@@ -12964,9 +12544,7 @@
     },
     "/signup": {
       "post": {
-        "tags": [
-          "Users"
-        ],
+        "tags": ["Users"],
         "summary": "Creates a new user and sends an email confirmation",
         "description": "Creates a new user and sends an email confirmation\n",
         "responses": {
@@ -13032,9 +12610,7 @@
     },
     "/status": {
       "get": {
-        "tags": [
-          "Status"
-        ],
+        "tags": ["Status"],
         "summary": "Retrieve API current status",
         "description": "Retrieve API current status\n",
         "security": [],
@@ -13074,9 +12650,7 @@
     },
     "/subscriptions": {
       "get": {
-        "tags": [
-          "Subscriptions"
-        ],
+        "tags": ["Subscriptions"],
         "summary": "Retrieve a list of subscriptions",
         "description": "Retrieve a list of subscriptions\n",
         "parameters": [
@@ -13092,10 +12666,7 @@
             "description": "The response media type",
             "schema": {
               "type": "string",
-              "enum": [
-                "application/json",
-                "text/csv"
-              ],
+              "enum": ["application/json", "text/csv"],
               "default": "application/json"
             }
           }
@@ -13172,9 +12743,7 @@
         ]
       },
       "post": {
-        "tags": [
-          "Subscriptions"
-        ],
+        "tags": ["Subscriptions"],
         "summary": "Create a subscription",
         "description": "Create a subscription\n",
         "responses": {
@@ -13240,9 +12809,7 @@
         }
       ],
       "get": {
-        "tags": [
-          "Subscriptions"
-        ],
+        "tags": ["Subscriptions"],
         "summary": "Retrieve a subscription",
         "description": "Retrieve a subscription with specified identifier string\n",
         "responses": {
@@ -13291,9 +12858,7 @@
         ]
       },
       "put": {
-        "tags": [
-          "Subscriptions"
-        ],
+        "tags": ["Subscriptions"],
         "summary": "Create or update a subscription with predefined ID",
         "description": "Create or update a subscription with predefined identifier string\n",
         "responses": {
@@ -13392,9 +12957,7 @@
         }
       ],
       "post": {
-        "tags": [
-          "Subscriptions"
-        ],
+        "tags": ["Subscriptions"],
         "summary": "Cancel a subscription",
         "description": "Cancel a subscription\n",
         "responses": {
@@ -13468,9 +13031,7 @@
         }
       ],
       "get": {
-        "tags": [
-          "Subscriptions"
-        ],
+        "tags": ["Subscriptions"],
         "summary": "Retrieve a subscription's Lead Source",
         "description": "Retrieve a Lead Source of given subscription\n",
         "responses": {
@@ -13519,9 +13080,7 @@
         ]
       },
       "put": {
-        "tags": [
-          "Subscriptions"
-        ],
+        "tags": ["Subscriptions"],
         "summary": "Create a Lead Source for a Subscription",
         "description": "Create a Lead Source for a Subscription\n",
         "responses": {
@@ -13610,9 +13169,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "Subscriptions"
-        ],
+        "tags": ["Subscriptions"],
         "summary": "Delete a Lead Source for a Subscription",
         "description": "Delete a Lead Source that belongs to a certain Subscription\n",
         "responses": {
@@ -13664,9 +13221,7 @@
         }
       ],
       "post": {
-        "tags": [
-          "Subscriptions"
-        ],
+        "tags": ["Subscriptions"],
         "summary": "Switch a subscription",
         "description": "Switch a subscription\n",
         "responses": {
@@ -13735,9 +13290,7 @@
     },
     "/tax-categories": {
       "get": {
-        "tags": [
-          "Taxes"
-        ],
+        "tags": ["Taxes"],
         "summary": "Retrieve a list of tax categories",
         "description": "Retrieve a list of tax categories\n",
         "responses": {
@@ -13800,9 +13353,7 @@
     },
     "/tokens": {
       "get": {
-        "tags": [
-          "Payment Tokens"
-        ],
+        "tags": ["Payment Tokens"],
         "summary": "Retrieve a list of tokens",
         "description": "Retrieve a list of tokens\n",
         "parameters": [
@@ -13877,9 +13428,7 @@
         ]
       },
       "post": {
-        "tags": [
-          "Payment Tokens"
-        ],
+        "tags": ["Payment Tokens"],
         "summary": "Create a payment token",
         "description": "Create a token\n",
         "security": [
@@ -13956,9 +13505,7 @@
         }
       ],
       "get": {
-        "tags": [
-          "Payment Tokens"
-        ],
+        "tags": ["Payment Tokens"],
         "summary": "Retrieve a token",
         "description": "Retrieve a token with specified identifier string\n",
         "security": [
@@ -14025,9 +13572,7 @@
         }
       ],
       "post": {
-        "tags": [
-          "Payment Tokens"
-        ],
+        "tags": ["Payment Tokens"],
         "summary": "Expire a token",
         "description": "Expire a token\n",
         "responses": {
@@ -14088,9 +13633,7 @@
     },
     "/tracking/api": {
       "get": {
-        "tags": [
-          "Tracking"
-        ],
+        "tags": ["Tracking"],
         "summary": "Retrieve a list of tracking API logs",
         "parameters": [
           {
@@ -14105,10 +13648,7 @@
             "description": "The response media type",
             "schema": {
               "type": "string",
-              "enum": [
-                "application/json",
-                "text/csv"
-              ],
+              "enum": ["application/json", "text/csv"],
               "default": "application/json"
             }
           }
@@ -14184,9 +13724,7 @@
         }
       ],
       "get": {
-        "tags": [
-          "Tracking"
-        ],
+        "tags": ["Tracking"],
         "summary": "Retrieve a tracking API log with specified identifier string",
         "responses": {
           "200": {
@@ -14236,9 +13774,7 @@
     },
     "/tracking/lists": {
       "get": {
-        "tags": [
-          "Tracking"
-        ],
+        "tags": ["Tracking"],
         "summary": "Retrieve Lists changes history",
         "parameters": [
           {
@@ -14308,9 +13844,7 @@
     },
     "/tracking/subscriptions": {
       "get": {
-        "tags": [
-          "Tracking"
-        ],
+        "tags": ["Tracking"],
         "summary": "Retrieve a list of tracking subscription logs",
         "parameters": [
           {
@@ -14385,9 +13919,7 @@
         }
       ],
       "get": {
-        "tags": [
-          "Tracking"
-        ],
+        "tags": ["Tracking"],
         "summary": "Retrieve a tracking subscription log with specified identifier string",
         "responses": {
           "200": {
@@ -14411,9 +13943,7 @@
     },
     "/tracking/webhooks": {
       "get": {
-        "tags": [
-          "Tracking"
-        ],
+        "tags": ["Tracking"],
         "summary": "Retrieve a list of tracking webhook notifications",
         "parameters": [
           {
@@ -14497,9 +14027,7 @@
         }
       ],
       "get": {
-        "tags": [
-          "Tracking"
-        ],
+        "tags": ["Tracking"],
         "summary": "Retrieve a tracking webhook notification with specified identifier string",
         "responses": {
           "200": {
@@ -14523,9 +14051,7 @@
     },
     "/tracking/website-webhooks": {
       "get": {
-        "tags": [
-          "Tracking"
-        ],
+        "tags": ["Tracking"],
         "summary": "Retrieve a list of tracking webhook notifications",
         "parameters": [
           {
@@ -14600,9 +14126,7 @@
         }
       ],
       "get": {
-        "tags": [
-          "Tracking"
-        ],
+        "tags": ["Tracking"],
         "summary": "Retrieve a tracking webhook notification with specified identifier string",
         "responses": {
           "200": {
@@ -14626,9 +14150,7 @@
     },
     "/transactions": {
       "get": {
-        "tags": [
-          "Transactions"
-        ],
+        "tags": ["Transactions"],
         "summary": "Retrieve a list of transactions",
         "description": "Retrieve a list of transactions\n",
         "parameters": [
@@ -14656,10 +14178,7 @@
             "description": "The response media type",
             "schema": {
               "type": "string",
-              "enum": [
-                "application/json",
-                "text/csv"
-              ],
+              "enum": ["application/json", "text/csv"],
               "default": "application/json"
             }
           }
@@ -14746,9 +14265,7 @@
         }
       ],
       "get": {
-        "tags": [
-          "Transactions"
-        ],
+        "tags": ["Transactions"],
         "summary": "Retrieve a Transaction",
         "description": "Retrieve a Transaction with specified identifier string\n",
         "responses": {
@@ -14804,9 +14321,7 @@
         }
       ],
       "post": {
-        "tags": [
-          "Transactions"
-        ],
+        "tags": ["Transactions"],
         "summary": "Cancel a pending or suspended transaction",
         "description": "Cancel a scheduled transaction. Once handled a transaction cannot be canceled",
         "responses": {
@@ -14862,9 +14377,7 @@
         }
       ],
       "get": {
-        "tags": [
-          "Transactions"
-        ],
+        "tags": ["Transactions"],
         "summary": "Retrieve a Transaction Gateway Logs",
         "description": "Retrieve Gateway communication Logs for Transaction with specified identifier string",
         "responses": {
@@ -14894,9 +14407,7 @@
         }
       ],
       "get": {
-        "tags": [
-          "Transactions"
-        ],
+        "tags": ["Transactions"],
         "summary": "Retrieve a transaction's Lead Source",
         "description": "Retrieve a Lead Source of given transaction\n",
         "responses": {
@@ -14945,9 +14456,7 @@
         ]
       },
       "put": {
-        "tags": [
-          "Transactions"
-        ],
+        "tags": ["Transactions"],
         "summary": "Create a Lead Source for a transaction",
         "description": "Create a Lead Source for a transaction\n",
         "responses": {
@@ -15036,9 +14545,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "Transactions"
-        ],
+        "tags": ["Transactions"],
         "summary": "Delete a Lead Source for a transaction",
         "description": "Delete a Lead Source that belongs to a certain transaction\n",
         "responses": {
@@ -15090,9 +14597,7 @@
         }
       ],
       "post": {
-        "tags": [
-          "Transactions"
-        ],
+        "tags": ["Transactions"],
         "summary": "Refund a Transaction",
         "description": "Refund a Transaction with specified identifier string.\nNote that the refund will be in the same currency as the original transaction.\n",
         "responses": {
@@ -15154,9 +14659,7 @@
     },
     "/users": {
       "get": {
-        "tags": [
-          "Users"
-        ],
+        "tags": ["Users"],
         "summary": "Retrieve a list of users",
         "description": "Retrieve a list of users\n",
         "parameters": [
@@ -15231,9 +14734,7 @@
         ]
       },
       "post": {
-        "tags": [
-          "Users"
-        ],
+        "tags": ["Users"],
         "summary": "Create an user",
         "description": "Create an user\n",
         "responses": {
@@ -15299,9 +14800,7 @@
         }
       ],
       "get": {
-        "tags": [
-          "Users"
-        ],
+        "tags": ["Users"],
         "summary": "Retrieve user",
         "description": "Retrieve user with specified identifier string\n",
         "responses": {
@@ -15350,9 +14849,7 @@
         ]
       },
       "put": {
-        "tags": [
-          "Users"
-        ],
+        "tags": ["Users"],
         "summary": "Create or update user with predefined ID",
         "description": "Create or update user with predefined identifier string\n",
         "responses": {
@@ -15437,9 +14934,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "Users"
-        ],
+        "tags": ["Users"],
         "summary": "Delete user",
         "description": "Delete user with predefined identifier string\n",
         "responses": {
@@ -15491,9 +14986,7 @@
         }
       ],
       "post": {
-        "tags": [
-          "Users"
-        ],
+        "tags": ["Users"],
         "summary": "Updates user's password with the specified newPassword",
         "description": "Updates user's password with the specified newPassword. And checks if currentPassword matches the actual one.\n",
         "responses": {
@@ -15555,9 +15048,7 @@
         }
       ],
       "post": {
-        "tags": [
-          "Users"
-        ],
+        "tags": ["Users"],
         "summary": "Reset (renew) totpSecret",
         "description": "Reset (renew) totpSecret\n",
         "responses": {
@@ -15616,14 +15107,12 @@
         }
       ],
       "post": {
-        "tags": [
-          "Users"
-        ],
+        "tags": ["Users"],
         "summary": "Reset user password",
         "description": "Reset user password\n",
         "responses": {
           "201": {
-            "description": "Password was reseted successfully",
+            "description": "Password was reset successfully",
             "headers": {
               "Rate-Limit-Limit": {
                 "description": "The number of allowed requests in the current period",
@@ -15684,9 +15173,7 @@
     },
     "/webhooks": {
       "get": {
-        "tags": [
-          "Webhooks"
-        ],
+        "tags": ["Webhooks"],
         "summary": "Retrieve a list of webhooks",
         "description": "Retrieve a list of webhooks\n",
         "parameters": [
@@ -15755,9 +15242,7 @@
         }
       },
       "post": {
-        "tags": [
-          "Webhooks"
-        ],
+        "tags": ["Webhooks"],
         "summary": "Create a webhook",
         "description": "Create a webhook\n",
         "responses": {
@@ -15817,9 +15302,7 @@
         }
       ],
       "get": {
-        "tags": [
-          "Webhooks"
-        ],
+        "tags": ["Webhooks"],
         "summary": "Retrieve a webhook",
         "description": "Retrieve a webhook with specified identifier string\n",
         "responses": {
@@ -15862,9 +15345,7 @@
         }
       },
       "put": {
-        "tags": [
-          "Webhooks"
-        ],
+        "tags": ["Webhooks"],
         "summary": "Create or update a webhook with predefined ID",
         "description": "Create or update a webhook with predefined identifier string\n",
         "responses": {
@@ -15949,9 +15430,7 @@
     },
     "/websites": {
       "get": {
-        "tags": [
-          "Websites"
-        ],
+        "tags": ["Websites"],
         "summary": "Retrieve a list of websites",
         "description": "Retrieve a list of websites\n",
         "parameters": [
@@ -15967,10 +15446,7 @@
             "description": "The response media type",
             "schema": {
               "type": "string",
-              "enum": [
-                "application/json",
-                "text/csv"
-              ],
+              "enum": ["application/json", "text/csv"],
               "default": "application/json"
             }
           }
@@ -16047,9 +15523,7 @@
         ]
       },
       "post": {
-        "tags": [
-          "Websites"
-        ],
+        "tags": ["Websites"],
         "summary": "Create a website",
         "description": "Create a website\n",
         "responses": {
@@ -16115,9 +15589,7 @@
         }
       ],
       "get": {
-        "tags": [
-          "Websites"
-        ],
+        "tags": ["Websites"],
         "summary": "Retrieve a website",
         "description": "Retrieve a website with specified identifier string\n",
         "responses": {
@@ -16166,9 +15638,7 @@
         ]
       },
       "put": {
-        "tags": [
-          "Websites"
-        ],
+        "tags": ["Websites"],
         "summary": "Create or update a website with predefined ID",
         "description": "Create or update a website with predefined identifier string\n",
         "responses": {
@@ -16260,9 +15730,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "Websites"
-        ],
+        "tags": ["Websites"],
         "summary": "Delete a website",
         "description": "Delete a website with predefined identifier string\n",
         "responses": {
@@ -16314,9 +15782,7 @@
         }
       ],
       "get": {
-        "tags": [
-          "Websites"
-        ],
+        "tags": ["Websites"],
         "summary": "Retrieve a webhook for website",
         "description": "Retrieve a webhook for website with specified identifier string\n",
         "responses": {
@@ -16345,9 +15811,7 @@
         ]
       },
       "put": {
-        "tags": [
-          "Websites"
-        ],
+        "tags": ["Websites"],
         "summary": "Create or update a webhook for website with predefined ID",
         "description": "Create or update a webhook for website with predefined identifier string\n",
         "responses": {
@@ -16397,9 +15861,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "Websites"
-        ],
+        "tags": ["Websites"],
         "summary": "Delete a webhook",
         "description": "Delete a webhook that belongs to a website with predefined ID\n",
         "responses": {
@@ -16464,10 +15926,7 @@
             "description": "Date time format",
             "type": "string",
             "default": "iso8601",
-            "enum": [
-              "mysql",
-              "iso8601"
-            ]
+            "enum": ["mysql", "iso8601"]
           },
           "apiUser": {
             "description": "API user name",
@@ -16501,11 +15960,7 @@
       },
       "Attachment": {
         "type": "object",
-        "required": [
-          "fileId",
-          "relatedId",
-          "relatedType"
-        ],
+        "required": ["fileId", "relatedId", "relatedType"],
         "properties": {
           "id": {
             "readOnly": true,
@@ -16607,10 +16062,7 @@
       },
       "AuthenticationToken": {
         "type": "object",
-        "required": [
-          "username",
-          "password"
-        ],
+        "required": ["username", "password"],
         "properties": {
           "token": {
             "description": "The token identifier string",
@@ -16712,10 +16164,7 @@
           "status": {
             "description": "Bank Account status",
             "type": "string",
-            "enum": [
-              "active",
-              "deactivated"
-            ]
+            "enum": ["active", "deactivated"]
           },
           "createdTime": {
             "description": "Bank Account created time",
@@ -16760,10 +16209,7 @@
       },
       "Blacklist": {
         "type": "object",
-        "required": [
-          "type",
-          "value"
-        ],
+        "required": ["type", "value"],
         "properties": {
           "id": {
             "description": "The blacklist identifier string",
@@ -16826,12 +16272,7 @@
       },
       "CheckoutPage": {
         "type": "object",
-        "required": [
-          "name",
-          "planId",
-          "websiteId",
-          "uriPath"
-        ],
+        "required": ["name", "planId", "websiteId", "uriPath"],
         "properties": {
           "id": {
             "description": "Checkout page identifier string",
@@ -17025,10 +16466,7 @@
         "type": "array",
         "items": {
           "type": "object",
-          "required": [
-            "label",
-            "value"
-          ],
+          "required": ["label", "value"],
           "properties": {
             "label": {
               "description": "The email label",
@@ -17103,10 +16541,7 @@
         "type": "array",
         "items": {
           "type": "object",
-          "required": [
-            "label",
-            "value"
-          ],
+          "required": ["label", "value"],
           "properties": {
             "label": {
               "description": "The phone label",
@@ -17126,10 +16561,7 @@
       "Coupon": {
         "type": "object",
         "description": "Coupons and Discounts",
-        "required": [
-          "discount",
-          "issuedTime"
-        ],
+        "required": ["discount", "issuedTime"],
         "properties": {
           "redemptionCode": {
             "description": "Coupon's redemption code",
@@ -17160,10 +16592,7 @@
             "type": "string",
             "description": "If coupon enabled",
             "readOnly": true,
-            "enum": [
-              "issued",
-              "expired"
-            ]
+            "enum": ["issued", "expired"]
           },
           "description": {
             "type": "string",
@@ -17209,9 +16638,7 @@
       },
       "CouponExpiration": {
         "type": "object",
-        "required": [
-          "expiredTime"
-        ],
+        "required": ["expiredTime"],
         "properties": {
           "expiredTime": {
             "description": "The coupon's expiry time, must be greater than the issued time. Null or empty string will immediately expire the coupon.",
@@ -17321,10 +16748,7 @@
           "type": {
             "description": "Discount type",
             "type": "string",
-            "enum": [
-              "fixed",
-              "percent"
-            ]
+            "enum": ["fixed", "percent"]
           }
         }
       },
@@ -17336,9 +16760,7 @@
           },
           {
             "type": "object",
-            "required": [
-              "quantity"
-            ],
+            "required": ["quantity"],
             "properties": {
               "quantity": {
                 "type": "integer",
@@ -17356,10 +16778,7 @@
           },
           {
             "type": "object",
-            "required": [
-              "amount",
-              "currency"
-            ],
+            "required": ["amount", "currency"],
             "properties": {
               "amount": {
                 "description": "Discount amount",
@@ -17426,10 +16845,7 @@
           },
           {
             "type": "object",
-            "required": [
-              "amount",
-              "currency"
-            ],
+            "required": ["amount", "currency"],
             "properties": {
               "amount": {
                 "type": "integer",
@@ -17451,9 +16867,7 @@
           },
           {
             "type": "object",
-            "required": [
-              "value"
-            ],
+            "required": ["value"],
             "properties": {
               "value": {
                 "description": "Discount percent",
@@ -17497,9 +16911,7 @@
           },
           {
             "type": "object",
-            "required": [
-              "quantity"
-            ],
+            "required": ["quantity"],
             "properties": {
               "quantity": {
                 "type": "integer",
@@ -17517,9 +16929,7 @@
           },
           {
             "type": "object",
-            "required": [
-              "invoiceIds"
-            ],
+            "required": ["invoiceIds"],
             "properties": {
               "invoiceIds": {
                 "type": "array",
@@ -17540,9 +16950,7 @@
           },
           {
             "type": "object",
-            "required": [
-              "planIds"
-            ],
+            "required": ["planIds"],
             "properties": {
               "planIds": {
                 "type": "array",
@@ -17563,9 +16971,7 @@
           },
           {
             "type": "object",
-            "required": [
-              "subscriptionIds"
-            ],
+            "required": ["subscriptionIds"],
             "properties": {
               "subscriptionIds": {
                 "type": "array",
@@ -17586,9 +16992,7 @@
           },
           {
             "type": "object",
-            "required": [
-              "quantity"
-            ],
+            "required": ["quantity"],
             "properties": {
               "quantity": {
                 "type": "integer",
@@ -17600,11 +17004,7 @@
       },
       "Credential": {
         "type": "object",
-        "required": [
-          "username",
-          "password",
-          "customerId"
-        ],
+        "required": ["username", "password", "customerId"],
         "properties": {
           "id": {
             "description": "The credential identifier string",
@@ -17661,23 +17061,10 @@
           "op": {
             "type": "string",
             "description": "The condition operation",
-            "enum": [
-              "and",
-              "or",
-              "not",
-              "between",
-              "equals",
-              "in",
-              "gt",
-              "gte",
-              "lt",
-              "lte"
-            ]
+            "enum": ["and", "or", "not", "between", "equals", "in", "gt", "gte", "lt", "lte"]
           }
         },
-        "required": [
-          "op"
-        ]
+        "required": ["op"]
       },
       "and": {
         "type": "object",
@@ -17711,11 +17098,7 @@
                 "type": "string"
               }
             },
-            "required": [
-              "path",
-              "min",
-              "max"
-            ]
+            "required": ["path", "min", "max"]
           }
         ]
       },
@@ -17729,10 +17112,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "path",
-          "value"
-        ]
+        "required": ["path", "value"]
       },
       "equals": {
         "type": "object",
@@ -17790,10 +17170,7 @@
                 }
               }
             },
-            "required": [
-              "path",
-              "values"
-            ]
+            "required": ["path", "values"]
           }
         ]
       },
@@ -17804,9 +17181,7 @@
             "$ref": "#/components/schemas/Condition"
           }
         },
-        "required": [
-          "condition"
-        ],
+        "required": ["condition"],
         "example": {
           "operation": "not",
           "condition": {
@@ -17827,9 +17202,7 @@
             }
           }
         },
-        "required": [
-          "conditions"
-        ]
+        "required": ["conditions"]
       },
       "lt": {
         "type": "object",
@@ -17978,10 +17351,7 @@
           "chronology": {
             "type": "string",
             "description": "The emitting time of the custom event relatively to the system event",
-            "enum": [
-              "before",
-              "after"
-            ]
+            "enum": ["before", "after"]
           },
           "scheduleInstruction": {
             "$ref": "#/components/schemas/CustomEventScheduleInstruction"
@@ -17994,20 +17364,12 @@
             "readOnly": true
           }
         },
-        "required": [
-          "eventType",
-          "title",
-          "chronology",
-          "scheduleInstruction"
-        ]
+        "required": ["eventType", "title", "chronology", "scheduleInstruction"]
       },
       "CustomField": {
         "description": "A separate Custom Field schema",
         "type": "object",
-        "required": [
-          "name",
-          "type"
-        ],
+        "required": ["name", "type"],
         "properties": {
           "name": {
             "description": "The name of the custom field",
@@ -18016,15 +17378,7 @@
           "type": {
             "description": "Type value    | Description\n------------- | -------------\narray         | An array of strings up to 255 characters, maximum size is 1000 elements\nboolean       | true or false\ndate          | String of format \"full-date\" (YYYY-MM-DD) from RFC-3339 (full-date)\ndatetime      | String of format \"date-time\" (YYYY-MM-DDTHH:MM:SSZ) from RFC-3339 (date-time)\ninteger       | Cardinal value of -2^31..2^31-1\nnumber        | Float value. It can take cardinal values also which are interpreted as float\nstring        | Regular string up to 255 characters\nmonetary      | A map of 3-letters currency code and amount, e.g. {\"currency\": \"EUR\", \"amount\": 25.30}\n",
             "type": "string",
-            "enum": [
-              "array",
-              "boolean",
-              "datetime",
-              "integer",
-              "number",
-              "string",
-              "monetary"
-            ]
+            "enum": ["array", "boolean", "datetime", "integer", "number", "string", "monetary"]
           },
           "description": {
             "description": "The custom field description",
@@ -18051,14 +17405,7 @@
       },
       "Dispute": {
         "type": "object",
-        "required": [
-          "currency",
-          "transactionId",
-          "postedTime",
-          "type",
-          "status",
-          "reasonCode"
-        ],
+        "required": ["currency", "transactionId", "postedTime", "type", "status", "reasonCode"],
         "properties": {
           "id": {
             "description": "The dispute identifier string",
@@ -18244,24 +17591,12 @@
           "type": {
             "description": "The dispute's type",
             "type": "string",
-            "enum": [
-              "information-request",
-              "first-chargeback",
-              "second-chargeback",
-              "arbitration"
-            ]
+            "enum": ["information-request", "first-chargeback", "second-chargeback", "arbitration"]
           },
           "status": {
             "description": "The dispute's status",
             "type": "string",
-            "enum": [
-              "response-needed",
-              "under-review",
-              "forfeited",
-              "won",
-              "lost",
-              "unknown"
-            ]
+            "enum": ["response-needed", "under-review", "forfeited", "won", "lost", "unknown"]
           },
           "postedTime": {
             "description": "Dispute posted time",
@@ -18349,9 +17684,7 @@
       },
       "Email": {
         "type": "object",
-        "required": [
-          "email"
-        ],
+        "required": ["email"],
         "properties": {
           "email": {
             "description": "Email",
@@ -18368,12 +17701,7 @@
         "properties": {
           "type": {
             "type": "string",
-            "enum": [
-              "none",
-              "plain",
-              "login",
-              "cram-md5"
-            ],
+            "enum": ["none", "plain", "login", "cram-md5"],
             "default": "none"
           }
         }
@@ -18411,9 +17739,7 @@
       "SmtpCredential": {
         "type": "object",
         "description": "SMTP Credential",
-        "required": [
-          "host"
-        ],
+        "required": ["host"],
         "properties": {
           "hash": {
             "readOnly": true,
@@ -18437,11 +17763,7 @@
           "encryption": {
             "type": "string",
             "description": "The encryption value",
-            "enum": [
-              "none",
-              "tls",
-              "ssl"
-            ],
+            "enum": ["none", "tls", "ssl"],
             "default": "none"
           },
           "auth": {
@@ -18470,10 +17792,7 @@
             "format": "password"
           }
         },
-        "required": [
-          "username",
-          "password"
-        ]
+        "required": ["username", "password"]
       },
       "Error": {
         "type": "object",
@@ -18573,13 +17892,7 @@
             "description": "The mime type",
             "type": "string",
             "readOnly": true,
-            "enum": [
-              "image/png",
-              "image/jpeg",
-              "image/gif",
-              "application/pdf",
-              "audio/mpeg"
-            ]
+            "enum": ["image/png", "image/jpeg", "image/gif", "application/pdf", "audio/mpeg"]
           },
           "size": {
             "description": "The File size in bytes",
@@ -18663,11 +17976,7 @@
             "description": "The gateway account's status",
             "readOnly": true,
             "type": "string",
-            "enum": [
-              "active",
-              "inactive",
-              "pending"
-            ]
+            "enum": ["active", "inactive", "pending"]
           },
           "gatewayName": {
             "$ref": "#/components/schemas/GatewayName"
@@ -18821,9 +18130,7 @@
           },
           {
             "type": "object",
-            "required": [
-              "gatewayConfig"
-            ],
+            "required": ["gatewayConfig"],
             "properties": {
               "gatewayConfig": {
                 "type": "object",
@@ -18839,10 +18146,7 @@
                     "format": "password"
                   }
                 },
-                "required": [
-                  "accountId",
-                  "password"
-                ]
+                "required": ["accountId", "password"]
               },
               "mpi": {
                 "$ref": "#/components/schemas/A1GatewayMpis"
@@ -18859,9 +18163,7 @@
           },
           {
             "type": "object",
-            "required": [
-              "gatewayConfig"
-            ],
+            "required": ["gatewayConfig"],
             "properties": {
               "gatewayConfig": {
                 "type": "object",
@@ -18890,13 +18192,7 @@
                     "format": "password"
                   }
                 },
-                "required": [
-                  "url",
-                  "merchantId",
-                  "accessCode",
-                  "user",
-                  "password"
-                ]
+                "required": ["url", "merchantId", "accessCode", "user", "password"]
               }
             }
           }
@@ -18910,9 +18206,7 @@
           },
           {
             "type": "object",
-            "required": [
-              "gatewayConfig"
-            ],
+            "required": ["gatewayConfig"],
             "properties": {
               "gatewayConfig": {
                 "type": "object",
@@ -18927,10 +18221,7 @@
                     "format": "password"
                   }
                 },
-                "required": [
-                  "apiLoginId",
-                  "transactionKey"
-                ]
+                "required": ["apiLoginId", "transactionKey"]
               }
             }
           }
@@ -18944,9 +18235,7 @@
           },
           {
             "type": "object",
-            "required": [
-              "gatewayConfig"
-            ],
+            "required": ["gatewayConfig"],
             "properties": {
               "gatewayConfig": {
                 "type": "object",
@@ -18961,10 +18250,7 @@
                     "format": "password"
                   }
                 },
-                "required": [
-                  "merchantId",
-                  "apiPasscode"
-                ]
+                "required": ["merchantId", "apiPasscode"]
               }
             }
           }
@@ -18978,9 +18264,7 @@
           },
           {
             "type": "object",
-            "required": [
-              "gatewayConfig"
-            ],
+            "required": ["gatewayConfig"],
             "properties": {
               "gatewayConfig": {
                 "type": "object",
@@ -19005,12 +18289,7 @@
                     "format": "password"
                   }
                 },
-                "required": [
-                  "publicKey",
-                  "privateKey",
-                  "merchantId",
-                  "merchantAccountId"
-                ]
+                "required": ["publicKey", "privateKey", "merchantId", "merchantAccountId"]
               }
             }
           }
@@ -19024,9 +18303,7 @@
           },
           {
             "type": "object",
-            "required": [
-              "gatewayConfig"
-            ],
+            "required": ["gatewayConfig"],
             "properties": {
               "gatewayConfig": {
                 "type": "object",
@@ -19041,10 +18318,7 @@
                     "format": "password"
                   }
                 },
-                "required": [
-                  "authPassword",
-                  "authId"
-                ]
+                "required": ["authPassword", "authId"]
               }
             }
           }
@@ -19058,9 +18332,7 @@
           },
           {
             "type": "object",
-            "required": [
-              "gatewayConfig"
-            ],
+            "required": ["gatewayConfig"],
             "properties": {
               "gatewayConfig": {
                 "type": "object",
@@ -19079,11 +18351,7 @@
                     "format": "password"
                   }
                 },
-                "required": [
-                  "merchantSiteId",
-                  "merchantName",
-                  "merchantKey"
-                ]
+                "required": ["merchantSiteId", "merchantName", "merchantKey"]
               }
             }
           }
@@ -19097,9 +18365,7 @@
           },
           {
             "type": "object",
-            "required": [
-              "gatewayConfig"
-            ],
+            "required": ["gatewayConfig"],
             "properties": {
               "gatewayConfig": {
                 "type": "object",
@@ -19127,13 +18393,7 @@
                     "default": false
                   }
                 },
-                "required": [
-                  "username",
-                  "password",
-                  "coNumber",
-                  "divisionId",
-                  "partialAuth"
-                ]
+                "required": ["username", "password", "coNumber", "divisionId", "partialAuth"]
               }
             }
           }
@@ -19147,9 +18407,7 @@
           },
           {
             "type": "object",
-            "required": [
-              "gatewayConfig"
-            ],
+            "required": ["gatewayConfig"],
             "properties": {
               "gatewayConfig": {
                 "type": "object",
@@ -19176,13 +18434,7 @@
                     "description": "China Union Pay Gateway mobile pay param"
                   }
                 },
-                "required": [
-                  "accountId",
-                  "partyId",
-                  "goods",
-                  "md5key",
-                  "mobilePay"
-                ]
+                "required": ["accountId", "partyId", "goods", "md5key", "mobilePay"]
               }
             }
           }
@@ -19196,9 +18448,7 @@
           },
           {
             "type": "object",
-            "required": [
-              "gatewayConfig"
-            ],
+            "required": ["gatewayConfig"],
             "properties": {
               "gatewayConfig": {
                 "type": "object",
@@ -19213,10 +18463,7 @@
                     "format": "password"
                   }
                 },
-                "required": [
-                  "merchantId",
-                  "merchantMd5Signature"
-                ]
+                "required": ["merchantId", "merchantMd5Signature"]
               }
             }
           }
@@ -19230,9 +18477,7 @@
           },
           {
             "type": "object",
-            "required": [
-              "gatewayConfig"
-            ],
+            "required": ["gatewayConfig"],
             "properties": {
               "gatewayConfig": {
                 "type": "object",
@@ -19260,12 +18505,7 @@
                     "default": 0
                   }
                 },
-                "required": [
-                  "client",
-                  "password",
-                  "policy",
-                  "delay"
-                ]
+                "required": ["client", "password", "policy", "delay"]
               },
               "mpi": {
                 "$ref": "#/components/schemas/DataCashMpis"
@@ -19282,9 +18522,7 @@
           },
           {
             "type": "object",
-            "required": [
-              "gatewayConfig"
-            ],
+            "required": ["gatewayConfig"],
             "properties": {
               "gatewayConfig": {
                 "type": "object",
@@ -19304,11 +18542,7 @@
                     "format": "password"
                   }
                 },
-                "required": [
-                  "projectId",
-                  "publicKey",
-                  "refundKey"
-                ]
+                "required": ["projectId", "publicKey", "refundKey"]
               }
             }
           }
@@ -19322,9 +18556,7 @@
           },
           {
             "type": "object",
-            "required": [
-              "gatewayConfig"
-            ],
+            "required": ["gatewayConfig"],
             "properties": {
               "gatewayConfig": {
                 "type": "object",
@@ -19339,10 +18571,7 @@
                     "format": "password"
                   }
                 },
-                "required": [
-                  "clientId",
-                  "apiKey"
-                ]
+                "required": ["clientId", "apiKey"]
               },
               "mpi": {
                 "$ref": "#/components/schemas/eMerchantPayMpis"
@@ -19359,9 +18588,7 @@
           },
           {
             "type": "object",
-            "required": [
-              "gatewayConfig"
-            ],
+            "required": ["gatewayConfig"],
             "properties": {
               "gatewayConfig": {
                 "type": "object",
@@ -19376,10 +18603,7 @@
                     "format": "password"
                   }
                 },
-                "required": [
-                  "apiKey",
-                  "apiSecret"
-                ]
+                "required": ["apiKey", "apiSecret"]
               }
             }
           }
@@ -19393,9 +18617,7 @@
           },
           {
             "type": "object",
-            "required": [
-              "gatewayConfig"
-            ],
+            "required": ["gatewayConfig"],
             "properties": {
               "gatewayConfig": {
                 "type": "object",
@@ -19419,12 +18641,7 @@
                     "format": "password"
                   }
                 },
-                "required": [
-                  "accountId",
-                  "locationId",
-                  "apiAccessId",
-                  "apiSecretKey"
-                ]
+                "required": ["accountId", "locationId", "apiAccessId", "apiSecretKey"]
               }
             }
           }
@@ -19438,9 +18655,7 @@
           },
           {
             "type": "object",
-            "required": [
-              "gatewayConfig"
-            ],
+            "required": ["gatewayConfig"],
             "properties": {
               "gatewayConfig": {
                 "type": "object",
@@ -19455,10 +18670,7 @@
                     "format": "password"
                   }
                 },
-                "required": [
-                  "clientId",
-                  "secretWord"
-                ]
+                "required": ["clientId", "secretWord"]
               }
             }
           }
@@ -19472,9 +18684,7 @@
           },
           {
             "type": "object",
-            "required": [
-              "gatewayConfig"
-            ],
+            "required": ["gatewayConfig"],
             "properties": {
               "gatewayConfig": {
                 "type": "object",
@@ -19484,9 +18694,7 @@
                     "description": "GET Gateway account ID"
                   }
                 },
-                "required": [
-                  "accountId"
-                ]
+                "required": ["accountId"]
               },
               "mpi": {
                 "$ref": "#/components/schemas/GETMpis"
@@ -19503,9 +18711,7 @@
           },
           {
             "type": "object",
-            "required": [
-              "gatewayConfig"
-            ],
+            "required": ["gatewayConfig"],
             "properties": {
               "gatewayConfig": {
                 "type": "object",
@@ -19528,11 +18734,7 @@
                     "description": "GlobalCollect skip fraud service"
                   }
                 },
-                "required": [
-                  "merchantId",
-                  "apiKeyId",
-                  "apiSecretKey"
-                ]
+                "required": ["merchantId", "apiKeyId", "apiSecretKey"]
               },
               "mpi": {
                 "$ref": "#/components/schemas/GlobalCollectMpis"
@@ -19549,9 +18751,7 @@
           },
           {
             "type": "object",
-            "required": [
-              "gatewayConfig"
-            ],
+            "required": ["gatewayConfig"],
             "properties": {
               "gatewayConfig": {
                 "type": "object",
@@ -19566,10 +18766,7 @@
                     "format": "password"
                   }
                 },
-                "required": [
-                  "terminalId",
-                  "sharedSecret"
-                ]
+                "required": ["terminalId", "sharedSecret"]
               }
             }
           }
@@ -19583,9 +18780,7 @@
           },
           {
             "type": "object",
-            "required": [
-              "gatewayConfig"
-            ],
+            "required": ["gatewayConfig"],
             "properties": {
               "gatewayConfig": {
                 "type": "object",
@@ -19595,9 +18790,7 @@
                     "description": "Gpaysafe apiKey"
                   }
                 },
-                "required": [
-                  "apiKey"
-                ]
+                "required": ["apiKey"]
               }
             }
           }
@@ -19611,9 +18804,7 @@
           },
           {
             "type": "object",
-            "required": [
-              "gatewayConfig"
-            ],
+            "required": ["gatewayConfig"],
             "properties": {
               "gatewayConfig": {
                 "type": "object",
@@ -19628,10 +18819,7 @@
                     "format": "password"
                   }
                 },
-                "required": [
-                  "clientId",
-                  "secretWord"
-                ]
+                "required": ["clientId", "secretWord"]
               }
             }
           }
@@ -19645,9 +18833,7 @@
           },
           {
             "type": "object",
-            "required": [
-              "gatewayConfig"
-            ],
+            "required": ["gatewayConfig"],
             "properties": {
               "gatewayConfig": {
                 "type": "object",
@@ -19666,11 +18852,7 @@
                     "format": "password"
                   }
                 },
-                "required": [
-                  "merchantId",
-                  "accountId",
-                  "digestPassword"
-                ]
+                "required": ["merchantId", "accountId", "digestPassword"]
               },
               "mpi": {
                 "$ref": "#/components/schemas/IlixiumMpis"
@@ -19687,9 +18869,7 @@
           },
           {
             "type": "object",
-            "required": [
-              "gatewayConfig"
-            ],
+            "required": ["gatewayConfig"],
             "properties": {
               "gatewayConfig": {
                 "type": "object",
@@ -19699,9 +18879,7 @@
                     "description": "Jeton apiKey"
                   }
                 },
-                "required": [
-                  "apiKey"
-                ]
+                "required": ["apiKey"]
               }
             }
           }
@@ -19715,9 +18893,7 @@
           },
           {
             "type": "object",
-            "required": [
-              "gatewayConfig"
-            ],
+            "required": ["gatewayConfig"],
             "properties": {
               "gatewayConfig": {
                 "type": "object",
@@ -19727,9 +18903,7 @@
                     "description": "JetPay Gateway terminal ID"
                   }
                 },
-                "required": [
-                  "TerminalID"
-                ]
+                "required": ["TerminalID"]
               }
             }
           }
@@ -19743,9 +18917,7 @@
           },
           {
             "type": "object",
-            "required": [
-              "gatewayConfig"
-            ],
+            "required": ["gatewayConfig"],
             "properties": {
               "gatewayConfig": {
                 "type": "object",
@@ -19760,10 +18932,7 @@
                     "description": "Moneris Gateway store ID"
                   }
                 },
-                "required": [
-                  "storeId",
-                  "apiToken"
-                ]
+                "required": ["storeId", "apiToken"]
               }
             }
           }
@@ -19777,9 +18946,7 @@
           },
           {
             "type": "object",
-            "required": [
-              "gatewayConfig"
-            ],
+            "required": ["gatewayConfig"],
             "properties": {
               "gatewayConfig": {
                 "type": "object",
@@ -19794,10 +18961,7 @@
                     "format": "password"
                   }
                 },
-                "required": [
-                  "username",
-                  "password"
-                ]
+                "required": ["username", "password"]
               },
               "mpi": {
                 "$ref": "#/components/schemas/NMIMpis"
@@ -19814,9 +18978,7 @@
           },
           {
             "type": "object",
-            "required": [
-              "gatewayConfig"
-            ],
+            "required": ["gatewayConfig"],
             "properties": {
               "gatewayConfig": {
                 "type": "object",
@@ -19836,11 +18998,7 @@
                     "format": "password"
                   }
                 },
-                "required": [
-                  "apiUsername",
-                  "apiPassword",
-                  "secretWord"
-                ]
+                "required": ["apiUsername", "apiPassword", "secretWord"]
               }
             }
           }
@@ -19854,9 +19012,7 @@
           },
           {
             "type": "object",
-            "required": [
-              "gatewayConfig"
-            ],
+            "required": ["gatewayConfig"],
             "properties": {
               "gatewayConfig": {
                 "type": "object",
@@ -19875,11 +19031,7 @@
                     "description": "Optimal Gateway account number"
                   }
                 },
-                "required": [
-                  "storeId",
-                  "storePwd",
-                  "accountNum"
-                ]
+                "required": ["storeId", "storePwd", "accountNum"]
               },
               "mpi": {
                 "$ref": "#/components/schemas/OptimalMpis"
@@ -19896,9 +19048,7 @@
           },
           {
             "type": "object",
-            "required": [
-              "gatewayConfig"
-            ],
+            "required": ["gatewayConfig"],
             "properties": {
               "gatewayConfig": {
                 "type": "object",
@@ -19917,11 +19067,7 @@
                     "format": "password"
                   }
                 },
-                "required": [
-                  "merchantCode",
-                  "apiCode",
-                  "signKey"
-                ]
+                "required": ["merchantCode", "apiCode", "signKey"]
               }
             }
           }
@@ -19935,9 +19081,7 @@
           },
           {
             "type": "object",
-            "required": [
-              "gatewayConfig"
-            ],
+            "required": ["gatewayConfig"],
             "properties": {
               "gatewayConfig": {
                 "type": "object",
@@ -19961,12 +19105,7 @@
                     "format": "password"
                   }
                 },
-                "required": [
-                  "merchantId",
-                  "merchantToken",
-                  "apiKey",
-                  "apiSecret"
-                ]
+                "required": ["merchantId", "merchantToken", "apiKey", "apiSecret"]
               }
             }
           }
@@ -19980,9 +19119,7 @@
           },
           {
             "type": "object",
-            "required": [
-              "gatewayConfig"
-            ],
+            "required": ["gatewayConfig"],
             "properties": {
               "gatewayConfig": {
                 "type": "object",
@@ -20002,11 +19139,7 @@
                     "format": "password"
                   }
                 },
-                "required": [
-                  "user",
-                  "vendor",
-                  "password"
-                ]
+                "required": ["user", "vendor", "password"]
               }
             }
           }
@@ -20020,9 +19153,7 @@
           },
           {
             "type": "object",
-            "required": [
-              "gatewayConfig"
-            ],
+            "required": ["gatewayConfig"],
             "properties": {
               "gatewayConfig": {
                 "type": "object",
@@ -20037,10 +19168,7 @@
                     "format": "url"
                   }
                 },
-                "required": [
-                  "merchantIdInPayPal",
-                  "redirectUrl"
-                ]
+                "required": ["merchantIdInPayPal", "redirectUrl"]
               }
             }
           }
@@ -20054,9 +19182,7 @@
           },
           {
             "type": "object",
-            "required": [
-              "gatewayConfig"
-            ],
+            "required": ["gatewayConfig"],
             "properties": {
               "gatewayConfig": {
                 "type": "object",
@@ -20071,10 +19197,7 @@
                     "format": "password"
                   }
                 },
-                "required": [
-                  "clientId",
-                  "secretWord"
-                ]
+                "required": ["clientId", "secretWord"]
               }
             }
           }
@@ -20088,9 +19211,7 @@
           },
           {
             "type": "object",
-            "required": [
-              "gatewayConfig"
-            ],
+            "required": ["gatewayConfig"],
             "properties": {
               "gatewayConfig": {
                 "type": "object",
@@ -20113,12 +19234,7 @@
                     "description": "Payvision Gateway delay"
                   }
                 },
-                "required": [
-                  "memberId",
-                  "memberGuid",
-                  "avs",
-                  "delay"
-                ]
+                "required": ["memberId", "memberGuid", "avs", "delay"]
               },
               "mpi": {
                 "$ref": "#/components/schemas/PayvisionMpis"
@@ -20135,9 +19251,7 @@
           },
           {
             "type": "object",
-            "required": [
-              "gatewayConfig"
-            ],
+            "required": ["gatewayConfig"],
             "properties": {
               "gatewayConfig": {
                 "type": "object",
@@ -20152,10 +19266,7 @@
                     "format": "password"
                   }
                 },
-                "required": [
-                  "publisher-name",
-                  "publisher-password"
-                ]
+                "required": ["publisher-name", "publisher-password"]
               }
             }
           }
@@ -20169,9 +19280,7 @@
           },
           {
             "type": "object",
-            "required": [
-              "gatewayConfig"
-            ],
+            "required": ["gatewayConfig"],
             "properties": {
               "gatewayConfig": {
                 "type": "object",
@@ -20195,12 +19304,7 @@
                     "description": "Realex Gateway account"
                   }
                 },
-                "required": [
-                  "merchantId",
-                  "secretKey",
-                  "rebatePassword",
-                  "account"
-                ]
+                "required": ["merchantId", "secretKey", "rebatePassword", "account"]
               }
             }
           }
@@ -20214,9 +19318,7 @@
           },
           {
             "type": "object",
-            "required": [
-              "gatewayConfig"
-            ],
+            "required": ["gatewayConfig"],
             "properties": {
               "gatewayConfig": {
                 "type": "object",
@@ -20231,10 +19333,7 @@
                     "format": "password"
                   }
                 },
-                "required": [
-                  "clientId",
-                  "secretWord"
-                ]
+                "required": ["clientId", "secretWord"]
               }
             }
           }
@@ -20264,9 +19363,7 @@
           },
           {
             "type": "object",
-            "required": [
-              "gatewayConfig"
-            ],
+            "required": ["gatewayConfig"],
             "properties": {
               "gatewayConfig": {
                 "type": "object",
@@ -20282,10 +19379,7 @@
                     "format": "password"
                   }
                 },
-                "required": [
-                  "merchantCode",
-                  "secretCode"
-                ]
+                "required": ["merchantCode", "secretCode"]
               }
             }
           }
@@ -20299,9 +19393,7 @@
           },
           {
             "type": "object",
-            "required": [
-              "gatewayConfig"
-            ],
+            "required": ["gatewayConfig"],
             "properties": {
               "gatewayConfig": {
                 "type": "object",
@@ -20316,10 +19408,7 @@
                     "format": "password"
                   }
                 },
-                "required": [
-                  "mid",
-                  "key"
-                ]
+                "required": ["mid", "key"]
               }
             }
           }
@@ -20333,9 +19422,7 @@
           },
           {
             "type": "object",
-            "required": [
-              "gatewayConfig"
-            ],
+            "required": ["gatewayConfig"],
             "properties": {
               "gatewayConfig": {
                 "type": "object",
@@ -20350,10 +19437,7 @@
                     "format": "password"
                   }
                 },
-                "required": [
-                  "M_ID",
-                  "M_KEY"
-                ]
+                "required": ["M_ID", "M_KEY"]
               }
             }
           }
@@ -20367,9 +19451,7 @@
           },
           {
             "type": "object",
-            "required": [
-              "gatewayConfig"
-            ],
+            "required": ["gatewayConfig"],
             "properties": {
               "gatewayConfig": {
                 "type": "object",
@@ -20379,9 +19461,7 @@
                     "description": "SMSVoucher AppId"
                   }
                 },
-                "required": [
-                  "AppId"
-                ]
+                "required": ["AppId"]
               }
             }
           }
@@ -20395,9 +19475,7 @@
           },
           {
             "type": "object",
-            "required": [
-              "gatewayConfig"
-            ],
+            "required": ["gatewayConfig"],
             "properties": {
               "gatewayConfig": {
                 "type": "object",
@@ -20408,9 +19486,7 @@
                     "format": "url"
                   }
                 },
-                "required": [
-                  "redirectUrl"
-                ]
+                "required": ["redirectUrl"]
               }
             }
           }
@@ -20424,9 +19500,7 @@
           },
           {
             "type": "object",
-            "required": [
-              "gatewayConfig"
-            ],
+            "required": ["gatewayConfig"],
             "properties": {
               "gatewayConfig": {
                 "type": "object",
@@ -20446,11 +19520,7 @@
                     "format": "password"
                   }
                 },
-                "required": [
-                  "receiver_account",
-                  "key",
-                  "secret"
-                ]
+                "required": ["receiver_account", "key", "secret"]
               }
             }
           }
@@ -20464,9 +19534,7 @@
           },
           {
             "type": "object",
-            "required": [
-              "gatewayConfig"
-            ],
+            "required": ["gatewayConfig"],
             "properties": {
               "gatewayConfig": {
                 "type": "object",
@@ -20482,10 +19550,7 @@
                     "format": "password"
                   }
                 },
-                "required": [
-                  "sourceKey",
-                  "pin"
-                ]
+                "required": ["sourceKey", "pin"]
               }
             }
           }
@@ -20499,9 +19564,7 @@
           },
           {
             "type": "object",
-            "required": [
-              "gatewayConfig"
-            ],
+            "required": ["gatewayConfig"],
             "properties": {
               "gatewayConfig": {
                 "type": "object",
@@ -20520,11 +19583,7 @@
                     "description": "VantivLitle Gateway merchant ID"
                   }
                 },
-                "required": [
-                  "username",
-                  "password",
-                  "merchantId"
-                ]
+                "required": ["username", "password", "merchantId"]
               },
               "mpi": {
                 "$ref": "#/components/schemas/VantivLitleMpis"
@@ -20541,9 +19600,7 @@
           },
           {
             "type": "object",
-            "required": [
-              "gatewayConfig"
-            ],
+            "required": ["gatewayConfig"],
             "properties": {
               "gatewayConfig": {
                 "type": "object",
@@ -20558,10 +19615,7 @@
                     "format": "password"
                   }
                 },
-                "required": [
-                  "terminalId",
-                  "password"
-                ]
+                "required": ["terminalId", "password"]
               }
             }
           }
@@ -20575,9 +19629,7 @@
           },
           {
             "type": "object",
-            "required": [
-              "gatewayConfig"
-            ],
+            "required": ["gatewayConfig"],
             "properties": {
               "gatewayConfig": {
                 "type": "object",
@@ -20592,10 +19644,7 @@
                     "format": "password"
                   }
                 },
-                "required": [
-                  "merchantName",
-                  "merchantPin"
-                ]
+                "required": ["merchantName", "merchantPin"]
               },
               "mpi": {
                 "$ref": "#/components/schemas/WalpayMpis"
@@ -20612,9 +19661,7 @@
           },
           {
             "type": "object",
-            "required": [
-              "gatewayConfig"
-            ],
+            "required": ["gatewayConfig"],
             "properties": {
               "gatewayConfig": {
                 "type": "object",
@@ -20638,12 +19685,7 @@
                     "description": "Wirecard Gateway delay"
                   }
                 },
-                "required": [
-                  "merchantUsername",
-                  "merchantPassword",
-                  "businessSignature",
-                  "delay"
-                ]
+                "required": ["merchantUsername", "merchantPassword", "businessSignature", "delay"]
               },
               "mpi": {
                 "$ref": "#/components/schemas/WirecardMpis"
@@ -20660,9 +19702,7 @@
           },
           {
             "type": "object",
-            "required": [
-              "gatewayConfig"
-            ],
+            "required": ["gatewayConfig"],
             "properties": {
               "gatewayConfig": {
                 "type": "object",
@@ -20678,10 +19718,7 @@
                     "format": "password"
                   }
                 },
-                "required": [
-                  "merchantCode",
-                  "merchantPassword"
-                ]
+                "required": ["merchantCode", "merchantPassword"]
               },
               "mpi": {
                 "$ref": "#/components/schemas/WorldpayMpis"
@@ -20834,11 +19871,7 @@
       },
       "GlobalWebhook": {
         "type": "object",
-        "required": [
-          "method",
-          "url",
-          "credentialHash"
-        ],
+        "required": ["method", "url", "credentialHash"],
         "properties": {
           "id": {
             "description": "The webhook identifier string",
@@ -20862,13 +19895,7 @@
           },
           "method": {
             "type": "string",
-            "enum": [
-              "GET",
-              "POST",
-              "PUT",
-              "PATCH",
-              "DELETE"
-            ]
+            "enum": ["GET", "POST", "PUT", "PATCH", "DELETE"]
           },
           "url": {
             "description": "URL that will be triggered when the given event occurs.",
@@ -20949,11 +19976,7 @@
       },
       "Invoice": {
         "type": "object",
-        "required": [
-          "customerId",
-          "websiteId",
-          "currency"
-        ],
+        "required": ["customerId", "websiteId", "currency"],
         "properties": {
           "id": {
             "description": "The invoice identifier string",
@@ -21070,14 +20093,7 @@
             "type": "string",
             "description": "Invoice status.",
             "readOnly": true,
-            "enum": [
-              "draft",
-              "issued",
-              "past-due",
-              "paid",
-              "abandoned",
-              "voided"
-            ]
+            "enum": ["draft", "issued", "past-due", "paid", "abandoned", "voided"]
           },
           "delinquentCollectionPeriod": {
             "type": "integer",
@@ -21182,10 +20198,7 @@
       },
       "InvoiceItem": {
         "type": "object",
-        "required": [
-          "type",
-          "unitPrice"
-        ],
+        "required": ["type", "unitPrice"],
         "properties": {
           "id": {
             "description": "The website identifier string",
@@ -21199,10 +20212,7 @@
           "type": {
             "description": "Invoice item's type",
             "type": "string",
-            "enum": [
-              "debit",
-              "credit"
-            ]
+            "enum": ["debit", "credit"]
           },
           "unitPrice": {
             "description": "Invoice item's price",
@@ -21278,9 +20288,7 @@
       },
       "Layout": {
         "type": "object",
-        "required": [
-          "name"
-        ],
+        "required": ["name"],
         "properties": {
           "id": {
             "description": "The layout identifier string",
@@ -21334,9 +20342,7 @@
       },
       "LayoutItem": {
         "type": "object",
-        "required": [
-          "planId"
-        ],
+        "required": ["planId"],
         "properties": {
           "planId": {
             "description": "The plan identifier string",
@@ -21478,14 +20484,10 @@
           "rel": {
             "description": "The link type",
             "type": "string",
-            "enum": [
-              "approvalUrl"
-            ]
+            "enum": ["approvalUrl"]
           }
         },
-        "required": [
-          "rel"
-        ]
+        "required": ["rel"]
       },
       "AttachmentResourceLink": {
         "type": "object",
@@ -21511,9 +20513,7 @@
             ]
           }
         },
-        "required": [
-          "rel"
-        ]
+        "required": ["rel"]
       },
       "BankAccountLink": {
         "type": "object",
@@ -21526,14 +20526,10 @@
           "rel": {
             "description": "The link type",
             "type": "string",
-            "enum": [
-              "bankAccount"
-            ]
+            "enum": ["bankAccount"]
           }
         },
-        "required": [
-          "rel"
-        ]
+        "required": ["rel"]
       },
       "BillingContactLink": {
         "type": "object",
@@ -21546,14 +20542,10 @@
           "rel": {
             "description": "The link type",
             "type": "string",
-            "enum": [
-              "billingContact"
-            ]
+            "enum": ["billingContact"]
           }
         },
-        "required": [
-          "rel"
-        ]
+        "required": ["rel"]
       },
       "CancelUrlLink": {
         "type": "object",
@@ -21566,14 +20558,10 @@
           "rel": {
             "description": "The link type",
             "type": "string",
-            "enum": [
-              "cancelUrl"
-            ]
+            "enum": ["cancelUrl"]
           }
         },
-        "required": [
-          "rel"
-        ]
+        "required": ["rel"]
       },
       "ContactLink": {
         "type": "object",
@@ -21586,14 +20574,10 @@
           "rel": {
             "description": "The link type",
             "type": "string",
-            "enum": [
-              "contact"
-            ]
+            "enum": ["contact"]
           }
         },
-        "required": [
-          "rel"
-        ]
+        "required": ["rel"]
       },
       "CustomerLink": {
         "type": "object",
@@ -21606,14 +20590,10 @@
           "rel": {
             "description": "The link type",
             "type": "string",
-            "enum": [
-              "customer"
-            ]
+            "enum": ["customer"]
           }
         },
-        "required": [
-          "rel"
-        ]
+        "required": ["rel"]
       },
       "DefaultPaymentInstrumentLink": {
         "type": "object",
@@ -21626,14 +20606,10 @@
           "rel": {
             "description": "The link type",
             "type": "string",
-            "enum": [
-              "defaultPaymentInstrument"
-            ]
+            "enum": ["defaultPaymentInstrument"]
           }
         },
-        "required": [
-          "rel"
-        ]
+        "required": ["rel"]
       },
       "DeliveryContactLink": {
         "type": "object",
@@ -21646,14 +20622,10 @@
           "rel": {
             "description": "The link type",
             "type": "string",
-            "enum": [
-              "deliveryContact"
-            ]
+            "enum": ["deliveryContact"]
           }
         },
-        "required": [
-          "rel"
-        ]
+        "required": ["rel"]
       },
       "DisputeLink": {
         "type": "object",
@@ -21666,14 +20638,10 @@
           "rel": {
             "description": "The link type",
             "type": "string",
-            "enum": [
-              "dispute"
-            ]
+            "enum": ["dispute"]
           }
         },
-        "required": [
-          "rel"
-        ]
+        "required": ["rel"]
       },
       "FileLink": {
         "type": "object",
@@ -21686,14 +20654,10 @@
           "rel": {
             "description": "The link type",
             "type": "string",
-            "enum": [
-              "file"
-            ]
+            "enum": ["file"]
           }
         },
-        "required": [
-          "rel"
-        ]
+        "required": ["rel"]
       },
       "GatewayAccountLink": {
         "type": "object",
@@ -21706,14 +20670,10 @@
           "rel": {
             "description": "The link type",
             "type": "string",
-            "enum": [
-              "gatewayAccount"
-            ]
+            "enum": ["gatewayAccount"]
           }
         },
-        "required": [
-          "rel"
-        ]
+        "required": ["rel"]
       },
       "ItemsLink": {
         "type": "object",
@@ -21726,14 +20686,10 @@
           "rel": {
             "description": "The link type",
             "type": "string",
-            "enum": [
-              "items"
-            ]
+            "enum": ["items"]
           }
         },
-        "required": [
-          "rel"
-        ]
+        "required": ["rel"]
       },
       "LeadSourceLink": {
         "type": "object",
@@ -21746,14 +20702,10 @@
           "rel": {
             "description": "The link type",
             "type": "string",
-            "enum": [
-              "leadSource"
-            ]
+            "enum": ["leadSource"]
           }
         },
-        "required": [
-          "rel"
-        ]
+        "required": ["rel"]
       },
       "NewLink": {
         "type": "object",
@@ -21763,9 +20715,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "href"
-        ]
+        "required": ["href"]
       },
       "NotesLink": {
         "type": "object",
@@ -21778,14 +20728,10 @@
           "rel": {
             "description": "The link type",
             "type": "string",
-            "enum": [
-              "notes"
-            ]
+            "enum": ["notes"]
           }
         },
-        "required": [
-          "rel"
-        ]
+        "required": ["rel"]
       },
       "OnBoardingUrlLink": {
         "type": "object",
@@ -21798,14 +20744,10 @@
           "rel": {
             "description": "The link type",
             "type": "string",
-            "enum": [
-              "onBoardingUrl"
-            ]
+            "enum": ["onBoardingUrl"]
           }
         },
-        "required": [
-          "rel"
-        ]
+        "required": ["rel"]
       },
       "OrganizationLink": {
         "type": "object",
@@ -21818,14 +20760,10 @@
           "rel": {
             "description": "The link type",
             "type": "string",
-            "enum": [
-              "organization"
-            ]
+            "enum": ["organization"]
           }
         },
-        "required": [
-          "rel"
-        ]
+        "required": ["rel"]
       },
       "ParentTransactionLink": {
         "type": "object",
@@ -21838,14 +20776,10 @@
           "rel": {
             "description": "The link type",
             "type": "string",
-            "enum": [
-              "parentTransaction"
-            ]
+            "enum": ["parentTransaction"]
           }
         },
-        "required": [
-          "rel"
-        ]
+        "required": ["rel"]
       },
       "PaymentCardLink": {
         "type": "object",
@@ -21858,14 +20792,10 @@
           "rel": {
             "description": "The link type",
             "type": "string",
-            "enum": [
-              "paymentCard"
-            ]
+            "enum": ["paymentCard"]
           }
         },
-        "required": [
-          "rel"
-        ]
+        "required": ["rel"]
       },
       "PaymentLink": {
         "type": "object",
@@ -21878,14 +20808,10 @@
           "rel": {
             "description": "The link type",
             "type": "string",
-            "enum": [
-              "payment"
-            ]
+            "enum": ["payment"]
           }
         },
-        "required": [
-          "rel"
-        ]
+        "required": ["rel"]
       },
       "PermalinkLink": {
         "type": "object",
@@ -21898,14 +20824,10 @@
           "rel": {
             "description": "The link type",
             "type": "string",
-            "enum": [
-              "permalink"
-            ]
+            "enum": ["permalink"]
           }
         },
-        "required": [
-          "rel"
-        ]
+        "required": ["rel"]
       },
       "PlanLink": {
         "type": "object",
@@ -21918,14 +20840,10 @@
           "rel": {
             "description": "The link type",
             "type": "string",
-            "enum": [
-              "plan"
-            ]
+            "enum": ["plan"]
           }
         },
-        "required": [
-          "rel"
-        ]
+        "required": ["rel"]
       },
       "RefundUrlLink": {
         "type": "object",
@@ -21938,14 +20856,10 @@
           "rel": {
             "description": "The link type",
             "type": "string",
-            "enum": [
-              "refundUrl"
-            ]
+            "enum": ["refundUrl"]
           }
         },
-        "required": [
-          "rel"
-        ]
+        "required": ["rel"]
       },
       "RetriedTransactionLink": {
         "type": "object",
@@ -21958,14 +20872,10 @@
           "rel": {
             "description": "The link type",
             "type": "string",
-            "enum": [
-              "retriedTransaction"
-            ]
+            "enum": ["retriedTransaction"]
           }
         },
-        "required": [
-          "rel"
-        ]
+        "required": ["rel"]
       },
       "RuleSetVersionLink": {
         "type": "object",
@@ -21978,14 +20888,10 @@
           "rel": {
             "description": "The link type",
             "type": "string",
-            "enum": [
-              "rules"
-            ]
+            "enum": ["rules"]
           }
         },
-        "required": [
-          "rel"
-        ]
+        "required": ["rel"]
       },
       "SelfLink": {
         "type": "object",
@@ -21998,14 +20904,10 @@
           "rel": {
             "description": "The link type",
             "type": "string",
-            "enum": [
-              "self"
-            ]
+            "enum": ["self"]
           }
         },
-        "required": [
-          "rel"
-        ]
+        "required": ["rel"]
       },
       "SubscriptionLink": {
         "type": "object",
@@ -22018,14 +20920,10 @@
           "rel": {
             "description": "The link type",
             "type": "string",
-            "enum": [
-              "subscription"
-            ]
+            "enum": ["subscription"]
           }
         },
-        "required": [
-          "rel"
-        ]
+        "required": ["rel"]
       },
       "TransactionLink": {
         "type": "object",
@@ -22038,14 +20936,10 @@
           "rel": {
             "description": "The link type",
             "type": "string",
-            "enum": [
-              "transaction"
-            ]
+            "enum": ["transaction"]
           }
         },
-        "required": [
-          "rel"
-        ]
+        "required": ["rel"]
       },
       "WebsiteLink": {
         "type": "object",
@@ -22058,21 +20952,14 @@
           "rel": {
             "description": "The link type",
             "type": "string",
-            "enum": [
-              "website"
-            ]
+            "enum": ["website"]
           }
         },
-        "required": [
-          "rel"
-        ]
+        "required": ["rel"]
       },
       "List": {
         "type": "object",
-        "required": [
-          "name",
-          "values"
-        ],
+        "required": ["name", "values"],
         "properties": {
           "id": {
             "description": "List ID",
@@ -22153,9 +21040,7 @@
           "propertyName": "name"
         },
         "type": "object",
-        "required": [
-          "name"
-        ],
+        "required": ["name"],
         "properties": {
           "name": {
             "allOf": [
@@ -22163,9 +21048,7 @@
                 "$ref": "#/components/schemas/MpiName"
               }
             ],
-            "enum": [
-              "Other"
-            ]
+            "enum": ["Other"]
           }
         }
       },
@@ -22183,9 +21066,7 @@
           "propertyName": "name"
         },
         "type": "object",
-        "required": [
-          "name"
-        ],
+        "required": ["name"],
         "properties": {
           "name": {
             "allOf": [
@@ -22193,9 +21074,7 @@
                 "$ref": "#/components/schemas/MpiName"
               }
             ],
-            "enum": [
-              "DataCashMpi"
-            ]
+            "enum": ["DataCashMpi"]
           }
         }
       },
@@ -22205,9 +21084,7 @@
           "propertyName": "name"
         },
         "type": "object",
-        "required": [
-          "name"
-        ],
+        "required": ["name"],
         "properties": {
           "name": {
             "allOf": [
@@ -22215,9 +21092,7 @@
                 "$ref": "#/components/schemas/MpiName"
               }
             ],
-            "enum": [
-              "Other"
-            ]
+            "enum": ["Other"]
           }
         }
       },
@@ -22227,9 +21102,7 @@
           "propertyName": "name"
         },
         "type": "object",
-        "required": [
-          "name"
-        ],
+        "required": ["name"],
         "properties": {
           "name": {
             "allOf": [
@@ -22237,9 +21110,7 @@
                 "$ref": "#/components/schemas/MpiName"
               }
             ],
-            "enum": [
-              "Other"
-            ]
+            "enum": ["Other"]
           }
         }
       },
@@ -22257,9 +21128,7 @@
           "propertyName": "name"
         },
         "type": "object",
-        "required": [
-          "name"
-        ],
+        "required": ["name"],
         "properties": {
           "name": {
             "allOf": [
@@ -22267,9 +21136,7 @@
                 "$ref": "#/components/schemas/MpiName"
               }
             ],
-            "enum": [
-              "GlobalCollectMpi"
-            ]
+            "enum": ["GlobalCollectMpi"]
           }
         }
       },
@@ -22287,9 +21154,7 @@
           "propertyName": "name"
         },
         "type": "object",
-        "required": [
-          "name"
-        ],
+        "required": ["name"],
         "properties": {
           "name": {
             "allOf": [
@@ -22297,9 +21162,7 @@
                 "$ref": "#/components/schemas/MpiName"
               }
             ],
-            "enum": [
-              "IlixiumMpi"
-            ]
+            "enum": ["IlixiumMpi"]
           }
         }
       },
@@ -22309,9 +21172,7 @@
           "propertyName": "name"
         },
         "type": "object",
-        "required": [
-          "name"
-        ],
+        "required": ["name"],
         "properties": {
           "name": {
             "allOf": [
@@ -22319,9 +21180,7 @@
                 "$ref": "#/components/schemas/MpiName"
               }
             ],
-            "enum": [
-              "Other"
-            ]
+            "enum": ["Other"]
           }
         }
       },
@@ -22339,9 +21198,7 @@
           "propertyName": "name"
         },
         "type": "object",
-        "required": [
-          "name"
-        ],
+        "required": ["name"],
         "properties": {
           "name": {
             "allOf": [
@@ -22349,9 +21206,7 @@
                 "$ref": "#/components/schemas/MpiName"
               }
             ],
-            "enum": [
-              "OptimalMpi"
-            ]
+            "enum": ["OptimalMpi"]
           }
         }
       },
@@ -22392,11 +21247,7 @@
           },
           {
             "type": "object",
-            "required": [
-              "merchantId",
-              "processorId",
-              "transactionPwd"
-            ],
+            "required": ["merchantId", "processorId", "transactionPwd"],
             "properties": {
               "merchantId": {
                 "type": "string",
@@ -22429,9 +21280,7 @@
           "propertyName": "name"
         },
         "type": "object",
-        "required": [
-          "name"
-        ],
+        "required": ["name"],
         "properties": {
           "name": {
             "allOf": [
@@ -22439,11 +21288,7 @@
                 "$ref": "#/components/schemas/MpiName"
               }
             ],
-            "enum": [
-              "PayvisionMpi",
-              "CardinalCommerce",
-              "Other"
-            ]
+            "enum": ["PayvisionMpi", "CardinalCommerce", "Other"]
           }
         }
       },
@@ -22461,9 +21306,7 @@
           "propertyName": "name"
         },
         "type": "object",
-        "required": [
-          "name"
-        ],
+        "required": ["name"],
         "properties": {
           "name": {
             "allOf": [
@@ -22471,9 +21314,7 @@
                 "$ref": "#/components/schemas/MpiName"
               }
             ],
-            "enum": [
-              "RebillySandboxMpi"
-            ]
+            "enum": ["RebillySandboxMpi"]
           }
         }
       },
@@ -22483,9 +21324,7 @@
           "propertyName": "name"
         },
         "type": "object",
-        "required": [
-          "name"
-        ],
+        "required": ["name"],
         "properties": {
           "name": {
             "allOf": [
@@ -22493,9 +21332,7 @@
                 "$ref": "#/components/schemas/MpiName"
               }
             ],
-            "enum": [
-              "Other"
-            ]
+            "enum": ["Other"]
           }
         }
       },
@@ -22505,9 +21342,7 @@
           "propertyName": "name"
         },
         "type": "object",
-        "required": [
-          "name"
-        ],
+        "required": ["name"],
         "properties": {
           "name": {
             "allOf": [
@@ -22515,9 +21350,7 @@
                 "$ref": "#/components/schemas/MpiName"
               }
             ],
-            "enum": [
-              "Other"
-            ]
+            "enum": ["Other"]
           }
         }
       },
@@ -22535,9 +21368,7 @@
           "propertyName": "name"
         },
         "type": "object",
-        "required": [
-          "name"
-        ],
+        "required": ["name"],
         "properties": {
           "name": {
             "allOf": [
@@ -22545,9 +21376,7 @@
                 "$ref": "#/components/schemas/MpiName"
               }
             ],
-            "enum": [
-              "WirecardMpi"
-            ]
+            "enum": ["WirecardMpi"]
           }
         }
       },
@@ -22557,9 +21386,7 @@
           "propertyName": "name"
         },
         "type": "object",
-        "required": [
-          "name"
-        ],
+        "required": ["name"],
         "properties": {
           "name": {
             "allOf": [
@@ -22567,19 +21394,13 @@
                 "$ref": "#/components/schemas/MpiName"
               }
             ],
-            "enum": [
-              "Other"
-            ]
+            "enum": ["Other"]
           }
         }
       },
       "Note": {
         "type": "object",
-        "required": [
-          "content",
-          "relatedType",
-          "relatedId"
-        ],
+        "required": ["content", "relatedType", "relatedId"],
         "properties": {
           "id": {
             "description": "The note identifier string",
@@ -22606,13 +21427,7 @@
           "relatedType": {
             "description": "The note's related resource type",
             "type": "string",
-            "enum": [
-              "customer",
-              "payment-card",
-              "payment-gateway",
-              "subscription",
-              "transaction"
-            ]
+            "enum": ["customer", "payment-card", "payment-gateway", "subscription", "transaction"]
           },
           "relatedId": {
             "description": "The note's related resource ID",
@@ -22661,17 +21476,11 @@
       "OnOff": {
         "type": "string",
         "default": "active",
-        "enum": [
-          "active",
-          "inactive"
-        ]
+        "enum": ["active", "inactive"]
       },
       "Organization": {
         "type": "object",
-        "required": [
-          "name",
-          "country"
-        ],
+        "required": ["name", "country"],
         "properties": {
           "id": {
             "description": "The organization identifier string",
@@ -22742,12 +21551,7 @@
       },
       "Payment": {
         "type": "object",
-        "required": [
-          "websiteId",
-          "customerId",
-          "currency",
-          "amount"
-        ],
+        "required": ["websiteId", "customerId", "currency", "amount"],
         "properties": {
           "id": {
             "description": "The payment identifier string",
@@ -22857,12 +21661,7 @@
             "description": "Payment result",
             "type": "string",
             "readOnly": true,
-            "enum": [
-              "approved",
-              "declined",
-              "canceled",
-              "unknown"
-            ]
+            "enum": ["approved", "declined", "canceled", "unknown"]
           },
           "riskMetadata": {
             "description": "Risk metadata",
@@ -22984,13 +21783,7 @@
             "description": "Payment Card status",
             "type": "string",
             "readOnly": true,
-            "enum": [
-              "active",
-              "expired",
-              "inactive",
-              "deactivated",
-              "pending"
-            ]
+            "enum": ["active", "expired", "inactive", "deactivated", "pending"]
           },
           "brand": {
             "description": "Payment Card brand",
@@ -23065,11 +21858,7 @@
       },
       "PaymentCardMigrationRequest": {
         "type": "object",
-        "required": [
-          "fromGatewayAccountId",
-          "toGatewayAccountId",
-          "paymentCardIds"
-        ],
+        "required": ["fromGatewayAccountId", "toGatewayAccountId", "paymentCardIds"],
         "properties": {
           "fromGatewayAccountId": {
             "description": "An ID of Gateway Account cards should be migrated from",
@@ -23112,9 +21901,7 @@
       },
       "PaymentInstrument": {
         "type": "object",
-        "required": [
-          "method"
-        ],
+        "required": ["method"],
         "discriminator": {
           "propertyName": "method"
         },
@@ -23132,9 +21919,7 @@
           },
           {
             "type": "object",
-            "required": [
-              "bankAccountId"
-            ],
+            "required": ["bankAccountId"],
             "properties": {
               "bankAccountId": {
                 "description": "The bank account identifier string",
@@ -23181,9 +21966,7 @@
           },
           {
             "type": "object",
-            "required": [
-              "paymentCardId"
-            ],
+            "required": ["paymentCardId"],
             "properties": {
               "paymentCardId": {
                 "description": "The payment card identifier string",
@@ -23213,9 +21996,7 @@
           },
           {
             "type": "object",
-            "required": [
-              "payPalAccountId"
-            ],
+            "required": ["payPalAccountId"],
             "properties": {
               "payPalAccountId": {
                 "description": "The PayPal account identifier string",
@@ -23245,16 +22026,10 @@
         "properties": {
           "method": {
             "type": "string",
-            "enum": [
-              "none",
-              "partial",
-              "discount"
-            ]
+            "enum": ["none", "partial", "discount"]
           }
         },
-        "required": [
-          "method"
-        ]
+        "required": ["method"]
       },
       "PaymentRetry": {
         "type": "object",
@@ -23272,34 +22047,21 @@
                   "$ref": "#/components/schemas/AmountAdjustment"
                 }
               },
-              "required": [
-                "scheduleInstruction",
-                "paymentInstruction"
-              ]
+              "required": ["scheduleInstruction", "paymentInstruction"]
             }
           },
           "afterAttemptPolicy": {
             "description": "The policy on the attempt finishes",
             "type": "string",
-            "enum": [
-              "none",
-              "change-subscription-renewal-time"
-            ]
+            "enum": ["none", "change-subscription-renewal-time"]
           },
           "afterRetryEndPolicy": {
             "description": "The policy on the retry ends",
             "type": "string",
-            "enum": [
-              "none",
-              "cancel-subscription"
-            ]
+            "enum": ["none", "cancel-subscription"]
           }
         },
-        "required": [
-          "attempts",
-          "afterAttemptPolicy",
-          "afterRetryEndPolicy"
-        ]
+        "required": ["attempts", "afterAttemptPolicy", "afterRetryEndPolicy"]
       },
       "discount": {
         "allOf": [
@@ -23317,16 +22079,10 @@
               "type": {
                 "description": "The payment amount discount type",
                 "type": "string",
-                "enum": [
-                  "percent",
-                  "fixed"
-                ]
+                "enum": ["percent", "fixed"]
               }
             },
-            "required": [
-              "value",
-              "type"
-            ]
+            "required": ["value", "type"]
           }
         ]
       },
@@ -23346,25 +22102,16 @@
               "type": {
                 "description": "The payment amount type",
                 "type": "string",
-                "enum": [
-                  "percent",
-                  "fixed"
-                ]
+                "enum": ["percent", "fixed"]
               }
             },
-            "required": [
-              "value",
-              "type"
-            ]
+            "required": ["value", "type"]
           }
         ]
       },
       "PaymentToken": {
         "type": "object",
-        "required": [
-          "method",
-          "paymentInstrument"
-        ],
+        "required": ["method", "paymentInstrument"],
         "properties": {
           "id": {
             "description": "The token identifier string",
@@ -23479,11 +22226,7 @@
             "description": "PayPal Account status",
             "type": "string",
             "readOnly": true,
-            "enum": [
-              "inactive",
-              "active",
-              "deactivated"
-            ]
+            "enum": ["inactive", "active", "deactivated"]
           },
           "createdTime": {
             "description": "PayPal Account created time",
@@ -23528,17 +22271,11 @@
             }
           }
         },
-        "required": [
-          "customerId",
-          "billingAddress"
-        ]
+        "required": ["customerId", "billingAddress"]
       },
       "Plan": {
         "type": "object",
-        "required": [
-          "name",
-          "currency"
-        ],
+        "required": ["name", "currency"],
         "properties": {
           "id": {
             "description": "The website identifier string",
@@ -23581,12 +22318,7 @@
           "recurringPeriodUnit": {
             "description": "The unit of time",
             "type": "string",
-            "enum": [
-              "day",
-              "week",
-              "month",
-              "year"
-            ]
+            "enum": ["day", "week", "month", "year"]
           },
           "recurringPeriodLength": {
             "description": "The length of time (used with the recurringPeriodUnit)",
@@ -23600,12 +22332,7 @@
           "trialPeriodUnit": {
             "description": "The unit of time",
             "type": "string",
-            "enum": [
-              "day",
-              "week",
-              "month",
-              "year"
-            ]
+            "enum": ["day", "week", "month", "year"]
           },
           "trialPeriodLength": {
             "description": "The length of time (used with the trialPeriodUnit)",
@@ -23624,12 +22351,7 @@
           "contractTermUnit": {
             "description": "The unit of time",
             "type": "string",
-            "enum": [
-              "day",
-              "week",
-              "month",
-              "year"
-            ]
+            "enum": ["day", "week", "month", "year"]
           },
           "contractTermLength": {
             "description": "The length that corresponds with the contractTermUnit",
@@ -23677,11 +22399,7 @@
       },
       "PriceBasedShippingRate": {
         "type": "object",
-        "required": [
-          "name",
-          "currency",
-          "price"
-        ],
+        "required": ["name", "currency", "price"],
         "properties": {
           "name": {
             "description": "The shipping rate name",
@@ -23722,9 +22440,7 @@
       },
       "Product": {
         "type": "object",
-        "required": [
-          "name"
-        ],
+        "required": ["name"],
         "description": "Your product includes digital goods, services, and physical goods.\nProducts appear on invoice line items. If you set a tax category identifier,\ntaxes will be calculated upon invoice generation.\n",
         "example": "{\n  \"id\": \"stringid\",\n  \"name\": \"Widget\",\n  \"description\": \"Fantastic widget\",\n  \"taxCategoryId\": null,\n  \"requiresShipping\": true,\n  \"accountingCode\": \"100\",\n  \"customFields\": [],\n  \"createdTime\": \"2015-08-27 13:45:12\",\n  \"updatedTime\": \"2015-08-27 13:45:12\",\n  \"_links\": [\n      {\n        \"rel\": \"self\",\n        \"href\": \"https://api.rebilly.com/v2.1/products/stringid\"\n      }\n  ]\n}\n",
         "properties": {
@@ -23750,15 +22466,7 @@
           "taxCategoryId": {
             "description": "The product's tax category identifier string",
             "type": "string",
-            "enum": [
-              99999,
-              20010,
-              40030,
-              51020,
-              51010,
-              31000,
-              30070
-            ]
+            "enum": [99999, 20010, 40030, 51020, 51010, 31000, 30070]
           },
           "requiresShipping": {
             "description": "If the product requires shipping, shipping calculations will be applied",
@@ -23851,17 +22559,17 @@
             "type": "string"
           },
           "totpRequired": {
-            "description": "The user setting of two-factor authentification",
+            "description": "The user setting of two-factor authentication",
             "readOnly": true,
             "type": "boolean"
           },
           "totpSecret": {
-            "description": "The user TOTP key for authentification app (if TOTP enabled)",
+            "description": "The user TOTP key for authentication app (if TOTP enabled)",
             "readOnly": true,
             "type": "string"
           },
           "totpUrl": {
-            "description": "The user link to QR-code for TOTP authentification app (if TOTP enabled)",
+            "description": "The user link to QR-code for TOTP authentication app (if TOTP enabled)",
             "readOnly": true,
             "type": "string",
             "format": "url"
@@ -23879,9 +22587,7 @@
       },
       "ResetPassword": {
         "type": "object",
-        "required": [
-          "newPassword"
-        ],
+        "required": ["newPassword"],
         "properties": {
           "newPassword": {
             "description": "New password",
@@ -23892,10 +22598,7 @@
       },
       "ResetPasswordToken": {
         "type": "object",
-        "required": [
-          "username",
-          "password"
-        ],
+        "required": ["username", "password"],
         "properties": {
           "token": {
             "description": "The token's identifier string",
@@ -24067,13 +22770,7 @@
             "properties": {
               "type": {
                 "type": "string",
-                "enum": [
-                  "customer-id",
-                  "email",
-                  "fingerprint",
-                  "ip-address",
-                  "payment-card-id"
-                ]
+                "enum": ["customer-id", "email", "fingerprint", "ip-address", "payment-card-id"]
               },
               "ttl": {
                 "type": "integer",
@@ -24081,9 +22778,7 @@
                 "default": 0
               }
             },
-            "required": [
-              "type"
-            ]
+            "required": ["type"]
           }
         ]
       },
@@ -24116,9 +22811,7 @@
                 "$ref": "#/components/schemas/GatewayAccountPickInstruction"
               }
             },
-            "required": [
-              "pickInstruction"
-            ]
+            "required": ["pickInstruction"]
           }
         ]
       },
@@ -24148,16 +22841,10 @@
               },
               "amountPolicy": {
                 "type": "string",
-                "enum": [
-                  "balance-outstanding",
-                  "invoice-total"
-                ]
+                "enum": ["balance-outstanding", "invoice-total"]
               }
             },
-            "required": [
-              "scheduleInstruction",
-              "amountPolicy"
-            ]
+            "required": ["scheduleInstruction", "amountPolicy"]
           }
         ]
       },
@@ -24250,17 +22937,10 @@
           },
           "bodyHtml": {
             "type": "string",
-            "description": "Leave empty to recieve \"text/plain\" email.\nThe template palceholders are allowed.\n"
+            "description": "Leave empty to receive \"text/plain\" email.\nThe template palceholders are allowed.\n"
           }
         },
-        "required": [
-          "credentialHash",
-          "sender",
-          "recipients",
-          "subject",
-          "bodyText",
-          "bodyHtml"
-        ]
+        "required": ["credentialHash", "sender", "recipients", "subject", "bodyText", "bodyHtml"]
       },
       "GatewayAccountPickInstruction": {
         "type": "object",
@@ -24270,15 +22950,10 @@
         "properties": {
           "method": {
             "type": "string",
-            "enum": [
-              "gateway-account-weights",
-              "gateway-acquirer-weights"
-            ]
+            "enum": ["gateway-account-weights", "gateway-acquirer-weights"]
           }
         },
-        "required": [
-          "method"
-        ]
+        "required": ["method"]
       },
       "gateway-account-weights": {
         "allOf": [
@@ -24302,17 +22977,12 @@
                       "type": "integer"
                     }
                   },
-                  "required": [
-                    "gatewayAccountId",
-                    "weight"
-                  ]
+                  "required": ["gatewayAccountId", "weight"]
                 },
                 "example": "[\n  {\"gatewayAccountId\": \"my_gateway_account_1\", \"weight\": 80},\n  {\"gatewayAccountId\": \"my_gateway_account_2\", \"weight\": 20}\n]\n"
               }
             },
-            "required": [
-              "weightedList"
-            ]
+            "required": ["weightedList"]
           }
         ]
       },
@@ -24341,18 +23011,12 @@
                       "type": "integer"
                     }
                   },
-                  "required": [
-                    "gatewayName",
-                    "acquirerName",
-                    "weight"
-                  ]
+                  "required": ["gatewayName", "acquirerName", "weight"]
                 },
                 "example": "[\n  {\"gatewayName\": \"RebillyProcessor\", \"acquirerName\": \"AIB\", \"weight\": 80},\n  {\"gatewayName\": \"RebillyProcessor\", \"acquirerName\": \"B+S\", \"weight\": 20}\n"
               }
             },
-            "required": [
-              "weightedList"
-            ]
+            "required": ["weightedList"]
           }
         ]
       },
@@ -24382,10 +23046,7 @@
             }
           }
         },
-        "required": [
-          "name",
-          "actions"
-        ]
+        "required": ["name", "actions"]
       },
       "RuleAction": {
         "type": "object",
@@ -24413,9 +23074,7 @@
             "$ref": "#/components/schemas/OnOff"
           }
         },
-        "required": [
-          "name"
-        ]
+        "required": ["name"]
       },
       "RuleSet": {
         "type": "object",
@@ -24445,9 +23104,7 @@
             }
           }
         },
-        "required": [
-          "rules"
-        ]
+        "required": ["rules"]
       },
       "RuleSetHistoryItem": {
         "type": "object",
@@ -24513,13 +23170,7 @@
         "properties": {
           "method": {
             "type": "string",
-            "enum": [
-              "GET",
-              "POST",
-              "PUT",
-              "PATCH",
-              "DELETE"
-            ]
+            "enum": ["GET", "POST", "PUT", "PATCH", "DELETE"]
           },
           "url": {
             "type": "string",
@@ -24550,10 +23201,7 @@
             }
           }
         },
-        "required": [
-          "method",
-          "url"
-        ]
+        "required": ["method", "url"]
       },
       "WebhookHeader": {
         "type": "object",
@@ -24572,10 +23220,7 @@
             }
           }
         },
-        "required": [
-          "name",
-          "value"
-        ]
+        "required": ["name", "value"]
       },
       "CommonScheduleInstruction": {
         "type": "object",
@@ -24586,18 +23231,10 @@
         "properties": {
           "method": {
             "type": "string",
-            "enum": [
-              "auto",
-              "immediately",
-              "date-interval",
-              "day-of-month",
-              "day-of-week"
-            ]
+            "enum": ["auto", "immediately", "date-interval", "day-of-month", "day-of-week"]
           }
         },
-        "required": [
-          "method"
-        ]
+        "required": ["method"]
       },
       "CustomEventScheduleInstruction": {
         "type": "object",
@@ -24608,28 +23245,14 @@
         "properties": {
           "method": {
             "type": "string",
-            "enum": [
-              "date-interval",
-              "day-of-month",
-              "day-of-week"
-            ]
+            "enum": ["date-interval", "day-of-month", "day-of-week"]
           }
         },
-        "required": [
-          "method"
-        ]
+        "required": ["method"]
       },
       "DayOfWeek": {
         "type": "string",
-        "enum": [
-          "Sunday",
-          "Monday",
-          "Tuesday",
-          "Wednesday",
-          "Thursday",
-          "Friday",
-          "Saturday"
-        ]
+        "enum": ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
       },
       "auto": {
         "allOf": [
@@ -24658,10 +23281,7 @@
                 "$ref": "#/components/schemas/TimeUnit"
               }
             },
-            "required": [
-              "duration",
-              "unit"
-            ]
+            "required": ["duration", "unit"]
           }
         ]
       },
@@ -24686,9 +23306,7 @@
                 "$ref": "#/components/schemas/Time"
               }
             },
-            "required": [
-              "day"
-            ]
+            "required": ["day"]
           }
         ]
       },
@@ -24709,19 +23327,13 @@
               "week": {
                 "type": "string",
                 "default": "next",
-                "enum": [
-                  "next",
-                  "first-in-month",
-                  "last-in-month"
-                ]
+                "enum": ["next", "first-in-month", "last-in-month"]
               },
               "time": {
                 "$ref": "#/components/schemas/Time"
               }
             },
-            "required": [
-              "day"
-            ]
+            "required": ["day"]
           }
         ]
       },
@@ -24762,9 +23374,7 @@
       },
       "Session": {
         "type": "object",
-        "required": [
-          "permissions"
-        ],
+        "required": ["permissions"],
         "properties": {
           "id": {
             "description": "The session identifier string",
@@ -24831,9 +23441,7 @@
       },
       "ShippingZone": {
         "type": "object",
-        "required": [
-          "name"
-        ],
+        "required": ["name"],
         "properties": {
           "id": {
             "description": "The shipping zone identifier string",
@@ -24904,10 +23512,7 @@
       },
       "Signin": {
         "type": "object",
-        "required": [
-          "email",
-          "password"
-        ],
+        "required": ["email", "password"],
         "properties": {
           "email": {
             "description": "Email",
@@ -24971,9 +23576,7 @@
           "currencies": {
             "description": "An array of currencies codes",
             "type": "array",
-            "default": [
-              "USD"
-            ],
+            "default": ["USD"],
             "items": {
               "description": "3 letters ISO 4217 currency code",
               "type": "string"
@@ -24993,9 +23596,7 @@
             "description": "The API status. If everything is ok - value is 'ok'",
             "type": "string",
             "readOnly": true,
-            "enum": [
-              "ok"
-            ]
+            "enum": ["ok"]
           },
           "time": {
             "description": "Current time",
@@ -25009,11 +23610,7 @@
       },
       "Subscription": {
         "type": "object",
-        "required": [
-          "customerId",
-          "planId",
-          "websiteId"
-        ],
+        "required": ["customerId", "planId", "websiteId"],
         "properties": {
           "id": {
             "description": "The Subscription identifier string",
@@ -25100,11 +23697,7 @@
             "description": "Canceled by",
             "type": "string",
             "readOnly": true,
-            "enum": [
-              "merchant",
-              "customer",
-              "rebilly"
-            ]
+            "enum": ["merchant", "customer", "rebilly"]
           },
           "cancelCategory": {
             "description": "Cancel category",
@@ -25228,28 +23821,17 @@
       },
       "SubscriptionCancel": {
         "type": "object",
-        "required": [
-          "policy",
-          "canceledBy",
-          "cancelCategory"
-        ],
+        "required": ["policy", "canceledBy", "cancelCategory"],
         "properties": {
           "policy": {
             "description": "Cancel policy",
             "type": "string",
-            "enum": [
-              "at-next-renewal",
-              "now-with-prorata-credit",
-              "now"
-            ]
+            "enum": ["at-next-renewal", "now-with-prorata-credit", "now"]
           },
           "canceledBy": {
             "description": "Canceled by",
             "type": "string",
-            "enum": [
-              "merchant",
-              "customer"
-            ]
+            "enum": ["merchant", "customer"]
           },
           "cancelCategory": {
             "description": "Cancel category",
@@ -25275,10 +23857,7 @@
       },
       "SubscriptionSwitch": {
         "type": "object",
-        "required": [
-          "planId",
-          "policy"
-        ],
+        "required": ["planId", "policy"],
         "properties": {
           "planId": {
             "description": "The plan identifier string",
@@ -25291,11 +23870,7 @@
           "policy": {
             "description": "Switch policy",
             "type": "string",
-            "enum": [
-              "at-next-renewal",
-              "now-with-prorata-credit",
-              "now"
-            ]
+            "enum": ["at-next-renewal", "now-with-prorata-credit", "now"]
           },
           "websiteId": {
             "description": "The website's ID",
@@ -25319,15 +23894,7 @@
             "type": "string",
             "readOnly": true,
             "maxLength": 50,
-            "enum": [
-              99999,
-              20010,
-              40030,
-              51020,
-              51010,
-              31000,
-              30070
-            ]
+            "enum": [99999, 20010, 40030, 51020, 51010, 31000, 30070]
           },
           "description": {
             "description": "The tax category description",
@@ -25337,9 +23904,7 @@
           "taxProvider": {
             "description": "The tax category maps to a provider",
             "type": "string",
-            "enum": [
-              "tax-jar"
-            ]
+            "enum": ["tax-jar"]
           },
           "_links": {
             "type": "array",
@@ -25410,11 +23975,7 @@
           "enrolled": {
             "description": "Is the cardholder enrolled in 3DSecure",
             "type": "string",
-            "enum": [
-              "Y",
-              "N",
-              "U"
-            ]
+            "enum": ["Y", "N", "U"]
           },
           "enrollmentEci": {
             "description": "The 3D Secure entry enrollment eci",
@@ -25435,20 +23996,12 @@
           "payerAuthResponseStatus": {
             "description": "The 3D Secure entry Auth Response Status",
             "type": "string",
-            "enum": [
-              "Y",
-              "N",
-              "U",
-              "A"
-            ]
+            "enum": ["Y", "N", "U", "A"]
           },
           "signatureVerification": {
             "description": "If signature was verified",
             "type": "string",
-            "enum": [
-              "Y",
-              "N"
-            ]
+            "enum": ["Y", "N"]
           },
           "amount": {
             "description": "Transaction amount",
@@ -25502,14 +24055,7 @@
           "method": {
             "type": "string",
             "description": "HTTP method",
-            "enum": [
-              "HEAD",
-              "GET",
-              "POST",
-              "PUT",
-              "DELETE",
-              "PATCH"
-            ]
+            "enum": ["HEAD", "GET", "POST", "PUT", "DELETE", "PATCH"]
           },
           "request": {
             "type": "string",
@@ -25644,12 +24190,7 @@
           "result": {
             "type": "string",
             "description": "Subscription's result",
-            "enum": [
-              "created",
-              "postponed",
-              "stopped",
-              "error"
-            ]
+            "enum": ["created", "postponed", "stopped", "error"]
           },
           "message": {
             "type": "string",
@@ -25783,10 +24324,7 @@
           "status": {
             "type": "string",
             "description": "Event's status",
-            "enum": [
-              "fail",
-              "success"
-            ]
+            "enum": ["fail", "success"]
           },
           "response": {
             "type": "integer",
@@ -25880,9 +24418,7 @@
       },
       "TransactionRefund": {
         "type": "object",
-        "required": [
-          "amount"
-        ],
+        "required": ["amount"],
         "properties": {
           "amount": {
             "description": "Refund amount",
@@ -25894,12 +24430,7 @@
       "RedirectUrls": {
         "type": "object",
         "description": "The redirect URIs",
-        "required": [
-          "error",
-          "success",
-          "decline",
-          "cancel"
-        ],
+        "required": ["error", "success", "decline", "cancel"],
         "properties": {
           "error": {
             "type": "string",
@@ -25922,39 +24453,21 @@
       "ThreeDSecureResult": {
         "type": "object",
         "readOnly": true,
-        "required": [
-          "enrolled",
-          "authenticated",
-          "liability"
-        ],
+        "required": ["enrolled", "authenticated", "liability"],
         "properties": {
           "enrolled": {
             "description": "Is the cardholder enrolled in 3D Secure",
             "type": "string",
-            "enum": [
-              "yes",
-              "no",
-              "invalid card/timeout",
-              "unavailable"
-            ]
+            "enum": ["yes", "no", "invalid card/timeout", "unavailable"]
           },
           "authenticated": {
             "description": "The 3D Secure entry Auth Response Status",
             "type": "string",
-            "enum": [
-              "yes",
-              "no",
-              "not applicable",
-              "attempted"
-            ]
+            "enum": ["yes", "no", "not applicable", "attempted"]
           },
           "liability": {
             "type": "string",
-            "enum": [
-              "protected",
-              "not protected",
-              "protected (attempt)"
-            ]
+            "enum": ["protected", "not protected", "protected (attempt)"]
           }
         }
       },
@@ -25974,14 +24487,7 @@
             "description": "Transaction type",
             "type": "string",
             "readOnly": true,
-            "enum": [
-              "authorize",
-              "capture",
-              "credit",
-              "refund",
-              "sale",
-              "void"
-            ]
+            "enum": ["authorize", "capture", "credit", "refund", "sale", "void"]
           },
           "status": {
             "description": "Transaction status",
@@ -26003,12 +24509,7 @@
             "description": "Transaction result",
             "type": "string",
             "readOnly": true,
-            "enum": [
-              "approved",
-              "canceled",
-              "declined",
-              "unknown"
-            ]
+            "enum": ["approved", "canceled", "declined", "unknown"]
           },
           "amount": {
             "description": "The transactions's amount",
@@ -26255,11 +24756,7 @@
               "outcome": {
                 "type": "string",
                 "description": "Dynamic Currency Conversion outcome",
-                "enum": [
-                  "rejected",
-                  "selected",
-                  "unknown"
-                ]
+                "enum": ["rejected", "selected", "unknown"]
               }
             }
           },
@@ -26408,11 +24905,7 @@
       },
       "User": {
         "type": "object",
-        "required": [
-          "email",
-          "firstName",
-          "lastName"
-        ],
+        "required": ["email", "firstName", "lastName"],
         "properties": {
           "id": {
             "description": "The user identifier string",
@@ -26495,26 +24988,22 @@
             }
           },
           "totpRequired": {
-            "description": "The user setting of two-factor authentification",
+            "description": "The user setting of two-factor authentication",
             "type": "boolean"
           },
           "totpSecret": {
-            "description": "The user TOTP key for authentification app (if TOTP enabled)",
+            "description": "The user TOTP key for authentication app (if TOTP enabled)",
             "type": "string"
           },
           "totpUrl": {
-            "description": "The user link to QR-code for TOTP authentification app (if TOTP enabled)",
+            "description": "The user link to QR-code for TOTP authentication app (if TOTP enabled)",
             "type": "string",
             "format": "url"
           },
           "status": {
             "description": "The user status",
             "type": "string",
-            "enum": [
-              "active",
-              "inactive",
-              "pending-confirmation"
-            ],
+            "enum": ["active", "inactive", "pending-confirmation"],
             "readOnly": true
           },
           "country": {
@@ -26597,14 +25086,7 @@
               "minItems": 1,
               "items": {
                 "type": "string",
-                "enum": [
-                  "HEAD",
-                  "GET",
-                  "POST",
-                  "PUT",
-                  "DELETE",
-                  "PATCH"
-                ]
+                "enum": ["HEAD", "GET", "POST", "PUT", "DELETE", "PATCH"]
               }
             },
             "resourceIds": {
@@ -26618,20 +25100,11 @@
         "example": [
           {
             "resourceName": "plans",
-            "methods": [
-              "GET",
-              "POST",
-              "PUT",
-              "HEAD",
-              "DELETE"
-            ]
+            "methods": ["GET", "POST", "PUT", "HEAD", "DELETE"]
           },
           {
             "resourceName": "invoices",
-            "methods": [
-              "GET",
-              "HEAD"
-            ],
+            "methods": ["GET", "HEAD"],
             "resourceIds": [
               "4f6cf35x-2c4y-483z-a0a9-158621f77a21",
               "1586f35x-4f6c-483z-a0a9-2c4y21f77a21"
@@ -26653,18 +25126,11 @@
           "type": {
             "type": "string",
             "description": "The authorization type",
-            "enum": [
-              "none",
-              "basic",
-              "digest",
-              "oauth1"
-            ],
+            "enum": ["none", "basic", "digest", "oauth1"],
             "default": "none"
           }
         },
-        "required": [
-          "type"
-        ]
+        "required": ["type"]
       },
       "basic": {
         "allOf": [
@@ -26682,10 +25148,7 @@
                 "format": "password"
               }
             },
-            "required": [
-              "username",
-              "password"
-            ]
+            "required": ["username", "password"]
           }
         ]
       },
@@ -26705,10 +25168,7 @@
                 "format": "password"
               }
             },
-            "required": [
-              "username",
-              "password"
-            ]
+            "required": ["username", "password"]
           }
         ]
       },
@@ -26733,12 +25193,7 @@
                 "type": "string"
               }
             },
-            "required": [
-              "consumerKey",
-              "consumerSecret",
-              "token",
-              "tokenSecret"
-            ]
+            "required": ["consumerKey", "consumerSecret", "token", "tokenSecret"]
           }
         ]
       },
@@ -26762,18 +25217,11 @@
             "$ref": "#/components/schemas/WebhookAuthorization"
           }
         },
-        "required": [
-          "host"
-        ]
+        "required": ["host"]
       },
       "Website": {
         "type": "object",
-        "required": [
-          "name",
-          "url",
-          "servicePhone",
-          "serviceEmail"
-        ],
+        "required": ["name", "url", "servicePhone", "serviceEmail"],
         "properties": {
           "id": {
             "description": "The website identifier string",
@@ -26845,11 +25293,7 @@
       },
       "WebsiteWebhook": {
         "type": "object",
-        "required": [
-          "webHookUrl",
-          "webHookUsername",
-          "webHookPassword"
-        ],
+        "required": ["webHookUrl", "webHookUsername", "webHookPassword"],
         "properties": {
           "webHookUrl": {
             "description": "Webhook Url",
@@ -26984,7 +25428,7 @@
       "collectionExpand": {
         "name": "expand",
         "in": "query",
-        "description": "Expand response to get full related object intead of ID.  See the expand guide for more info.",
+        "description": "Expand response to get full related object instead of ID.  See the expand guide for more info.",
         "schema": {
           "type": "string"
         }
@@ -27023,9 +25467,7 @@
         "description": "The response media type",
         "schema": {
           "type": "string",
-          "enum": [
-            "application/json"
-          ],
+          "enum": ["application/json"],
           "default": "application/json"
         }
       }

@@ -1,11 +1,11 @@
-import { action, computed, observable } from 'mobx';
+import { action, computed, observable, makeObservable } from 'mobx';
 
-import { OpenAPIMediaType } from '../../types';
+import type { OpenAPIMediaType } from '../../types';
 import { MediaTypeModel } from './MediaType';
 
 import { mergeSimilarMediaTypes } from '../../utils';
-import { OpenAPIParser } from '../OpenAPIParser';
-import { RedocNormalizedOptions } from '../RedocNormalizedOptions';
+import type { OpenAPIParser } from '../OpenAPIParser';
+import type { RedocNormalizedOptions } from '../RedocNormalizedOptions';
 
 /**
  * MediaContent model ready to be sued by React components
@@ -21,18 +21,19 @@ export class MediaContentModel {
    * @param isRequestType needed to know if skipe RO/RW fields in objects
    */
   constructor(
-    public parser: OpenAPIParser,
-    info: Dict<OpenAPIMediaType>,
+    parser: OpenAPIParser,
+    info: Record<string, OpenAPIMediaType>,
     public isRequestType: boolean,
     options: RedocNormalizedOptions,
   ) {
+    makeObservable(this);
+
     if (options.unstable_ignoreMimeParameters) {
       info = mergeSimilarMediaTypes(info);
     }
     this.mediaTypes = Object.keys(info).map(name => {
       const mime = info[name];
       // reset deref cache just in case something is left there
-      parser.resetVisited();
       return new MediaTypeModel(parser, name, isRequestType, mime, options);
     });
   }

@@ -1,12 +1,44 @@
 import { transparentize } from 'polished';
 
-import styled, { extensionsHook } from '../styled-components';
+import styled, { extensionsHook, css } from '../styled-components';
 import { PropertyNameCell } from './fields-layout';
 import { ShelfIcon } from './shelfs';
 
 export const ClickablePropertyNameCell = styled(PropertyNameCell)`
-  cursor: pointer;
+  button {
+    background-color: transparent;
+    border: 0;
+    outline: 0;
+    font-size: 13px;
+    font-family: ${props => props.theme.typography.code.fontFamily};
+    cursor: pointer;
+    padding: 0;
+    color: ${props => props.theme.colors.text.primary};
+    &:focus {
+      font-weight: ${({ theme }) => theme.typography.fontWeightBold};
+    }
+    ${({ kind }) =>
+      kind === 'patternProperties' &&
+      css`
+        display: inline-flex;
+        margin-right: 20px;
 
+        > span.property-name {
+          white-space: break-spaces;
+          text-align: left;
+
+          ::before,
+          ::after {
+            content: '/';
+            filter: opacity(0.2);
+          }
+        }
+
+        > svg {
+          align-self: center;
+        }
+      `}
+  }
   ${ShelfIcon} {
     height: ${({ theme }) => theme.schema.arrow.size};
     width: ${({ theme }) => theme.schema.arrow.size};
@@ -23,7 +55,7 @@ export const FieldLabel = styled.span`
 `;
 
 export const TypePrefix = styled(FieldLabel)`
-  color: ${props => transparentize(0.2, props.theme.schema.typeNameColor)};
+  color: ${props => transparentize(0.1, props.theme.schema.typeNameColor)};
 `;
 
 export const TypeName = styled(FieldLabel)`
@@ -45,18 +77,17 @@ export const RequiredLabel = styled(FieldLabel.withComponent('div'))`
   line-height: 1;
 `;
 
+export const PropertyLabel = styled(RequiredLabel)`
+  color: ${props => props.theme.colors.primary.light};
+`;
+
 export const RecursiveLabel = styled(FieldLabel)`
   color: ${({ theme }) => theme.colors.warning.main};
   font-size: 13px;
 `;
 
-export const NullableLabel = styled(FieldLabel)`
-  color: #3195a6;
-  font-size: 13px;
-`;
-
 export const PatternLabel = styled(FieldLabel)`
-  color: #3195a6;
+  color: #0e7c86;
   &::before,
   &::after {
     font-weight: bold;
@@ -65,6 +96,7 @@ export const PatternLabel = styled(FieldLabel)`
 
 export const ExampleValue = styled(FieldLabel)`
   border-radius: 2px;
+  word-break: break-word;
   ${({ theme }) => `
     background-color: ${transparentize(0.95, theme.colors.text.primary)};
     color: ${transparentize(0.1, theme.colors.text.primary)};
@@ -72,7 +104,6 @@ export const ExampleValue = styled(FieldLabel)`
     padding: 0 ${theme.spacing.unit}px;
     border: 1px solid ${transparentize(0.9, theme.colors.text.primary)};
     font-family: ${theme.typography.code.fontFamily};
-    color: ${theme.typography.code.color};
 }`};
   & + & {
     margin-left: 0;
@@ -96,4 +127,15 @@ export const ConstraintItem = styled(FieldLabel)`
     margin-left: 0;
   }
   ${extensionsHook('ConstraintItem')};
+`;
+
+export const ToggleButton = styled.button`
+  background-color: transparent;
+  border: 0;
+  color: ${({ theme }) => theme.colors.text.secondary};
+  margin-left: ${({ theme }) => theme.spacing.unit}px;
+  border-radius: 2px;
+  cursor: pointer;
+  outline-color: ${({ theme }) => theme.colors.text.secondary};
+  font-size: 12px;
 `;

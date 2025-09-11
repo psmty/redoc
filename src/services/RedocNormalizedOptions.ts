@@ -1,9 +1,10 @@
 import defaultTheme, { ResolvedThemeInterface, resolveTheme, ThemeInterface } from '../theme';
 import { querySelector } from '../utils/dom';
-import { isNumeric, mergeObjects } from '../utils/helpers';
+import { isArray, isNumeric, mergeObjects } from '../utils/helpers';
 
-import { LabelsConfigRaw, setRedocLabels } from './Labels';
-import { MDXComponentMeta } from './MarkdownRenderer';
+import { setRedocLabels } from './Labels';
+import { SideNavStyleEnum } from './types';
+import type { LabelsConfigRaw, MDXComponentMeta } from './types';
 
 export interface RedocRawOptions {
   theme?: ThemeInterface;
@@ -12,35 +13,75 @@ export interface RedocRawOptions {
   expandResponses?: string | 'all';
   requiredPropsFirst?: boolean | string;
   sortPropsAlphabetically?: boolean | string;
-  noAutoAuth?: boolean | string;
+  sortEnumValuesAlphabetically?: boolean | string;
+  sortOperationsAlphabetically?: boolean | string;
+  sortTagsAlphabetically?: boolean | string;
   nativeScrollbars?: boolean | string;
   pathInMiddlePanel?: boolean | string;
   untrustedSpec?: boolean | string;
   hideLoading?: boolean | string;
   hideDownloadButton?: boolean | string;
+  downloadFileName?: string;
+  downloadDefinitionUrl?: string;
   disableSearch?: boolean | string;
   onlyRequiredInSamples?: boolean | string;
   showExtensions?: boolean | string | string[];
+  sideNavStyle?: SideNavStyleEnum;
   hideSingleRequestSampleTab?: boolean | string;
   menuToggle?: boolean | string;
   jsonSampleExpandLevel?: number | string | 'all';
+  hideSchemaTitles?: boolean | string;
+  simpleOneOfTypeLabel?: boolean | string;
+  payloadSampleIdx?: number;
+  expandSingleSchemaField?: boolean | string;
+  schemaExpansionLevel?: number | string | 'all';
+  showObjectSchemaExamples?: boolean | string;
+  showSecuritySchemeType?: boolean;
+  hideSecuritySection?: boolean;
 
   unstable_ignoreMimeParameters?: boolean;
 
-  allowedMdComponents?: Dict<MDXComponentMeta>;
+  allowedMdComponents?: Record<string, MDXComponentMeta>;
 
   labels?: LabelsConfigRaw;
+
   enumSkipQuotes?: boolean | string;
+
+  expandDefaultServerVariables?: boolean;
+  maxDisplayedEnumValues?: number;
+  ignoreNamedSchemas?: string[] | string;
+  hideSchemaPattern?: boolean;
+  generatedPayloadSamplesMaxDepth?: number;
+  nonce?: string;
+  hideFab?: boolean;
+  minCharacterLengthToInitSearch?: number;
+  showWebhookVerb?: boolean;
 }
 
-function argValueToBoolean(val?: string | boolean): boolean {
+export function argValueToBoolean(val?: string | boolean, defaultValue?: boolean): boolean {
   if (val === undefined) {
-    return false;
+    return defaultValue || false;
   }
   if (typeof val === 'string') {
-    return true;
+    return val !== 'false';
   }
   return val;
+}
+
+function argValueToNumber(value: number | string | undefined): number | undefined {
+  if (typeof value === 'string') {
+    return parseInt(value, 10);
+  }
+
+  if (typeof value === 'number') {
+    return value;
+  }
+}
+
+function argValueToExpandLevel(value?: number | string | undefined, defaultValue = 0): number {
+  if (value === 'all') return Infinity;
+
+  return argValueToNumber(value) || defaultValue;
 }
 
 export class RedocNormalizedOptions {
@@ -106,11 +147,48 @@ export class RedocNormalizedOptions {
       return true;
     }
 
-    if (typeof value === 'string') {
-      return value.split(',').map(ext => ext.trim());
+    if (typeof value !== 'string') {
+      return value;
     }
 
-    return value;
+    switch (value) {
+      case 'true':
+        return true;
+      case 'false':
+        return false;
+      default:
+        return value.split(',').map(ext => ext.trim());
+    }
+  }
+
+  static normalizeSideNavStyle(value: RedocRawOptions['sideNavStyle']): SideNavStyleEnum {
+    const defaultValue = SideNavStyleEnum.SummaryOnly;
+    if (typeof value !== 'string') {
+      return defaultValue;
+    }
+
+    switch (value) {
+      case defaultValue:
+        return value;
+      case SideNavStyleEnum.PathOnly:
+        return SideNavStyleEnum.PathOnly;
+      case SideNavStyleEnum.IdOnly:
+        return SideNavStyleEnum.IdOnly;
+      default:
+        return defaultValue;
+    }
+  }
+
+  static normalizePayloadSampleIdx(value: RedocRawOptions['payloadSampleIdx']): number {
+    if (typeof value === 'number') {
+      return Math.max(0, value); // always greater or equal than 0
+    }
+
+    if (typeof value === 'string') {
+      return isFinite(value) ? parseInt(value, 10) : 0;
+    }
+
+    return 0;
   }
 
   private static normalizeJsonSampleExpandLevel(level?: number | string | 'all'): number {
@@ -123,32 +201,79 @@ export class RedocNormalizedOptions {
     return 2;
   }
 
+  private static normalizeGeneratedPayloadSamplesMaxDepth(
+    value?: number | string | undefined,
+  ): number {
+    if (!isNaN(Number(value))) {
+      return Math.max(0, Number(value));
+    }
+
+    return 10;
+  }
+
   theme: ResolvedThemeInterface;
   scrollYOffset: () => number;
   hideHostname: boolean;
   expandResponses: { [code: string]: boolean } | 'all';
   requiredPropsFirst: boolean;
   sortPropsAlphabetically: boolean;
-  noAutoAuth: boolean;
+  sortEnumValuesAlphabetically: boolean;
+  sortOperationsAlphabetically: boolean;
+  sortTagsAlphabetically: boolean;
   nativeScrollbars: boolean;
   pathInMiddlePanel: boolean;
   untrustedSpec: boolean;
   hideDownloadButton: boolean;
+  downloadFileName?: string;
+  downloadDefinitionUrl?: string;
   disableSearch: boolean;
   onlyRequiredInSamples: boolean;
   showExtensions: boolean | string[];
+  sideNavStyle: SideNavStyleEnum;
   hideSingleRequestSampleTab: boolean;
   menuToggle: boolean;
   jsonSampleExpandLevel: number;
   enumSkipQuotes: boolean;
+  hideSchemaTitles: boolean;
+  simpleOneOfTypeLabel: boolean;
+  payloadSampleIdx: number;
+  expandSingleSchemaField: boolean;
+  schemaExpansionLevel: number;
+  showObjectSchemaExamples: boolean;
+  showSecuritySchemeType?: boolean;
+  hideSecuritySection?: boolean;
 
   /* tslint:disable-next-line */
   unstable_ignoreMimeParameters: boolean;
-  allowedMdComponents: Dict<MDXComponentMeta>;
+  allowedMdComponents: Record<string, MDXComponentMeta>;
+
+  expandDefaultServerVariables: boolean;
+  maxDisplayedEnumValues?: number;
+
+  ignoreNamedSchemas: Set<string>;
+  hideSchemaPattern: boolean;
+  generatedPayloadSamplesMaxDepth: number;
+  hideFab: boolean;
+  minCharacterLengthToInitSearch: number;
+  showWebhookVerb: boolean;
+
+  nonce?: string;
 
   constructor(raw: RedocRawOptions, defaults: RedocRawOptions = {}) {
     raw = { ...defaults, ...raw };
     const hook = raw.theme && raw.theme.extensionsHook;
+
+    // migrate from old theme
+    if ((raw.theme as any)?.menu && !raw.theme?.sidebar) {
+      console.warn('Theme setting "menu" is deprecated. Rename to "sidebar"');
+      raw.theme!.sidebar = (raw.theme as any).menu;
+    }
+
+    if ((raw.theme as any)?.codeSample && !raw.theme?.codeBlock) {
+      console.warn('Theme setting "codeSample" is deprecated. Rename to "codeBlock"');
+      raw.theme!.codeBlock = (raw.theme as any).codeSample;
+    }
+
     this.theme = resolveTheme(
       mergeObjects({} as any, defaultTheme, { ...raw.theme, extensionsHook: undefined }),
     );
@@ -163,23 +288,52 @@ export class RedocNormalizedOptions {
     this.expandResponses = RedocNormalizedOptions.normalizeExpandResponses(raw.expandResponses);
     this.requiredPropsFirst = argValueToBoolean(raw.requiredPropsFirst);
     this.sortPropsAlphabetically = argValueToBoolean(raw.sortPropsAlphabetically);
-    this.noAutoAuth = argValueToBoolean(raw.noAutoAuth);
+    this.sortEnumValuesAlphabetically = argValueToBoolean(raw.sortEnumValuesAlphabetically);
+    this.sortOperationsAlphabetically = argValueToBoolean(raw.sortOperationsAlphabetically);
+    this.sortTagsAlphabetically = argValueToBoolean(raw.sortTagsAlphabetically);
     this.nativeScrollbars = argValueToBoolean(raw.nativeScrollbars);
     this.pathInMiddlePanel = argValueToBoolean(raw.pathInMiddlePanel);
     this.untrustedSpec = argValueToBoolean(raw.untrustedSpec);
     this.hideDownloadButton = argValueToBoolean(raw.hideDownloadButton);
+    this.downloadFileName = raw.downloadFileName;
+    this.downloadDefinitionUrl = raw.downloadDefinitionUrl;
     this.disableSearch = argValueToBoolean(raw.disableSearch);
     this.onlyRequiredInSamples = argValueToBoolean(raw.onlyRequiredInSamples);
     this.showExtensions = RedocNormalizedOptions.normalizeShowExtensions(raw.showExtensions);
+    this.sideNavStyle = RedocNormalizedOptions.normalizeSideNavStyle(raw.sideNavStyle);
     this.hideSingleRequestSampleTab = argValueToBoolean(raw.hideSingleRequestSampleTab);
-    this.menuToggle = argValueToBoolean(raw.menuToggle);
+    this.menuToggle = argValueToBoolean(raw.menuToggle, true);
     this.jsonSampleExpandLevel = RedocNormalizedOptions.normalizeJsonSampleExpandLevel(
       raw.jsonSampleExpandLevel,
     );
     this.enumSkipQuotes = argValueToBoolean(raw.enumSkipQuotes);
+    this.hideSchemaTitles = argValueToBoolean(raw.hideSchemaTitles);
+    this.simpleOneOfTypeLabel = argValueToBoolean(raw.simpleOneOfTypeLabel);
+    this.payloadSampleIdx = RedocNormalizedOptions.normalizePayloadSampleIdx(raw.payloadSampleIdx);
+    this.expandSingleSchemaField = argValueToBoolean(raw.expandSingleSchemaField);
+    this.schemaExpansionLevel = argValueToExpandLevel(raw.schemaExpansionLevel);
+    this.showObjectSchemaExamples = argValueToBoolean(raw.showObjectSchemaExamples);
+    this.showSecuritySchemeType = argValueToBoolean(raw.showSecuritySchemeType);
+    this.hideSecuritySection = argValueToBoolean(raw.hideSecuritySection);
 
     this.unstable_ignoreMimeParameters = argValueToBoolean(raw.unstable_ignoreMimeParameters);
 
     this.allowedMdComponents = raw.allowedMdComponents || {};
+
+    this.expandDefaultServerVariables = argValueToBoolean(raw.expandDefaultServerVariables);
+    this.maxDisplayedEnumValues = argValueToNumber(raw.maxDisplayedEnumValues);
+    const ignoreNamedSchemas = isArray(raw.ignoreNamedSchemas)
+      ? raw.ignoreNamedSchemas
+      : raw.ignoreNamedSchemas?.split(',').map(s => s.trim());
+    this.ignoreNamedSchemas = new Set(ignoreNamedSchemas);
+    this.hideSchemaPattern = argValueToBoolean(raw.hideSchemaPattern);
+    this.generatedPayloadSamplesMaxDepth =
+      RedocNormalizedOptions.normalizeGeneratedPayloadSamplesMaxDepth(
+        raw.generatedPayloadSamplesMaxDepth,
+      );
+    this.nonce = raw.nonce;
+    this.hideFab = argValueToBoolean(raw.hideFab);
+    this.minCharacterLengthToInitSearch = argValueToNumber(raw.minCharacterLengthToInitSearch) || 3;
+    this.showWebhookVerb = argValueToBoolean(raw.showWebhookVerb);
   }
 }

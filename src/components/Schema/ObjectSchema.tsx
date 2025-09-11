@@ -9,6 +9,7 @@ import { DiscriminatorDropdown } from './DiscriminatorDropdown';
 import { SchemaProps } from './Schema';
 
 import { mapWithLast } from '../../utils';
+import { OptionsContext } from '../OptionsProvider';
 
 export interface ObjectSchemaProps extends SchemaProps {
   discriminator?: {
@@ -17,33 +18,38 @@ export interface ObjectSchemaProps extends SchemaProps {
   };
 }
 
-@observer
-export class ObjectSchema extends React.Component<ObjectSchemaProps> {
-  get parentSchema() {
-    return this.props.discriminator!.parentSchema;
-  }
+export const ObjectSchema = observer(
+  ({
+    schema: { fields = [], title },
+    showTitle,
+    discriminator,
+    skipReadOnly,
+    skipWriteOnly,
+    level,
+  }: ObjectSchemaProps) => {
+    const { expandSingleSchemaField, showObjectSchemaExamples, schemaExpansionLevel } =
+      React.useContext(OptionsContext);
 
-  render() {
-    const {
-      schema: { fields = [] },
-      showTitle,
-      discriminator,
-    } = this.props;
+    const filteredFields = React.useMemo(
+      () =>
+        skipReadOnly || skipWriteOnly
+          ? fields.filter(
+              item =>
+                !(
+                  (skipReadOnly && item.schema.readOnly) ||
+                  (skipWriteOnly && item.schema.writeOnly)
+                ),
+            )
+          : fields,
+      [skipReadOnly, skipWriteOnly, fields],
+    );
 
-    const needFilter = this.props.skipReadOnly || this.props.skipWriteOnly;
-
-    const filteredFields = needFilter
-      ? fields.filter(item => {
-          return !(
-            (this.props.skipReadOnly && item.schema.readOnly) ||
-            (this.props.skipWriteOnly && item.schema.writeOnly)
-          );
-        })
-      : fields;
+    const expandByDefault =
+      (expandSingleSchemaField && filteredFields.length === 1) || schemaExpansionLevel >= level!;
 
     return (
       <PropertiesTable>
-        {showTitle && <PropertiesTableCaption>{this.props.schema.title}</PropertiesTableCaption>}
+        {showTitle && <PropertiesTableCaption>{title}</PropertiesTableCaption>}
         <tbody>
           {mapWithLast(filteredFields, (field, isLast) => {
             return (
@@ -51,27 +57,28 @@ export class ObjectSchema extends React.Component<ObjectSchemaProps> {
                 key={field.name}
                 isLast={isLast}
                 field={field}
+                expandByDefault={expandByDefault}
                 renderDiscriminatorSwitch={
-                  (discriminator &&
-                    discriminator.fieldName === field.name &&
-                    (() => (
-                      <DiscriminatorDropdown
-                        parent={this.parentSchema}
-                        enumValues={field.schema.enum}
-                      />
-                    ))) ||
-                  undefined
+                  discriminator?.fieldName === field.name
+                    ? () => (
+                        <DiscriminatorDropdown
+                          parent={discriminator!.parentSchema}
+                          enumValues={field.schema.enum}
+                        />
+                      )
+                    : undefined
                 }
                 className={field.expanded ? 'expanded' : undefined}
-                showExamples={false}
-                skipReadOnly={this.props.skipReadOnly}
-                skipWriteOnly={this.props.skipWriteOnly}
-                showTitle={this.props.showTitle}
+                showExamples={showObjectSchemaExamples}
+                skipReadOnly={skipReadOnly}
+                skipWriteOnly={skipWriteOnly}
+                showTitle={showTitle}
+                level={level}
               />
             );
           })}
         </tbody>
       </PropertiesTable>
     );
-  }
-}
+  },
+);

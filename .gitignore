@@ -28,10 +28,14 @@ bundles/
 typings/*
 !typings/styled-patch.d.ts
 cli/index.js
+cli/__test__/*/**/*.html
 
 /benchmark/revisions
 
 /coverage
 .ghpages-tmp
 stats.json
-/package-lock.json
+yarn.lock
+.idea
+.vscode
+.eslintcache

@@ -1,36 +1,15 @@
-import { action, observable } from 'mobx';
+import { action, observable, makeObservable } from 'mobx';
 import { querySelector } from '../utils/dom';
-import { SpecStore } from './models';
+import { escapeHTMLAttrChars, flattenByProp, SECURITY_SCHEMES_SECTION_PREFIX } from '../utils';
 
 import { history as historyInst, HistoryService } from './HistoryService';
-import { ScrollService } from './ScrollService';
-
-import { flattenByProp, SECURITY_SCHEMES_SECTION_PREFIX } from '../utils';
 import { GROUP_DEPTH } from './MenuBuilder';
 
-export type MenuItemGroupType = 'group' | 'tag' | 'section';
-export type MenuItemType = MenuItemGroupType | 'operation';
+import type { SpecStore } from './models';
+import type { ScrollService } from './ScrollService';
+import type { IMenuItem } from './types';
 
 /** Generic interface for MenuItems */
-export interface IMenuItem {
-  id: string;
-  absoluteIdx?: number;
-  name: string;
-  description?: string;
-  depth: number;
-  active: boolean;
-  expanded: boolean;
-  items: IMenuItem[];
-  parent?: IMenuItem;
-  deprecated?: boolean;
-  type: MenuItemType;
-
-  deactivate(): void;
-  activate(): void;
-
-  collapse(): void;
-  expand(): void;
-}
 
 export const SECTION_ATTR = 'data-section-id';
 
@@ -46,7 +25,7 @@ export class MenuStore {
     if (!id) {
       return;
     }
-    scroll.scrollIntoViewBySelector(`[${SECTION_ATTR}="${id}"]`);
+    scroll.scrollIntoViewBySelector(`[${SECTION_ATTR}="${escapeHTMLAttrChars(id)}"]`);
   }
 
   /**
@@ -76,6 +55,8 @@ export class MenuStore {
    * @param scroll scroll service instance used by this menu
    */
   constructor(spec: SpecStore, public scroll: ScrollService, public history: HistoryService) {
+    makeObservable(this);
+
     this.items = spec.contentItems;
 
     this.flatItems = flattenByProp(this.items || [], 'items');
@@ -116,7 +97,7 @@ export class MenuStore {
       }
 
       if (isScrolledDown) {
-        const el = this.getElementAt(itemIdx + 1);
+        const el = this.getElementAtOrFirstChild(itemIdx + 1);
         if (this.scroll.isElementBellow(el)) {
           break;
         }
@@ -143,14 +124,15 @@ export class MenuStore {
     let item: IMenuItem | undefined;
 
     item = this.flatItems.find(i => i.id === id);
+
     if (item) {
       this.activateAndScroll(item, false);
     } else {
       if (id.startsWith(SECURITY_SCHEMES_SECTION_PREFIX)) {
         item = this.flatItems.find(i => SECURITY_SCHEMES_SECTION_PREFIX.startsWith(i.id));
-        this.activate(item);
+        this.activateAndScroll(item, false);
       }
-      this.scroll.scrollIntoViewBySelector(`[${SECTION_ATTR}="${id}"]`);
+      this.scroll.scrollIntoViewBySelector(`[${SECTION_ATTR}="${escapeHTMLAttrChars(id)}"]`);
     }
   };
 
@@ -160,7 +142,19 @@ export class MenuStore {
    */
   getElementAt(idx: number): Element | null {
     const item = this.flatItems[idx];
-    return (item && querySelector(`[${SECTION_ATTR}="${item.id}"]`)) || null;
+    return (item && querySelector(`[${SECTION_ATTR}="${escapeHTMLAttrChars(item.id)}"]`)) || null;
+  }
+
+  /**
+   * get section/operation DOM Node related to the item or if it is group item, returns first item of the group
+   * @param idx item absolute index
+   */
+  getElementAtOrFirstChild(idx: number): Element | null {
+    let item = this.flatItems[idx];
+    if (item && item.type === 'group') {
+      item = item.items[0];
+    }
+    return (item && querySelector(`[${SECTION_ATTR}="${escapeHTMLAttrChars(item.id)}"]`)) || null;
   }
 
   /**
@@ -178,7 +172,7 @@ export class MenuStore {
    * activate menu item
    * @param item item to activate
    * @param updateLocation [true] whether to update location
-   * @param rewriteHistory [false] whether to rewrite browser history (do not create new enrty)
+   * @param rewriteHistory [false] whether to rewrite browser history (do not create new entry)
    */
   @action
   activate(
@@ -189,8 +183,14 @@ export class MenuStore {
     if ((this.activeItem && this.activeItem.id) === (item && item.id)) {
       return;
     }
+
+    if (item && item.type === 'group') {
+      return;
+    }
+
     this.deactivate(this.activeItem);
     if (!item) {
+      this.activeItemIdx = -1;
       this.history.replace('', rewriteHistory);
       return;
     }
@@ -203,7 +203,7 @@ export class MenuStore {
 
     this.activeItemIdx = item.absoluteIdx!;
     if (updateLocation) {
-      this.history.replace(item.id, rewriteHistory);
+      this.history.replace(encodeURI(item.id), rewriteHistory);
     }
 
     item.activate();

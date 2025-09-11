@@ -2,14 +2,14 @@ import { bind } from 'decko';
 import * as EventEmitter from 'eventemitter3';
 
 import { IS_BROWSER, querySelector, Throttle } from '../utils';
-import { RedocNormalizedOptions } from './RedocNormalizedOptions';
+import type { RedocNormalizedOptions } from './RedocNormalizedOptions';
 
 const EVENT = 'scroll';
 
 export class ScrollService {
   private _scrollParent: Window | HTMLElement | undefined;
   private _emiter: EventEmitter;
-  private _prevOffsetY: number = 0;
+  private _prevOffsetY = 0;
   constructor(private options: RedocNormalizedOptions) {
     this._scrollParent = IS_BROWSER ? window : undefined;
     this._emiter = new EventEmitter();

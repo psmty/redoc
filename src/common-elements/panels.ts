@@ -39,7 +39,7 @@ export const Section = styled.div.attrs(props => ({
       width: 100%;
       display: block;
       content: '';
-      border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+      border-bottom: 1px solid rgb(243, 243, 243);
     }
   `) ||
     ''}
@@ -58,6 +58,7 @@ export const RightPanel = styled.div`
   `};
 `;
 
+// @ts-ignore
 export const DarkRightPanel = styled(RightPanel)`
   background-color: ${props => props.theme.rightPanel.backgroundColor};
 `;

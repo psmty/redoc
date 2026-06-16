@@ -74,12 +74,11 @@ export class Endpoint extends React.Component<EndpointProps, EndpointState> {
                     <SelectOnClick>
                       <ServerUrl>
                         <span>
-                          {(hideHostname || options.hideHostname
+                          {hideHostname || options.hideHostname
                             ? basePath === '/'
                               ? ''
                               : basePath
-                            : normalizedUrl
-                          ).replace('swagger/sg', '')}
+                            : normalizedUrl}
                         </span>
                         {operation.path}
                       </ServerUrl>

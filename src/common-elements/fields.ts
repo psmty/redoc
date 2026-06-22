@@ -1,6 +1,6 @@
 import { transparentize } from 'polished';
 
-import styled, { extensionsHook } from '../styled-components';
+import styled, { css, extensionsHook } from '../styled-components';
 import { PropertyNameCell } from './fields-layout';
 import { ShelfIcon } from './shelfs';
 
@@ -16,10 +16,14 @@ export const ClickablePropertyNameCell = styled(PropertyNameCell)`
   }
 `;
 
-export const FieldLabel = styled.span`
+const fieldLabelMixin = css`
   vertical-align: middle;
   font-size: ${({ theme }) => theme.typography.code.fontSize};
   line-height: 20px;
+`;
+
+export const FieldLabel = styled.span`
+  ${fieldLabelMixin}
 `;
 
 export const TypePrefix = styled(FieldLabel)`
@@ -37,7 +41,8 @@ export const TypeTitle = styled(FieldLabel)`
 
 export const TypeFormat = TypeName;
 
-export const RequiredLabel = styled(FieldLabel.withComponent('div'))`
+export const RequiredLabel = styled.div`
+  ${fieldLabelMixin}
   color: ${props => props.theme.schema.requireLabelColor};
   font-size: ${props => props.theme.schema.labelsTextSize};
   font-weight: normal;

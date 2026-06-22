@@ -7,20 +7,20 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-    - uses: actions/setup-node@v4
-      with:
-        node-version: 16.x
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 16.0
 
-    - name: Install
-      run: npm install
+      - name: Install
+        run: npm install
 
-    - name: Build
-      run: npm run bundle:standalone
+      - name: Build
+        run: npm run bundle:standalone
 
-    - uses: actions/upload-artifact@v4
-      with:
-        path: |
-          ./bundles
-        retention-days: 1
+      - uses: actions/upload-artifact@v4
+        with:
+          path: |
+            ./bundles
+          retention-days: 1
